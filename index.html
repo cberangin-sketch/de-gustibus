@@ -2,4 +2,31 @@
 layout: default
 title: ""
 ---
-<section class="hero"><div><p class="eyebrow">Carnet culturel</p><h1>Ici je parle un peu d'art</h1></div><blockquote>« {{ site.data.site.quote }} »<span class="quote-author">La Bruyère</span></blockquote></section><section class="archive"><div class="section-heading"><h2>Derniers articles</h2></div>{% if site.posts.size > 0 %}<div class="post-list">{% for post in site.posts %}{% include post-card.html %}{% endfor %}</div>{% else %}<p>Les premiers articles arriveront bientôt.</p>{% endif %}</section>
+
+<section class="hero">
+  <div>
+    <p class="eyebrow">Carnet culturel</p>
+    <h1>Ici je parle un peu d'art</h1>
+  </div>
+
+  <blockquote>
+    {{ site.data.site.quote }}
+    <span class="quote-author">La Bruyère</span>
+  </blockquote>
+</section>
+
+<section class="archive">
+  <div class="section-heading">
+    <h2>Derniers articles</h2>
+  </div>
+
+  {% if site.posts.size > 0 %}
+    <div class="post-list">
+      {% for post in site.posts limit:5 %}
+        {% include post-card.html %}
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>Les premiers articles arriveront bientôt.</p>
+  {% endif %}
+</section>
