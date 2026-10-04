@@ -1,0 +1,51 @@
+media:
+  input: assets/images
+  output: /de-gustibus/assets/images
+
+content:
+  - name: posts
+    label: Articles
+    type: collection
+    path: _posts
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      fields: [title, date, category]
+    fields:
+      - name: title
+        label: Titre
+        type: string
+
+      - name: date
+        label: Date
+        type: date
+
+      - name: category
+        label: Catégorie
+        type: select
+        options:
+          values:
+            - value: jeu-video
+              label: Jeu vidéo
+            - value: films-et-series
+              label: Films et Séries
+            - value: litterature
+              label: Littérature
+            - value: divers
+              label: Divers
+
+      - name: chapeau
+        label: Chapeau
+        type: text
+
+      - name: image
+        label: Image de couverture
+        type: image
+
+      - name: tags
+        label: Mots-clés
+        type: string
+        list: true
+
+      - name: body
+        label: Texte
+        type: rich-text
