@@ -1,7 +1,7 @@
 title: "De gustibus"
-description: "Ici je vous parle de jeux-vidéos, de cinéma, de littérature"
-url: "https://degustibus.fr"
-baseurl: ""
+description: "Ici je vous parle d'art"
+url: "https://cberangin-sketch.github.io"
+baseurl: "/de-gustibus"
 lang: "fr"
 timezone: "Europe/Paris"
 markdown: kramdown
@@ -12,7 +12,6 @@ defaults:
       type: posts
     values:
       layout: post
-      categories: []
       tags: []
       image: ""
 plugins: []
