@@ -1,0 +1,22 @@
+---
+layout: default
+title: Archives
+permalink: /archives/
+---
+
+<section class="archive">
+  <div class="section-heading">
+    <p class="eyebrow">Archives</p>
+    <h1>Tous les articles</h1>
+  </div>
+
+  {% if site.posts.size > 0 %}
+    <div class="post-list">
+      {% for post in site.posts %}
+        {% include post-card.html %}
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>Aucun article pour le moment.</p>
+  {% endif %}
+</section>
