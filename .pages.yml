@@ -1,6 +1,6 @@
 media:
   input: assets/images
-  output: /de-gustibus/assets/images
+  output: /assets/images
 
 content:
   - name: posts
