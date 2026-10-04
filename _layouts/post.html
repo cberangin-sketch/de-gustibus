@@ -1,0 +1,4 @@
+---
+layout: default
+---
+<article class="post"><header class="post-header"><p class="eyebrow">{{ page.category }} · {{ page.date | date: "%d.%m.%Y" }}</p><h1>{{ page.title }}</h1>{% if page.tags %}<div class="tags">{% for tag in page.tags %}<span>#{{ tag }}</span>{% endfor %}</div>{% endif %}</header>{% if page.image %}<figure class="post-cover"><img src="{{ page.image | relative_url }}" alt=""></figure>{% endif %}<div class="post-body">{{ content }}</div></article>

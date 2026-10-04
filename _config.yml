@@ -1,0 +1,18 @@
+title: "De gustibus"
+description: "Ici je vous parle de jeux-vidéos, de cinéma, de littérature"
+url: "https://degustibus.fr"
+baseurl: ""
+lang: "fr"
+timezone: "Europe/Paris"
+markdown: kramdown
+permalink: /:categories/:title/
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      categories: []
+      tags: []
+      image: ""
+plugins: []
