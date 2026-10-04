@@ -5,7 +5,7 @@ category: jeu-video
 chapeau: Sept ans après sa sortie, Red Dead Redemption 2 continue de fasciner
   par la richesse de son monde, la profondeur de ses personnages et la justesse
   de son regard sur une Amérique en transition.
-image: /de-gustibus/assets/images/Capture d’écran 2026-10-04 à 15.22.34.png
+image: /assets/images/Capture d’écran 2026-10-04 à 15.22.34-1.png
 tags:
   - Red Dead Redemption 2
   - Rockstar
