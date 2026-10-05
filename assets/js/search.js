@@ -14,10 +14,10 @@
 
   if (menuToggle && mainNav) {
     menuToggle.addEventListener('click', function () {
-
       const isOpen = mainNav.classList.toggle('is-open');
 
       menuToggle.setAttribute('aria-expanded', String(isOpen));
+
       menuToggle.setAttribute(
         'aria-label',
         isOpen ? 'Fermer le menu' : 'Ouvrir le menu'
@@ -28,7 +28,7 @@
   }
 
 
-  /* Ouverture de la recherche */
+  /* Recherche */
 
   function openSearch() {
     if (!searchPanel) return;
@@ -60,18 +60,22 @@
       searchPanel.hidden = true;
 
       if (desktopSearchToggle) {
-        desktopSearchToggle.setAttribute('aria-expanded', 'false');
+        desktopSearchToggle.setAttribute(
+          'aria-expanded',
+          'false'
+        );
       }
     }
   }
 
 
   if (desktopSearchToggle) {
-    desktopSearchToggle.addEventListener('click', toggleDesktopSearch);
+    desktopSearchToggle.addEventListener(
+      'click',
+      toggleDesktopSearch
+    );
   }
 
-
-  /* Recherche depuis le menu mobile */
 
   if (mobileSearchToggle) {
     mobileSearchToggle.addEventListener('click', function () {
@@ -83,7 +87,10 @@
       if (menuToggle) {
         menuToggle.textContent = '☰';
         menuToggle.setAttribute('aria-expanded', 'false');
-        menuToggle.setAttribute('aria-label', 'Ouvrir le menu');
+        menuToggle.setAttribute(
+          'aria-label',
+          'Ouvrir le menu'
+        );
       }
 
       openSearch();
@@ -91,7 +98,33 @@
   }
 
 
-  /* Page complète de résultats */
+  /* Dernier article : comportement tactile */
+
+  const featuredLatest =
+    document.querySelector('.featured-latest__link');
+
+  if (featuredLatest) {
+
+    featuredLatest.addEventListener(
+      'click',
+      function (event) {
+
+        if (
+          window.matchMedia('(max-width: 760px)').matches &&
+          !featuredLatest.classList.contains('is-revealed')
+        ) {
+          event.preventDefault();
+
+          featuredLatest.classList.add('is-revealed');
+        }
+
+      }
+    );
+
+  }
+
+
+  /* Page de résultats de recherche */
 
   const f = document.querySelector('#full-search-form');
   const i = document.querySelector('#full-search-input');
@@ -101,10 +134,20 @@
 
   const posts = window.DE_GUSTIBUS_POSTS || [];
 
+
+  /*
+   * À partir d'ici, le code ne concerne que
+   * la page de recherche.
+   */
+
   if (!f) return;
 
-  const q = new URLSearchParams(location.search).get('q') || '';
+
+  const q =
+    new URLSearchParams(location.search).get('q') || '';
+
   i.value = q;
+
 
   function esc(x) {
     return String(x).replace(
@@ -119,17 +162,26 @@
     );
   }
 
+
   function run() {
-    let x = i.value.trim().toLocaleLowerCase('fr');
+
+    let x =
+      i.value
+        .trim()
+        .toLocaleLowerCase('fr');
 
     r.innerHTML = '';
     e.hidden = true;
 
+
     if (!x) {
+
       s.textContent =
         'Saisissez un mot ou une expression pour rechercher dans le carnet.';
+
       return;
     }
+
 
     let m = posts.filter(p =>
       [
@@ -143,45 +195,68 @@
         .includes(x)
     );
 
+
     s.textContent =
       m.length +
       ' ' +
-      (m.length > 1 ? 'articles trouvés.' : 'article trouvé.');
+      (
+        m.length > 1
+          ? 'articles trouvés.'
+          : 'article trouvé.'
+      );
+
 
     m.forEach(p => {
+
       let a = document.createElement('article');
 
-      a.className = 'post-card search-card';
+      a.className =
+        'post-card search-card';
+
 
       a.innerHTML =
         '<div class="post-card-content">' +
+
         '<p class="eyebrow">' +
         esc(p.category) +
         ' · ' +
-        p.date.split('-').reverse().join('.') +
+        p.date
+          .split('-')
+          .reverse()
+          .join('.') +
         '</p>' +
+
         '<h2><a href="' +
         p.url +
         '">' +
         esc(p.title) +
         '</a></h2>' +
+
         '<div class="post-excerpt">' +
         esc(p.excerpt || '') +
         '</div>' +
+
         '<a class="read-more" href="' +
         p.url +
         '">Lire l’article →</a>' +
+
         '</div>';
 
+
       r.appendChild(a);
+
     });
+
 
     if (!m.length) {
       e.hidden = false;
     }
+
   }
 
+
   f.onsubmit = z => {
+
     z.preventDefault();
 
     history.replaceState(
@@ -193,19 +268,10 @@
     );
 
     run();
+
   };
 
-  run();
-const featuredLatest = document.querySelector('.featured-latest__link');
 
-if (featuredLatest) {
-  featuredLatest.addEventListener('click', function (event) {
-    if (window.matchMedia('(max-width: 760px)').matches) {
-      if (!featuredLatest.classList.contains('is-revealed')) {
-        event.preventDefault();
-        featuredLatest.classList.add('is-revealed');
-      }
-    }
-  });
-}
+  run();
+
 })();
