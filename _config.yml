@@ -6,6 +6,7 @@ lang: "fr"
 timezone: "Europe/Paris"
 markdown: kramdown
 permalink: /:title/
+
 defaults:
   - scope:
       path: ""
@@ -14,4 +15,6 @@ defaults:
       layout: post
       tags: []
       image: ""
-plugins: []
+
+plugins:
+  - jekyll-sitemap
