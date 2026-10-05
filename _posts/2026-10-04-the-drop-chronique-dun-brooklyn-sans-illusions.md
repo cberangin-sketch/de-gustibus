@@ -5,7 +5,7 @@ category: films-et-series
 chapeau: "Un bar miteux, de petites frappes et une violence qui affleure sans
   cesse : The Drop transforme le film criminel en chronique désenchantée d’un
   quartier de Brooklyn."
-image: /de-gustibus/assets/images/the-drop1.jpg
+image: /assets/images/the-drop1.jpg
 tags:
   - Genre
   - Dark

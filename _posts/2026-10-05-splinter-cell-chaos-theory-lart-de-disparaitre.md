@@ -6,7 +6,7 @@ chapeau: "Vingt ans après sa sortie, Splinter Cell: Chaos Theory reste moins
   impressionnant par ce qu’il inventait que par la confiance avec laquelle il
   laissait le joueur habiter l’ombre. Rarement l’infiltration aura été aussi
   lente, physique et méthodique."
-image: /de-gustibus/assets/images/1681e1459892d5148e4b68d24_hd.jpg
+image: /assets/images/1681e1459892d5148e4b68d24_hd.jpg
 tags:
   - Infiltration
   - Ubisoft

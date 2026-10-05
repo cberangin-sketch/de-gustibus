@@ -7,7 +7,7 @@ chapeau: "Avec Les Particules élémentaires, Michel Houellebecq transforme les
   et le désespoir, le roman pose une question autrement plus troublante : que
   reste-t-il des individus lorsque la liberté promise devient une nouvelle forme
   de solitude ?"
-image: /de-gustibus/assets/images/1hhhh.webp
+image: /assets/images/1hhhh.webp
 tags:
   - Houellebecq
   - Littérature

@@ -5,7 +5,7 @@ category: divers
 chapeau: Depuis plus de cinquante ans, Bernard Lavilliers fait entrer dans la
   chanson française les ports, les usines, les voyages et les colères
   politiques. Une œuvre où l’ailleurs n’est jamais très loin de Saint-Étienne.
-image: /de-gustibus/assets/images/12048.webp
+image: /assets/images/12048.webp
 ---
 Il suffit de quelques secondes pour reconnaître Bernard Lavilliers. Une basse lourde, quelques percussions, une guitare qui regarde du côté du reggae ou de l’Amérique latine, puis cette voix grave, immédiatement identifiable. Peu d’artistes français ont construit un univers aussi cohérent tout en voyageant autant d’un genre musical à l’autre.
 

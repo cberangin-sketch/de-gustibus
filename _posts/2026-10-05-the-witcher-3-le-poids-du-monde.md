@@ -6,7 +6,7 @@ chapeau: Plus de dix ans après sa sortie, The Witcher 3 impressionne moins par
   l’immensité de son monde que par la densité humaine qu’il parvient à lui
   donner. Derrière les monstres et les légendes, son véritable sujet reste celui
   des hommes.
-image: /de-gustibus/assets/images/1786248110_ss_f7f564ecedd09b3e503b071a637aeefdedbee.webp
+image: /assets/images/1786248110_ss_f7f564ecedd09b3e503b071a637aeefdedbee.webp
 tags:
   - TW3
   - CD Project

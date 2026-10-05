@@ -7,7 +7,7 @@ chapeau: "Plus de vingt-cinq ans après ses débuts, Les Soprano reste une œuvr
   les costumes et les restaurants italiens, David Chase racontait surtout
   quelque chose de plus banal et de plus inquiétant : un homme incapable d’être
   heureux."
-image: /de-gustibus/assets/images/11ZUMA Press, Inc. _ Alamy _ Abaca.webp
+image: /assets/images/11ZUMA Press, Inc. _ Alamy _ Abaca.webp
 tags:
   - Mafia
   - New-Jersey

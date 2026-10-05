@@ -6,7 +6,7 @@ chapeau: Mercedes Sosa n’a jamais seulement chanté l’Argentine. Sa voix a p
   avec elle tout un continent, ses blessures, ses luttes et ses mémoires. Peu
   d’interprètes auront donné à la chanson populaire une telle gravité sans
   jamais la rendre solennelle.
-image: /de-gustibus/assets/images/111111.webp
+image: /assets/images/111111.webp
 tags:
   - Mercedes
   - Argentine
