@@ -2,6 +2,43 @@
 layout: default
 ---
 
+{% assign article_section = page.category %}
+
+{% if page.category == "films-et-series" %}
+  {% assign article_section = "Films et Séries" %}
+{% elsif page.category == "jeu-video" %}
+  {% assign article_section = "Jeu vidéo" %}
+{% elsif page.category == "litterature" %}
+  {% assign article_section = "Littérature" %}
+{% elsif page.category == "divers" %}
+  {% assign article_section = "Divers" %}
+{% endif %}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ page.url | absolute_url | jsonify }}
+  },
+  "headline": {{ page.title | jsonify }},
+  "description": {{ page.chapeau | default: site.description | strip_html | jsonify }},
+  "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
+  "author": {
+    "@type": "Person",
+    "name": "de gustibus."
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ site.title | jsonify }}
+  },
+  "articleSection": {{ article_section | strip | jsonify }},
+  "keywords": {{ page.tags | join: ", " | jsonify }}{% if page.image %},
+  "image": {{ site.url | append: page.image | jsonify }}{% endif %}
+}
+</script>
+
 <article class="post">
 
   <header class="post-header">
@@ -42,6 +79,7 @@ layout: default
   {% endif %}
 
   <nav class="post-navigation">
+
     <div class="post-navigation-prev">
       {% if page.previous %}
         <span>← Article précédent</span>
@@ -59,6 +97,7 @@ layout: default
         </a>
       {% endif %}
     </div>
+
   </nav>
 
 </article>
