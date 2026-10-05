@@ -135,13 +135,12 @@
   /*
    * Dernier article sur téléphone
    *
-   * Premier toucher :
-   * - doigt posé = texte visible
-   * - doigt relâché = texte disparaît
-   * - l'article ne s'ouvre pas
-   *
-   * Deuxième toucher :
-   * - l'article s'ouvre normalement
+   * - doigt posé : texte visible
+   * - doigt relâché : texte invisible
+   * - l'aperçu peut être répété autant de fois qu'on veut
+   * - premier contact : pas d'ouverture
+   * - après un premier contact, un appui bref ouvre l'article
+   * - un appui maintenu n'ouvre jamais l'article
    */
 
   const featuredLatest =
@@ -149,16 +148,21 @@
 
   if (featuredLatest) {
 
-    let previewArmed = false;
-    let previewTouch = false;
+    let touchStartTime = 0;
+    let hasPreviewed = false;
     let suppressNextClick = false;
 
+    const longPressDelay = 220;
+
+
     function isMobileTouch() {
-      return window.matchMedia('(max-width: 760px)').matches;
+      return window.matchMedia(
+        '(max-width: 760px)'
+      ).matches;
     }
 
 
-    /* Doigt posé */
+    /* Le doigt touche l'image */
 
     featuredLatest.addEventListener(
       'touchstart',
@@ -166,37 +170,18 @@
 
         if (!isMobileTouch()) return;
 
-        /*
-         * Premier toucher :
-         * on affiche seulement l'aperçu.
-         */
+        touchStartTime = Date.now();
 
-        if (!previewArmed) {
-
-          previewTouch = true;
-
-          featuredLatest.classList.add(
-            'is-revealed'
-          );
-
-        } else {
-
-          /*
-           * Deuxième toucher :
-           * aucun aperçu supplémentaire,
-           * le clic pourra ouvrir l'article.
-           */
-
-          previewTouch = false;
-
-        }
+        featuredLatest.classList.add(
+          'is-revealed'
+        );
 
       },
       { passive: true }
     );
 
 
-    /* Doigt relâché */
+    /* Le doigt quitte l'image */
 
     featuredLatest.addEventListener(
       'touchend',
@@ -204,40 +189,62 @@
 
         if (!isMobileTouch()) return;
 
-        if (previewTouch) {
+        const duration =
+          Date.now() - touchStartTime;
 
-          /*
-           * Le texte disparaît immédiatement.
-           */
+        featuredLatest.classList.remove(
+          'is-revealed'
+        );
 
-          featuredLatest.classList.remove(
-            'is-revealed'
-          );
 
-          /*
-           * Le prochain toucher pourra ouvrir
-           * l'article.
-           */
+        /*
+         * Appui maintenu :
+         * il sert uniquement à regarder le titre.
+         * Il ne doit jamais ouvrir l'article.
+         */
 
-          previewArmed = true;
+        if (duration >= longPressDelay) {
 
-          /*
-           * On bloque le clic automatique généré
-           * par ce premier toucher.
-           */
-
+          hasPreviewed = true;
           suppressNextClick = true;
 
-          previewTouch = false;
+          return;
 
         }
+
+
+        /*
+         * Premier appui bref :
+         * on l'utilise comme premier contact,
+         * sans ouvrir l'article.
+         */
+
+        if (!hasPreviewed) {
+
+          hasPreviewed = true;
+          suppressNextClick = true;
+
+          return;
+
+        }
+
+
+        /*
+         * Si on arrive ici :
+         * un premier contact a déjà eu lieu
+         * et l'appui actuel est bref.
+         *
+         * On laisse donc le clic ouvrir l'article.
+         */
+
+        suppressNextClick = false;
 
       },
       { passive: true }
     );
 
 
-    /* Si le toucher est annulé */
+    /* Si le toucher est interrompu */
 
     featuredLatest.addEventListener(
       'touchcancel',
@@ -249,16 +256,14 @@
           'is-revealed'
         );
 
-        previewTouch = false;
-
       },
       { passive: true }
     );
 
 
     /*
-     * Empêche le menu contextuel du navigateur
-     * lors d'un appui prolongé sur téléphone.
+     * Empêche le menu contextuel lors
+     * d'un appui prolongé.
      */
 
     featuredLatest.addEventListener(
@@ -273,7 +278,7 @@
     );
 
 
-    /* Gestion de l'ouverture de l'article */
+    /* Empêche seulement les clics prévus pour l'aperçu */
 
     featuredLatest.addEventListener(
       'click',
@@ -281,29 +286,12 @@
 
         if (!isMobileTouch()) return;
 
-        /*
-         * Clic automatique produit après
-         * le premier toucher :
-         * on l'annule.
-         */
-
         if (suppressNextClick) {
 
           event.preventDefault();
 
           suppressNextClick = false;
 
-          return;
-
-        }
-
-        /*
-         * Deuxième toucher :
-         * on laisse le lien fonctionner normalement.
-         */
-
-        if (previewArmed) {
-          previewArmed = false;
         }
 
       }
@@ -333,11 +321,6 @@
     window.DE_GUSTIBUS_POSTS || [];
 
 
-  /*
-   * Si nous ne sommes pas sur la page de recherche,
-   * le reste du script n'est pas nécessaire.
-   */
-
   if (!f) return;
 
 
@@ -347,7 +330,7 @@
   i.value = q;
 
 
-  /* Protection du texte injecté dans les résultats */
+  /* Protection du texte injecté */
 
   function esc(x) {
 
@@ -376,6 +359,7 @@
       dateOnly.split('-');
 
     if (parts.length === 3) {
+
       return (
         parts[2] +
         '.' +
@@ -383,6 +367,7 @@
         '.' +
         parts[0]
       );
+
     }
 
     return dateOnly;
