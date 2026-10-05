@@ -6,7 +6,14 @@ layout: default
 
   <header class="post-header">
     <p class="eyebrow">
-      {{ page.category }} · {{ page.date | date: "%d.%m.%Y" }}
+      {% case page.category %}
+        {% when "films-et-series" %}Films et Séries
+        {% when "jeu-video" %}Jeu vidéo
+        {% when "litterature" %}Littérature
+        {% when "divers" %}Divers
+        {% else %}{{ page.category }}
+      {% endcase %}
+      · {{ page.date | date: "%d.%m.%Y" }}
     </p>
 
     <h1>{{ page.title }}</h1>
