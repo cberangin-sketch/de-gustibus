@@ -3,10 +3,41 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="{{ site.description }}">
+
+  {% assign meta_title = page.title | default: site.title %}
+  {% assign meta_description = page.chapeau | default: site.description %}
 
   <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
 
+  <meta name="description" content="{{ meta_description | strip_html | escape }}">
+
+  <!-- Open Graph : Telegram, WhatsApp, Messenger, Discord, etc. -->
+  <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+  <meta property="og:site_name" content="{{ site.title }}">
+  <meta property="og:title" content="{{ meta_title | strip_html | escape }}">
+  <meta property="og:description" content="{{ meta_description | strip_html | escape }}">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+
+  {% if page.image %}
+    <meta property="og:image" content="{{ site.url }}{{ page.image }}">
+  {% endif %}
+
+  <!-- X / Twitter -->
+  <meta name="twitter:card" content="{% if page.image %}summary_large_image{% else %}summary{% endif %}">
+  <meta name="twitter:title" content="{{ meta_title | strip_html | escape }}">
+  <meta name="twitter:description" content="{{ meta_description | strip_html | escape }}">
+
+  {% if page.image %}
+    <meta name="twitter:image" content="{{ site.url }}{{ page.image }}">
+  {% endif %}
+
+  <!-- Favicon -->
+  <link
+    rel="icon"
+    href="{{ '/favicon.svg' | relative_url }}"
+    type="image/svg+xml">
+
+  <!-- Polices -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -14,11 +45,7 @@
     href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap"
     rel="stylesheet">
 
-  <link
-    rel="icon"
-    href="{{ '/favicon.svg' | relative_url }}"
-    type="image/svg+xml">
-
+  <!-- Feuille de style -->
   <link
     rel="stylesheet"
     href="{{ '/assets/css/style.css' | relative_url }}">
@@ -53,6 +80,7 @@
       <a href="{{ '/divers/' | relative_url }}">Divers</a>
       <a href="{{ '/a-propos/' | relative_url }}">À propos</a>
 
+      <!-- Recherche mobile -->
       <button
         class="mobile-search-toggle"
         type="button"
@@ -61,6 +89,7 @@
         Rechercher
       </button>
 
+      <!-- Recherche desktop -->
       <button
         class="search-toggle"
         type="button"
