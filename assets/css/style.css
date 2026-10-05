@@ -1,11 +1,20 @@
 :root{
-  --paper:#e7d8c1; --ink:#171411; --muted:#74695c; --line:#b9aa93;
-  --max:1180px; --sans:"DM Sans",Arial,sans-serif; --serif:"EB Garamond",Georgia,serif
+  --paper:#e7d8c1;
+  --ink:#171411;
+  --muted:#74695c;
+  --line:#b9aa93;
+  --max:1180px;
+  --sans:"DM Sans",Arial,sans-serif;
+  --serif:"EB Garamond",Georgia,serif
 }
 
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box
+}
 
-html{background:var(--paper)}
+html{
+  background:var(--paper)
+}
 
 body{
   margin:0;
@@ -245,11 +254,6 @@ main{
   margin:55px 0 20px
 }
 
-.post .post-body p{
-  text-align:justify !important;
-  text-justify:inter-word
-}
-
 .tags{
   max-width:690px;
   margin:55px auto 0;
@@ -281,6 +285,14 @@ main{
   justify-content:space-between;
   font:10px var(--sans);
   color:var(--muted)
+}
+
+
+/* Texte des articles */
+
+.post .post-body p{
+  text-align:justify !important;
+  text-justify:inter-word
 }
 
 
@@ -346,7 +358,8 @@ main{
   width:100%;
   aspect-ratio:16 / 8;
   overflow:hidden;
-  background:var(--ink)
+  background:var(--ink);
+  -webkit-tap-highlight-color:transparent
 }
 
 .featured-latest__image{
@@ -354,7 +367,11 @@ main{
   width:100%;
   height:100%;
   object-fit:cover;
-  transition:transform .6s ease, opacity .4s ease
+  opacity:1;
+  transform:none;
+  transition:
+    transform .6s ease,
+    opacity .4s ease
 }
 
 .featured-latest__overlay{
@@ -367,7 +384,9 @@ main{
   background:rgba(23,20,17,0);
   color:#f3eadc;
   opacity:0;
-  transition:opacity .35s ease, background .35s ease
+  transition:
+    opacity .35s ease,
+    background .35s ease
 }
 
 .featured-latest__meta{
@@ -384,14 +403,21 @@ main{
   letter-spacing:-.025em
 }
 
-.featured-latest__link:hover .featured-latest__image{
-  transform:scale(1.015);
-  opacity:.65
-}
 
-.featured-latest__link:hover .featured-latest__overlay{
-  opacity:1;
-  background:rgba(23,20,17,.22)
+/* Le survol ne s'applique qu'aux appareils équipés d'une souris */
+
+@media (hover:hover) and (pointer:fine){
+
+  .featured-latest__link:hover .featured-latest__image{
+    transform:scale(1.015);
+    opacity:.65
+  }
+
+  .featured-latest__link:hover .featured-latest__overlay{
+    opacity:1;
+    background:rgba(23,20,17,.22)
+  }
+
 }
 
 
@@ -416,7 +442,7 @@ main{
 }
 
 
-/* Adaptation téléphone */
+/* Adaptation téléphone générale */
 
 @media(max-width:760px){
 
@@ -485,7 +511,7 @@ main{
   }
 
 
-  /* Dernier article sur mobile */
+  /* Dernier article sur téléphone */
 
   .featured-latest{
     padding:44px 20px 0
@@ -498,12 +524,37 @@ main{
   .featured-latest__overlay{
     padding:24px;
     opacity:0;
-    background:rgba(23,20,17,0)
+    background:transparent
   }
 
   .featured-latest__image{
-    opacity:1
+    opacity:1;
+    transform:none
   }
+
+  .featured-latest__title{
+    font-size:32px
+  }
+
+  /*
+   * Avant le premier toucher :
+   * photographie entièrement visible, aucun texte.
+   */
+
+  .featured-latest__link:not(.is-revealed) .featured-latest__overlay{
+    opacity:0 !important;
+    background:transparent !important
+  }
+
+  .featured-latest__link:not(.is-revealed) .featured-latest__image{
+    opacity:1 !important;
+    transform:none !important
+  }
+
+  /*
+   * Après le premier toucher :
+   * voile + catégorie + titre.
+   */
 
   .featured-latest__link.is-revealed .featured-latest__overlay{
     opacity:1;
@@ -512,10 +563,6 @@ main{
 
   .featured-latest__link.is-revealed .featured-latest__image{
     opacity:.78
-  }
-
-  .featured-latest__title{
-    font-size:32px
   }
 
 }
@@ -657,11 +704,13 @@ button{
     background:transparent
   }
 
+
   /* La loupe desktop disparaît sur téléphone */
 
   .site-header .search-toggle{
     display:none
   }
+
 
   /* Panneau de recherche mobile */
 
