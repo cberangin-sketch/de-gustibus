@@ -14,9 +14,13 @@
 
   if (menuToggle && mainNav) {
     menuToggle.addEventListener('click', function () {
+
       const isOpen = mainNav.classList.toggle('is-open');
 
-      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.setAttribute(
+        'aria-expanded',
+        String(isOpen)
+      );
 
       menuToggle.setAttribute(
         'aria-label',
@@ -24,23 +28,31 @@
       );
 
       menuToggle.textContent = isOpen ? '×' : '☰';
+
     });
   }
 
 
-  /* Recherche */
+  /* Ouverture de la recherche */
 
   function openSearch() {
+
     if (!searchPanel) return;
 
     searchPanel.hidden = false;
 
     if (desktopSearchToggle) {
-      desktopSearchToggle.setAttribute('aria-expanded', 'true');
+      desktopSearchToggle.setAttribute(
+        'aria-expanded',
+        'true'
+      );
     }
 
     if (mobileSearchToggle) {
-      mobileSearchToggle.setAttribute('aria-expanded', 'true');
+      mobileSearchToggle.setAttribute(
+        'aria-expanded',
+        'true'
+      );
     }
 
     if (searchInput) {
@@ -48,15 +60,20 @@
         searchInput.focus();
       }, 50);
     }
+
   }
 
 
   function toggleDesktopSearch() {
+
     if (!searchPanel) return;
 
     if (searchPanel.hidden) {
+
       openSearch();
+
     } else {
+
       searchPanel.hidden = true;
 
       if (desktopSearchToggle) {
@@ -65,7 +82,9 @@
           'false'
         );
       }
+
     }
+
   }
 
 
@@ -77,24 +96,39 @@
   }
 
 
+  /* Recherche depuis le menu mobile */
+
   if (mobileSearchToggle) {
-    mobileSearchToggle.addEventListener('click', function () {
 
-      if (mainNav) {
-        mainNav.classList.remove('is-open');
+    mobileSearchToggle.addEventListener(
+      'click',
+      function () {
+
+        if (mainNav) {
+          mainNav.classList.remove('is-open');
+        }
+
+        if (menuToggle) {
+
+          menuToggle.textContent = '☰';
+
+          menuToggle.setAttribute(
+            'aria-expanded',
+            'false'
+          );
+
+          menuToggle.setAttribute(
+            'aria-label',
+            'Ouvrir le menu'
+          );
+
+        }
+
+        openSearch();
+
       }
+    );
 
-      if (menuToggle) {
-        menuToggle.textContent = '☰';
-        menuToggle.setAttribute('aria-expanded', 'false');
-        menuToggle.setAttribute(
-          'aria-label',
-          'Ouvrir le menu'
-        );
-      }
-
-      openSearch();
-    });
   }
 
 
@@ -113,9 +147,11 @@
           window.matchMedia('(max-width: 760px)').matches &&
           !featuredLatest.classList.contains('is-revealed')
         ) {
+
           event.preventDefault();
 
           featuredLatest.classList.add('is-revealed');
+
         }
 
       }
@@ -124,20 +160,33 @@
   }
 
 
-  /* Page de résultats de recherche */
+  /* Page complète de résultats */
 
-  const f = document.querySelector('#full-search-form');
-  const i = document.querySelector('#full-search-input');
-  const r = document.querySelector('#search-results-list');
-  const s = document.querySelector('#search-summary');
-  const e = document.querySelector('#search-empty');
+  const f =
+    document.querySelector('#full-search-form');
 
-  const posts = window.DE_GUSTIBUS_POSTS || [];
+  const i =
+    document.querySelector('#full-search-input');
+
+  const r =
+    document.querySelector('#search-results-list');
+
+  const s =
+    document.querySelector('#search-summary');
+
+  const e =
+    document.querySelector('#search-empty');
+
+  const posts =
+    window.DE_GUSTIBUS_POSTS || [];
 
 
   /*
-   * À partir d'ici, le code ne concerne que
-   * la page de recherche.
+   * Si nous ne sommes pas sur la page de recherche,
+   * le reste du script n'est pas nécessaire.
+   *
+   * Le comportement tactile du dernier article
+   * a déjà été chargé au-dessus.
    */
 
   if (!f) return;
@@ -149,7 +198,10 @@
   i.value = q;
 
 
+  /* Protection du texte injecté dans les résultats */
+
   function esc(x) {
+
     return String(x).replace(
       /[&<>"']/g,
       c => ({
@@ -160,8 +212,45 @@
         "'": '&#039;'
       }[c])
     );
+
   }
 
+
+  /*
+   * Affichage de la date.
+   * Compatible avec :
+   *
+   * 2026-10-05
+   *
+   * et avec le nouveau format :
+   *
+   * 2026-10-05T16:30
+   */
+
+  function formatDate(value) {
+
+    const dateOnly =
+      String(value || '').split('T')[0];
+
+    const parts =
+      dateOnly.split('-');
+
+    if (parts.length === 3) {
+      return (
+        parts[2] +
+        '.' +
+        parts[1] +
+        '.' +
+        parts[0]
+      );
+    }
+
+    return dateOnly;
+
+  }
+
+
+  /* Recherche */
 
   function run() {
 
@@ -180,19 +269,23 @@
         'Saisissez un mot ou une expression pour rechercher dans le carnet.';
 
       return;
+
     }
 
 
     let m = posts.filter(p =>
+
       [
         p.title,
         p.category,
         p.excerpt,
         ...(p.tags || [])
       ]
+
         .join(' ')
         .toLocaleLowerCase('fr')
         .includes(x)
+
     );
 
 
@@ -208,22 +301,21 @@
 
     m.forEach(p => {
 
-      let a = document.createElement('article');
+      let a =
+        document.createElement('article');
 
       a.className =
         'post-card search-card';
 
 
       a.innerHTML =
+
         '<div class="post-card-content">' +
 
         '<p class="eyebrow">' +
         esc(p.category) +
         ' · ' +
-        p.date
-          .split('-')
-          .reverse()
-          .join('.') +
+        formatDate(p.date) +
         '</p>' +
 
         '<h2><a href="' +
