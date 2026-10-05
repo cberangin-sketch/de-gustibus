@@ -1,12 +1,20 @@
 (function () {
 
-  /* Menu mobile */
-
   const menuToggle = document.querySelector('.menu-toggle');
   const mainNav = document.querySelector('.main-nav');
 
+  const desktopSearchToggle = document.querySelector('.search-toggle');
+  const mobileSearchToggle = document.querySelector('.mobile-search-toggle');
+
+  const searchPanel = document.querySelector('#search-panel');
+  const searchInput = document.querySelector('#search-input');
+
+
+  /* Menu mobile */
+
   if (menuToggle && mainNav) {
-    menuToggle.addEventListener('click', () => {
+    menuToggle.addEventListener('click', function () {
+
       const isOpen = mainNav.classList.toggle('is-open');
 
       menuToggle.setAttribute('aria-expanded', String(isOpen));
@@ -20,21 +28,70 @@
   }
 
 
-  /* Recherche */
+  /* Ouverture de la recherche */
 
-  const t = document.querySelector('.search-toggle');
-  const p = document.querySelector('#search-panel');
+  function openSearch() {
+    if (!searchPanel) return;
 
-  if (t && p) {
-    t.onclick = () => {
-      p.hidden = !p.hidden;
-      t.setAttribute('aria-expanded', String(!p.hidden));
+    searchPanel.hidden = false;
 
-      if (!p.hidden) {
-        p.querySelector('input').focus();
-      }
-    };
+    if (desktopSearchToggle) {
+      desktopSearchToggle.setAttribute('aria-expanded', 'true');
+    }
+
+    if (mobileSearchToggle) {
+      mobileSearchToggle.setAttribute('aria-expanded', 'true');
+    }
+
+    if (searchInput) {
+      setTimeout(function () {
+        searchInput.focus();
+      }, 50);
+    }
   }
+
+
+  function toggleDesktopSearch() {
+    if (!searchPanel) return;
+
+    if (searchPanel.hidden) {
+      openSearch();
+    } else {
+      searchPanel.hidden = true;
+
+      if (desktopSearchToggle) {
+        desktopSearchToggle.setAttribute('aria-expanded', 'false');
+      }
+    }
+  }
+
+
+  if (desktopSearchToggle) {
+    desktopSearchToggle.addEventListener('click', toggleDesktopSearch);
+  }
+
+
+  /* Recherche depuis le menu mobile */
+
+  if (mobileSearchToggle) {
+    mobileSearchToggle.addEventListener('click', function () {
+
+      if (mainNav) {
+        mainNav.classList.remove('is-open');
+      }
+
+      if (menuToggle) {
+        menuToggle.textContent = '☰';
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'Ouvrir le menu');
+      }
+
+      openSearch();
+    });
+  }
+
+
+  /* Page complète de résultats */
 
   const f = document.querySelector('#full-search-form');
   const i = document.querySelector('#full-search-input');
