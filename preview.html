@@ -1,3 +1,344 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>De gustibus — aperçu V1</title><style>
-:root{--ink:#171717;--paper:#f3ecdf;--muted:#77736c;--line:#d8d1c6;--accent:#9a1f1f}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:'EB Garamond',Georgia,serif;font-size:20px;line-height:1.55}.wrap{max-width:1180px;margin:auto;padding:0 42px}header{height:86px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;font-family:'DM Sans',sans-serif}a{text-decoration:none;color:inherit}.logo{font-weight:700;letter-spacing:-.04em;font-size:25px}.nav{display:flex;gap:25px;font-size:14px}.nav a{color:#3c3a36}.nav a:hover{color:var(--accent)}main{padding-bottom:100px}.hero{padding:92px 0 78px;max-width:920px}.eyebrow{text-transform:uppercase;letter-spacing:.14em;font:600 11px/1.2 'DM Sans',sans-serif;color:var(--muted);margin:0 0 18px}.hero h1{font:600 78px/.95 'DM Sans',sans-serif;letter-spacing:-.065em;margin:0 0 22px}.hero-subtitle{font-size:28px;line-height:1.2;max-width:720px;margin:0 0 48px}.hero blockquote{border-left:2px solid var(--ink);padding:0 0 0 25px;margin:0;max-width:790px;font-size:24px;font-style:italic;line-height:1.35}.archive{border-top:1px solid var(--line);padding-top:42px}.section-heading{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:25px}.section-heading h2{font:600 32px/1 'DM Sans',sans-serif;letter-spacing:-.04em;margin:0}.post-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}.card{background:var(--paper);padding:28px 30px 31px;min-height:230px;display:flex;flex-direction:column}.meta{font:500 11px 'DM Sans',sans-serif;color:var(--muted);text-transform:uppercase;letter-spacing:.11em}.card h3{font:600 29px/1.05 'DM Sans',sans-serif;letter-spacing:-.045em;margin:13px 0 12px}.card p{margin:0;color:#4b4842}.tags{margin-top:auto;padding-top:24px;font:500 11px 'DM Sans',sans-serif;color:var(--accent)}footer{border-top:1px solid var(--line);padding:26px 0 45px;font:12px 'DM Sans',sans-serif;color:var(--muted)}@media(max-width:760px){.wrap{padding:0 20px}header{height:auto;min-height:74px;align-items:flex-start;padding:20px 0;gap:15px}.nav{gap:10px;flex-wrap:wrap;justify-content:flex-end}.hero{padding:58px 0}.hero h1{font-size:54px}.hero-subtitle{font-size:23px}.hero blockquote{font-size:20px}.post-list{grid-template-columns:1fr}.card h3{font-size:25px}}
-</style></head><body><div class="wrap"><header><a class="logo" href="#">De gustibus</a><nav class="nav"><a href="#">Accueil</a><a href="#">Jeu vidéo</a><a href="#">Films et Séries</a><a href="#">Littérature</a><a href="#">Divers</a><a href="#">À propos</a><a href="#">⌕</a></nav></header><main><section class="hero"><p class="eyebrow">Carnet personnel</p><h1>De gustibus</h1><p class="hero-subtitle">Ici je vous parle de jeux-vidéos, de cinéma, de littérature</p><blockquote>« Il y a dans l’art un point de perfection comme de bonté ou de maturité dans la nature : celui qui le sent et qui l’aime a le goût parfait, celui qui ne le sent pas et qui aime en deçà et au delà a le goût défectueux. Il y a donc un bon et un mauvais goût, et l’on dispute des goûts avec fondement »</blockquote></section><section class="archive"><div class="section-heading"><p class="eyebrow">Le carnet</p><h2>Articles</h2></div><div class="post-list"><article class="card"><div class="meta">04 octobre 2026 · Jeu vidéo</div><h3>Premier article</h3><p>Un exemple d’article pour montrer comment le carnet pourrait se présenter. Chaque nouvelle publication apparaîtra ici, de la plus récente à la plus ancienne.</p><div class="tags">#exemple&nbsp;&nbsp; #jeu-video</div></article><article class="card"><div class="meta">À venir · Films et Séries</div><h3>Le cinéma comme affaire de goût</h3><p>Une seconde carte permet de voir immédiatement la logique d’archive et la place laissée aux futurs textes.</p><div class="tags">#cinema&nbsp;&nbsp; #critique</div></article></div></section></main><footer>De gustibus · Un carnet personnel sur les jeux vidéo, le cinéma et la littérature</footer></div></body></html>
+---
+sitemap: false
+---
+
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>De gustibus — aperçu V1</title>
+
+  <style>
+    :root{
+      --ink:#171717;
+      --paper:#f3ecdf;
+      --muted:#77736c;
+      --line:#d8d1c6;
+      --accent:#9a1f1f
+    }
+
+    *{
+      box-sizing:border-box
+    }
+
+    body{
+      margin:0;
+      background:var(--paper);
+      color:var(--ink);
+      font-family:'EB Garamond',Georgia,serif;
+      font-size:20px;
+      line-height:1.55
+    }
+
+    .wrap{
+      max-width:1180px;
+      margin:auto;
+      padding:0 42px
+    }
+
+    header{
+      height:86px;
+      border-bottom:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      font-family:'DM Sans',sans-serif
+    }
+
+    a{
+      text-decoration:none;
+      color:inherit
+    }
+
+    .logo{
+      font-weight:700;
+      letter-spacing:-.04em;
+      font-size:25px
+    }
+
+    .nav{
+      display:flex;
+      gap:25px;
+      font-size:14px
+    }
+
+    .nav a{
+      color:#3c3a36
+    }
+
+    .nav a:hover{
+      color:var(--accent)
+    }
+
+    main{
+      padding-bottom:100px
+    }
+
+    .hero{
+      padding:92px 0 78px;
+      max-width:920px
+    }
+
+    .eyebrow{
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      font:600 11px/1.2 'DM Sans',sans-serif;
+      color:var(--muted);
+      margin:0 0 18px
+    }
+
+    .hero h1{
+      font:600 78px/.95 'DM Sans',sans-serif;
+      letter-spacing:-.065em;
+      margin:0 0 22px
+    }
+
+    .hero-subtitle{
+      font-size:28px;
+      line-height:1.2;
+      max-width:720px;
+      margin:0 0 48px
+    }
+
+    .hero blockquote{
+      border-left:2px solid var(--ink);
+      padding:0 0 0 25px;
+      margin:0;
+      max-width:790px;
+      font-size:24px;
+      font-style:italic;
+      line-height:1.35
+    }
+
+    .archive{
+      border-top:1px solid var(--line);
+      padding-top:42px
+    }
+
+    .section-heading{
+      display:flex;
+      align-items:baseline;
+      justify-content:space-between;
+      margin-bottom:25px
+    }
+
+    .section-heading h2{
+      font:600 32px/1 'DM Sans',sans-serif;
+      letter-spacing:-.04em;
+      margin:0
+    }
+
+    .post-list{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:1px;
+      background:var(--line);
+      border:1px solid var(--line)
+    }
+
+    .card{
+      background:var(--paper);
+      padding:28px 30px 31px;
+      min-height:230px;
+      display:flex;
+      flex-direction:column
+    }
+
+    .meta{
+      font:500 11px 'DM Sans',sans-serif;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.11em
+    }
+
+    .card h3{
+      font:600 29px/1.05 'DM Sans',sans-serif;
+      letter-spacing:-.045em;
+      margin:13px 0 12px
+    }
+
+    .card p{
+      margin:0;
+      color:#4b4842
+    }
+
+    .tags{
+      margin-top:auto;
+      padding-top:24px;
+      font:500 11px 'DM Sans',sans-serif;
+      color:var(--accent)
+    }
+
+    footer{
+      border-top:1px solid var(--line);
+      padding:26px 0 45px;
+      font:12px 'DM Sans',sans-serif;
+      color:var(--muted)
+    }
+
+    @media(max-width:760px){
+
+      .wrap{
+        padding:0 20px
+      }
+
+      header{
+        height:auto;
+        min-height:74px;
+        align-items:flex-start;
+        padding:20px 0;
+        gap:15px
+      }
+
+      .nav{
+        gap:10px;
+        flex-wrap:wrap;
+        justify-content:flex-end
+      }
+
+      .hero{
+        padding:58px 0
+      }
+
+      .hero h1{
+        font-size:54px
+      }
+
+      .hero-subtitle{
+        font-size:23px
+      }
+
+      .hero blockquote{
+        font-size:20px
+      }
+
+      .post-list{
+        grid-template-columns:1fr
+      }
+
+      .card h3{
+        font-size:25px
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="wrap">
+
+    <header>
+
+      <a class="logo" href="#">
+        De gustibus
+      </a>
+
+      <nav class="nav">
+        <a href="#">Accueil</a>
+        <a href="#">Jeu vidéo</a>
+        <a href="#">Films et Séries</a>
+        <a href="#">Littérature</a>
+        <a href="#">Divers</a>
+        <a href="#">À propos</a>
+        <a href="#">⌕</a>
+      </nav>
+
+    </header>
+
+    <main>
+
+      <section class="hero">
+
+        <p class="eyebrow">
+          Carnet personnel
+        </p>
+
+        <h1>
+          De gustibus
+        </h1>
+
+        <p class="hero-subtitle">
+          Ici je vous parle de jeux-vidéos, de cinéma, de littérature
+        </p>
+
+        <blockquote>
+          « Il y a dans l’art un point de perfection comme de bonté ou de maturité dans la nature : celui qui le sent et qui l’aime a le goût parfait, celui qui ne le sent pas et qui aime en deçà et au delà a le goût défectueux.
+          Il y a donc un bon et un mauvais goût, et l’on dispute des goûts avec fondement »
+        </blockquote>
+
+      </section>
+
+      <section class="archive">
+
+        <div class="section-heading">
+
+          <p class="eyebrow">
+            Le carnet
+          </p>
+
+          <h2>
+            Articles
+          </h2>
+
+        </div>
+
+        <div class="post-list">
+
+          <article class="card">
+
+            <div class="meta">
+              04 octobre 2026 · Jeu vidéo
+            </div>
+
+            <h3>
+              Premier article
+            </h3>
+
+            <p>
+              Un exemple d’article pour montrer comment le carnet pourrait se présenter.
+              Chaque nouvelle publication apparaîtra ici, de la plus récente à la plus ancienne.
+            </p>
+
+            <div class="tags">
+              #exemple&nbsp;&nbsp; #jeu-video
+            </div>
+
+          </article>
+
+          <article class="card">
+
+            <div class="meta">
+              À venir · Films et Séries
+            </div>
+
+            <h3>
+              Le cinéma comme affaire de goût
+            </h3>
+
+            <p>
+              Une seconde carte permet de voir immédiatement la logique d’archive et la place laissée aux futurs textes.
+            </p>
+
+            <div class="tags">
+              #cinema&nbsp;&nbsp; #critique
+            </div>
+
+          </article>
+
+        </div>
+
+      </section>
+
+    </main>
+
+    <footer>
+      De gustibus · Un carnet personnel sur les jeux vidéo, le cinéma et la littérature
+    </footer>
+
+  </div>
+
+</body>
+</html>
