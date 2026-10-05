@@ -132,26 +132,178 @@
   }
 
 
-  /* Dernier article : comportement tactile */
+  /*
+   * Dernier article sur téléphone
+   *
+   * Premier toucher :
+   * - doigt posé = texte visible
+   * - doigt relâché = texte disparaît
+   * - l'article ne s'ouvre pas
+   *
+   * Deuxième toucher :
+   * - l'article s'ouvre normalement
+   */
 
   const featuredLatest =
     document.querySelector('.featured-latest__link');
 
   if (featuredLatest) {
 
+    let previewArmed = false;
+    let previewTouch = false;
+    let suppressNextClick = false;
+
+    function isMobileTouch() {
+      return window.matchMedia('(max-width: 760px)').matches;
+    }
+
+
+    /* Doigt posé */
+
+    featuredLatest.addEventListener(
+      'touchstart',
+      function () {
+
+        if (!isMobileTouch()) return;
+
+        /*
+         * Premier toucher :
+         * on affiche seulement l'aperçu.
+         */
+
+        if (!previewArmed) {
+
+          previewTouch = true;
+
+          featuredLatest.classList.add(
+            'is-revealed'
+          );
+
+        } else {
+
+          /*
+           * Deuxième toucher :
+           * aucun aperçu supplémentaire,
+           * le clic pourra ouvrir l'article.
+           */
+
+          previewTouch = false;
+
+        }
+
+      },
+      { passive: true }
+    );
+
+
+    /* Doigt relâché */
+
+    featuredLatest.addEventListener(
+      'touchend',
+      function () {
+
+        if (!isMobileTouch()) return;
+
+        if (previewTouch) {
+
+          /*
+           * Le texte disparaît immédiatement.
+           */
+
+          featuredLatest.classList.remove(
+            'is-revealed'
+          );
+
+          /*
+           * Le prochain toucher pourra ouvrir
+           * l'article.
+           */
+
+          previewArmed = true;
+
+          /*
+           * On bloque le clic automatique généré
+           * par ce premier toucher.
+           */
+
+          suppressNextClick = true;
+
+          previewTouch = false;
+
+        }
+
+      },
+      { passive: true }
+    );
+
+
+    /* Si le toucher est annulé */
+
+    featuredLatest.addEventListener(
+      'touchcancel',
+      function () {
+
+        if (!isMobileTouch()) return;
+
+        featuredLatest.classList.remove(
+          'is-revealed'
+        );
+
+        previewTouch = false;
+
+      },
+      { passive: true }
+    );
+
+
+    /*
+     * Empêche le menu contextuel du navigateur
+     * lors d'un appui prolongé sur téléphone.
+     */
+
+    featuredLatest.addEventListener(
+      'contextmenu',
+      function (event) {
+
+        if (isMobileTouch()) {
+          event.preventDefault();
+        }
+
+      }
+    );
+
+
+    /* Gestion de l'ouverture de l'article */
+
     featuredLatest.addEventListener(
       'click',
       function (event) {
 
-        if (
-          window.matchMedia('(max-width: 760px)').matches &&
-          !featuredLatest.classList.contains('is-revealed')
-        ) {
+        if (!isMobileTouch()) return;
+
+        /*
+         * Clic automatique produit après
+         * le premier toucher :
+         * on l'annule.
+         */
+
+        if (suppressNextClick) {
 
           event.preventDefault();
 
-          featuredLatest.classList.add('is-revealed');
+          suppressNextClick = false;
 
+          return;
+
+        }
+
+        /*
+         * Deuxième toucher :
+         * on laisse le lien fonctionner normalement.
+         */
+
+        if (previewArmed) {
+          previewArmed = false;
         }
 
       }
@@ -184,9 +336,6 @@
   /*
    * Si nous ne sommes pas sur la page de recherche,
    * le reste du script n'est pas nécessaire.
-   *
-   * Le comportement tactile du dernier article
-   * a déjà été chargé au-dessus.
    */
 
   if (!f) return;
@@ -216,16 +365,7 @@
   }
 
 
-  /*
-   * Affichage de la date.
-   * Compatible avec :
-   *
-   * 2026-10-05
-   *
-   * et avec le nouveau format :
-   *
-   * 2026-10-05T16:30
-   */
+  /* Affichage propre de la date */
 
   function formatDate(value) {
 
