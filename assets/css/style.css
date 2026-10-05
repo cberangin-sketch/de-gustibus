@@ -63,3 +63,70 @@ main{max-width:var(--max);margin:auto}
 .hero blockquote {
   font-style: italic;
 }
+/* Navigation entre les articles */
+
+.post-navigation {
+  max-width: 900px;
+  margin: 60px auto 0;
+  padding: 28px 0 35px;
+  border-top: 1px solid rgba(30, 25, 20, 0.35);
+  border-bottom: 1px solid rgba(30, 25, 20, 0.35);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.post-navigation-prev,
+.post-navigation-next {
+  width: 45%;
+}
+
+.post-navigation-next {
+  text-align: right;
+}
+
+.post-navigation span {
+  display: block;
+  margin-bottom: 8px;
+
+  font-family: Georgia, serif;
+  font-size: 15px;
+  font-style: italic;
+  font-weight: normal;
+}
+
+.post-navigation a {
+  font-family: Georgia, serif;
+  font-size: 20px;
+  font-weight: normal;
+  line-height: 1.25;
+  text-decoration: none;
+  color: inherit;
+}
+
+.post-navigation a:hover {
+  text-decoration: underline;
+}
+
+/* Adaptation téléphone */
+
+@media (max-width: 650px) {
+  .post-navigation {
+    gap: 20px;
+  }
+
+  .post-navigation-prev,
+  .post-navigation-next {
+    width: 48%;
+  }
+
+  .post-navigation span {
+    font-size: 12px;
+  }
+
+  .post-navigation a {
+    font-size: 16px;
+  }
+}
