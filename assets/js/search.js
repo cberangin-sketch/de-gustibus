@@ -147,17 +147,17 @@
   /*
    * Dernier article sur téléphone
    *
-   * 1er toucher :
+   * Premier toucher :
    * le titre apparaît et reste affiché.
    *
-   * 2e toucher sur l'image :
+   * Même si on relâche le doigt ou qu'on scrolle :
+   * il reste affiché.
+   *
+   * Deuxième toucher sur l'image :
    * ouverture de l'article.
    *
    * Toucher ailleurs :
-   * le titre disparaît.
-   *
-   * Recommencer à faire défiler la page :
-   * le titre disparaît.
+   * disparition du titre.
    */
 
   const featuredLatest =
@@ -165,10 +165,10 @@
 
   if (featuredLatest) {
 
-    let touchStartedRevealed = false;
-    let touchMoved = false;
+    let wasAlreadyRevealed = false;
     let suppressNextClick = false;
 
+    let touchMoved = false;
     let startX = 0;
     let startY = 0;
 
@@ -204,11 +204,10 @@
         touchMoved = false;
 
         /*
-         * On mémorise si le titre était déjà visible
-         * AVANT ce nouveau toucher.
+         * On vérifie si le faux hover était déjà actif.
          */
 
-        touchStartedRevealed =
+        wasAlreadyRevealed =
           featuredLatest.classList.contains(
             'is-revealed'
           );
@@ -216,10 +215,10 @@
 
         /*
          * Premier toucher :
-         * apparition immédiate du titre.
+         * on affiche le titre.
          */
 
-        if (!touchStartedRevealed) {
+        if (!wasAlreadyRevealed) {
 
           featuredLatest.classList.add(
             'is-revealed'
@@ -233,8 +232,10 @@
 
 
     /*
-     * Si le doigt se déplace suffisamment,
-     * on considère que l'utilisateur veut scroller.
+     * On détecte seulement si le doigt se déplace.
+     *
+     * Important :
+     * le titre NE disparaît PAS pendant le scroll.
      */
 
     featuredLatest.addEventListener(
@@ -261,22 +262,6 @@
 
           touchMoved = true;
 
-          /*
-           * Dès que le scroll commence,
-           * le faux "hover" disparaît.
-           */
-
-          featuredLatest.classList.remove(
-            'is-revealed'
-          );
-
-          /*
-           * Par sécurité, aucun clic ne doit
-           * être déclenché après ce geste.
-           */
-
-          suppressNextClick = true;
-
         }
 
       },
@@ -296,8 +281,11 @@
 
 
         /*
-         * L'utilisateur a fait défiler :
-         * aucune ouverture de l'article.
+         * Si l'utilisateur a scrollé depuis l'image :
+         * le titre reste affiché.
+         *
+         * On bloque simplement une éventuelle
+         * ouverture accidentelle.
          */
 
         if (touchMoved) {
@@ -310,15 +298,13 @@
 
 
         /*
-         * Si le titre n'était PAS visible
-         * avant le toucher :
+         * Premier toucher :
+         * le titre vient d'apparaître.
          *
-         * c'était le premier toucher.
-         * On garde le titre affiché,
-         * mais on bloque l'ouverture.
+         * On bloque l'ouverture de l'article.
          */
 
-        if (!touchStartedRevealed) {
+        if (!wasAlreadyRevealed) {
 
           suppressNextClick = true;
 
@@ -328,10 +314,10 @@
 
 
         /*
-         * Si le titre était déjà visible :
+         * Deuxième toucher sur l'image,
+         * alors que le titre était déjà visible :
          *
-         * c'est le deuxième toucher.
-         * On laisse le lien s'ouvrir normalement.
+         * on laisse le lien s'ouvrir.
          */
 
         suppressNextClick = false;
@@ -342,7 +328,8 @@
 
 
     /*
-     * Si Android/iOS annule le geste.
+     * Si le système annule le geste,
+     * on conserve quand même le titre.
      */
 
     featuredLatest.addEventListener(
@@ -351,11 +338,6 @@
 
         if (!isMobileTouch()) return;
 
-        featuredLatest.classList.remove(
-          'is-revealed'
-        );
-
-        touchMoved = false;
         suppressNextClick = true;
 
       },
@@ -375,7 +357,7 @@
 
 
         /*
-         * Premier toucher ou scroll :
+         * Premier toucher ou geste de scroll :
          * on empêche l'ouverture.
          */
 
@@ -389,8 +371,8 @@
 
         /*
          * Sinon :
-         * c'était bien le deuxième toucher.
-         * Le lien fonctionne normalement.
+         * deuxième tap sur l'image,
+         * le lien s'ouvre normalement.
          */
 
       }
@@ -398,8 +380,8 @@
 
 
     /*
-     * Toucher n'importe où ailleurs sur la page :
-     * disparition du titre.
+     * Toucher ailleurs sur la page :
+     * disparition du faux hover.
      */
 
     document.addEventListener(
@@ -419,34 +401,7 @@
 
           suppressNextClick = false;
 
-        }
-
-      },
-      { passive: true }
-    );
-
-
-    /*
-     * Si la page commence à défiler,
-     * le titre disparaît également.
-     */
-
-    window.addEventListener(
-      'scroll',
-      function () {
-
-        if (!isMobileTouch()) return;
-
-
-        if (
-          featuredLatest.classList.contains(
-            'is-revealed'
-          )
-        ) {
-
-          featuredLatest.classList.remove(
-            'is-revealed'
-          );
+          wasAlreadyRevealed = false;
 
         }
 
@@ -456,8 +411,8 @@
 
 
     /*
-     * Évite le menu contextuel Android/iOS
-     * sur appui prolongé.
+     * Évite le menu contextuel lors
+     * d'un appui prolongé.
      */
 
     featuredLatest.addEventListener(
