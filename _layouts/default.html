@@ -11,9 +11,10 @@
 
   <meta name="description" content="{{ meta_description | strip_html | escape }}">
 
-  <!-- Open Graph : Telegram, WhatsApp, Messenger, Discord, etc. -->
+  <!-- Aperçus Telegram, WhatsApp, Messenger, Discord, etc. -->
+  <meta property="og:locale" content="fr_FR">
   <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
-  <meta property="og:site_name" content="{{ site.title }}">
+  <meta property="og:site_name" content="{{ site.title | escape }}">
   <meta property="og:title" content="{{ meta_title | strip_html | escape }}">
   <meta property="og:description" content="{{ meta_description | strip_html | escape }}">
   <meta property="og:url" content="{{ site.url }}{{ page.url }}">
@@ -22,7 +23,7 @@
     <meta property="og:image" content="{{ site.url }}{{ page.image }}">
   {% endif %}
 
-  <!-- X / Twitter -->
+  <!-- Aperçus X / Twitter -->
   <meta name="twitter:card" content="{% if page.image %}summary_large_image{% else %}summary{% endif %}">
   <meta name="twitter:title" content="{{ meta_title | strip_html | escape }}">
   <meta name="twitter:description" content="{{ meta_description | strip_html | escape }}">
@@ -80,7 +81,6 @@
       <a href="{{ '/divers/' | relative_url }}">Divers</a>
       <a href="{{ '/a-propos/' | relative_url }}">À propos</a>
 
-      <!-- Recherche mobile -->
       <button
         class="mobile-search-toggle"
         type="button"
@@ -89,7 +89,6 @@
         Rechercher
       </button>
 
-      <!-- Recherche desktop -->
       <button
         class="search-toggle"
         type="button"
