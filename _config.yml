@@ -1,7 +1,7 @@
 title: "de gustibus."
 description: "Ici je parle un peu d'art"
-url: "https://cberangin-sketch.github.io"
-baseurl: "/de-gustibus"
+url: "https://degustibus.fr"
+baseurl: ""
 lang: "fr"
 timezone: "Europe/Paris"
 markdown: kramdown
