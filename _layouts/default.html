@@ -12,6 +12,11 @@
   <!-- URL canonique -->
   <link rel="canonical" href="{{ page.url | absolute_url }}">
 
+  <!-- Indexation -->
+  {% if page.noindex %}
+    <meta name="robots" content="noindex, follow">
+  {% endif %}
+
   <meta name="description" content="{{ meta_description | strip_html | escape }}">
 
   <!-- Aperçus Telegram, WhatsApp, Messenger, Discord, etc. -->
@@ -105,7 +110,6 @@
 
   </header>
 
-
   <aside
     id="search-panel"
     class="search-panel"
@@ -138,17 +142,14 @@
 
   </aside>
 
-
   <main>
     {{ content }}
   </main>
-
 
   <footer class="site-footer">
     <span>de gustibus.</span>
     <span>Carnet culturel</span>
   </footer>
-
 
   <script src="{{ '/assets/js/search.js' | relative_url }}"></script>
 
