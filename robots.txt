@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://degustibus.fr/sitemap.xml
