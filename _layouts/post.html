@@ -1,13 +1,57 @@
 ---
 layout: default
 ---
+
 <article class="post">
+
   <header class="post-header">
-    <p class="eyebrow">{{ page.category }} · {{ page.date | date: "%d.%m.%Y" }}</p>
+    <p class="eyebrow">
+      {{ page.category }} · {{ page.date | date: "%d.%m.%Y" }}
+    </p>
+
     <h1>{{ page.title }}</h1>
-    {% if page.chapeau %}<p class="post-deck">{{ page.chapeau }}</p>{% endif %}
+
+    {% if page.chapeau %}
+      <p class="post-deck">{{ page.chapeau }}</p>
+    {% endif %}
   </header>
-  {% if page.image %}<figure class="post-cover"><img src="{{ page.image }}" alt=""></figure>{% endif %}
-  <div class="post-body">{{ content }}</div>
-  {% if page.tags %}<div class="tags">{% for tag in page.tags %}<span>#{{ tag }}</span>{% endfor %}</div>{% endif %}
+
+  {% if page.image %}
+    <figure class="post-cover">
+      <img src="{{ page.image }}" alt="{{ page.title }}">
+    </figure>
+  {% endif %}
+
+  <div class="post-body">
+    {{ content }}
+  </div>
+
+  {% if page.tags %}
+    <div class="tags">
+      {% for tag in page.tags %}
+        <span>#{{ tag }}</span>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <nav class="post-navigation">
+    <div class="post-navigation-prev">
+      {% if page.previous %}
+        <span>← Article précédent</span>
+        <a href="{{ page.previous.url | relative_url }}">
+          {{ page.previous.title }}
+        </a>
+      {% endif %}
+    </div>
+
+    <div class="post-navigation-next">
+      {% if page.next %}
+        <span>Article suivant →</span>
+        <a href="{{ page.next.url | relative_url }}">
+          {{ page.next.title }}
+        </a>
+      {% endif %}
+    </div>
+  </nav>
+
 </article>
