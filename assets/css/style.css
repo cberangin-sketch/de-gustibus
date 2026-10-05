@@ -281,3 +281,104 @@ button {
     -webkit-tap-highlight-color: transparent;
   }
 }
+/* Dernier article mis en avant */
+
+.featured-latest {
+  padding: 62px 34px 0;
+}
+
+.featured-latest .section-heading {
+  margin-bottom: 20px;
+}
+
+.featured-latest__link {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 8;
+  overflow: hidden;
+  background: var(--ink);
+}
+
+.featured-latest__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .6s ease, opacity .4s ease;
+}
+
+.featured-latest__overlay {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  padding: 42px;
+
+  background: rgba(23, 20, 17, 0);
+  color: #f3eadc;
+
+  opacity: 0;
+  transition: opacity .35s ease, background .35s ease;
+}
+
+.featured-latest__meta {
+  margin: 0 0 10px;
+
+  font: 500 10px var(--sans);
+  text-transform: uppercase;
+  letter-spacing: .11em;
+}
+
+.featured-latest__title {
+  max-width: 850px;
+  margin: 0;
+
+  font: 400 clamp(32px, 5vw, 58px)/1.02 var(--serif);
+  letter-spacing: -.025em;
+}
+
+.featured-latest__link:hover .featured-latest__image {
+  transform: scale(1.015);
+  opacity: .65;
+}
+
+.featured-latest__link:hover .featured-latest__overlay {
+  opacity: 1;
+  background: rgba(23, 20, 17, .22);
+}
+
+
+/* Adaptation mobile */
+
+@media (max-width: 760px) {
+
+  .featured-latest {
+    padding: 44px 20px 0;
+  }
+
+  .featured-latest__link {
+    aspect-ratio: 4 / 3;
+  }
+
+  .featured-latest__overlay {
+    padding: 24px;
+
+    /* Sur téléphone il n'y a pas de véritable survol :
+       le titre reste donc visible. */
+    opacity: 1;
+    background: rgba(23, 20, 17, .28);
+  }
+
+  .featured-latest__image {
+    opacity: .78;
+  }
+
+  .featured-latest__title {
+    font-size: 32px;
+  }
+
+}
