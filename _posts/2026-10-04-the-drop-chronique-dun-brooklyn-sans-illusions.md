@@ -1,6 +1,7 @@
 ---
 title: "The Drop : chronique d’un Brooklyn sans illusions"
 date: 2026-10-04
+category: films-et-series
 chapeau: "Un bar miteux, de petites frappes et une violence qui affleure sans
   cesse : The Drop transforme le film criminel en chronique désenchantée d’un
   quartier de Brooklyn."
