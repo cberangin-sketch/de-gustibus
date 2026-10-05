@@ -10,7 +10,7 @@
   <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
 
   <!-- URL canonique -->
-  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
 
   <meta name="description" content="{{ meta_description | strip_html | escape }}">
 
@@ -20,7 +20,7 @@
   <meta property="og:site_name" content="{{ site.title | escape }}">
   <meta property="og:title" content="{{ meta_title | strip_html | escape }}">
   <meta property="og:description" content="{{ meta_description | strip_html | escape }}">
-  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
 
   {% if page.image %}
     <meta property="og:image" content="{{ site.url }}{{ page.image }}">
