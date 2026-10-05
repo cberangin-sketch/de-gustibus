@@ -196,5 +196,16 @@
   };
 
   run();
+const featuredLatest = document.querySelector('.featured-latest__link');
 
+if (featuredLatest) {
+  featuredLatest.addEventListener('click', function (event) {
+    if (window.matchMedia('(max-width: 760px)').matches) {
+      if (!featuredLatest.classList.contains('is-revealed')) {
+        event.preventDefault();
+        featuredLatest.classList.add('is-revealed');
+      }
+    }
+  });
+}
 })();
