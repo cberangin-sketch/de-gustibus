@@ -7,6 +7,13 @@
   {% assign meta_title = page.title | default: site.title %}
   {% assign meta_description = page.chapeau | default: site.description %}
 
+  <!-- Image utilisée pour les aperçus de partage -->
+  {% assign social_image = page.image %}
+
+  {% if page.url == "/" %}
+    {% assign social_image = "/assets/images/social-home.png" %}
+  {% endif %}
+
   <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
 
   <!-- URL canonique -->
@@ -17,27 +24,51 @@
     <meta name="robots" content="noindex, follow">
   {% endif %}
 
-  <meta name="description" content="{{ meta_description | strip_html | escape }}">
+  <meta
+    name="description"
+    content="{{ meta_description | strip_html | escape }}">
 
   <!-- Aperçus Telegram, WhatsApp, Messenger, Discord, etc. -->
   <meta property="og:locale" content="fr_FR">
-  <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
-  <meta property="og:site_name" content="{{ site.title | escape }}">
-  <meta property="og:title" content="{{ meta_title | strip_html | escape }}">
-  <meta property="og:description" content="{{ meta_description | strip_html | escape }}">
-  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta
+    property="og:type"
+    content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+  <meta
+    property="og:site_name"
+    content="{{ site.title | escape }}">
+  <meta
+    property="og:title"
+    content="{{ meta_title | strip_html | escape }}">
+  <meta
+    property="og:description"
+    content="{{ meta_description | strip_html | escape }}">
+  <meta
+    property="og:url"
+    content="{{ page.url | absolute_url }}">
 
-  {% if page.image %}
-    <meta property="og:image" content="{{ site.url }}{{ page.image }}">
+  {% if social_image %}
+    <meta
+      property="og:image"
+      content="{{ social_image | absolute_url }}">
   {% endif %}
 
   <!-- Aperçus X / Twitter -->
-  <meta name="twitter:card" content="{% if page.image %}summary_large_image{% else %}summary{% endif %}">
-  <meta name="twitter:title" content="{{ meta_title | strip_html | escape }}">
-  <meta name="twitter:description" content="{{ meta_description | strip_html | escape }}">
+  <meta
+    name="twitter:card"
+    content="{% if social_image %}summary_large_image{% else %}summary{% endif %}">
 
-  {% if page.image %}
-    <meta name="twitter:image" content="{{ site.url }}{{ page.image }}">
+  <meta
+    name="twitter:title"
+    content="{{ meta_title | strip_html | escape }}">
+
+  <meta
+    name="twitter:description"
+    content="{{ meta_description | strip_html | escape }}">
+
+  {% if social_image %}
+    <meta
+      name="twitter:image"
+      content="{{ social_image | absolute_url }}">
   {% endif %}
 
   <!-- Favicon -->
@@ -47,8 +78,14 @@
     type="image/svg+xml">
 
   <!-- Polices -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com">
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin>
 
   <link
     href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap"
@@ -64,7 +101,9 @@
 
   <header class="site-header">
 
-    <a class="logo" href="{{ '/' | relative_url }}">
+    <a
+      class="logo"
+      href="{{ '/' | relative_url }}">
       {{ site.data.site.logo_text }}
     </a>
 
