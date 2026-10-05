@@ -5,7 +5,7 @@ baseurl: "/de-gustibus"
 lang: "fr"
 timezone: "Europe/Paris"
 markdown: kramdown
-permalink: /:categories/:title/
+permalink: /:title/
 defaults:
   - scope:
       path: ""
