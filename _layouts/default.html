@@ -28,20 +28,25 @@
     name="description"
     content="{{ meta_description | strip_html | escape }}">
 
-  <!-- Aperçus Telegram, WhatsApp, Messenger, Discord, etc. -->
+  <!-- Open Graph : Telegram, WhatsApp, Messenger, Discord, etc. -->
   <meta property="og:locale" content="fr_FR">
+
   <meta
     property="og:type"
     content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+
   <meta
     property="og:site_name"
     content="{{ site.title | escape }}">
+
   <meta
     property="og:title"
     content="{{ meta_title | strip_html | escape }}">
+
   <meta
     property="og:description"
     content="{{ meta_description | strip_html | escape }}">
+
   <meta
     property="og:url"
     content="{{ page.url | absolute_url }}">
@@ -50,9 +55,26 @@
     <meta
       property="og:image"
       content="{{ social_image | absolute_url }}">
+
+    <meta
+      property="og:image:secure_url"
+      content="{{ social_image | absolute_url }}">
+
+    {% if page.url == "/" %}
+      <meta property="og:image:type" content="image/png">
+      <meta property="og:image:width" content="1536">
+      <meta property="og:image:height" content="864">
+      <meta
+        property="og:image:alt"
+        content="de gustibus. — Ici je parle un peu d’art">
+    {% else %}
+      <meta
+        property="og:image:alt"
+        content="{{ page.title | default: site.title | strip_html | escape }}">
+    {% endif %}
   {% endif %}
 
-  <!-- Aperçus X / Twitter -->
+  <!-- X / Twitter -->
   <meta
     name="twitter:card"
     content="{% if social_image %}summary_large_image{% else %}summary{% endif %}">
@@ -69,6 +91,10 @@
     <meta
       name="twitter:image"
       content="{{ social_image | absolute_url }}">
+
+    <meta
+      name="twitter:image:alt"
+      content="{% if page.url == '/' %}de gustibus. — Ici je parle un peu d’art{% else %}{{ page.title | default: site.title | strip_html | escape }}{% endif %}">
   {% endif %}
 
   <!-- Favicon -->
