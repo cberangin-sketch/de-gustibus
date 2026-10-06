@@ -41,60 +41,91 @@ permalink: /a-propos/
     -webkit-user-select: none;
   }
 
-  /* Recadrage renforcé pour faire disparaître complètement
-     les bordures blanches, notamment en bas */
+  /*
+   * Recadrage renforcé pour supprimer
+   * complètement les bordures blanches
+   * présentes dans l'image source.
+   */
   .about-image img {
     position: absolute;
     left: 50%;
     top: 50%;
-    width: 128%;
-    height: 140%;
+
+    width: 132%;
+    height: 165%;
+
     max-width: none;
+
     object-fit: cover;
     object-position: center;
-    transform: translate(-50%, -57%);
+
+    transform: translate(-50%, -62%);
+
     pointer-events: none;
     display: block;
   }
 
   .about-image-caption {
     position: absolute;
+
     left: 28px;
     bottom: 24px;
+
     z-index: 2;
+
     margin: 0;
+
     color: #fff;
+
     font-family: "EB Garamond", serif;
     font-size: 18px;
     font-weight: 400;
     line-height: 1.35;
+
     text-transform: none;
     letter-spacing: 0;
+
     opacity: 0;
+
     transform: translateY(3px);
-    transition: opacity .25s ease, transform .25s ease;
+
+    transition:
+      opacity .25s ease,
+      transform .25s ease;
+
     pointer-events: none;
-    text-shadow: 0 1px 8px rgba(0, 0, 0, .38);
+
+    text-shadow:
+      0 1px 8px rgba(0, 0, 0, .38);
   }
 
   .about-caption-background {
     position: absolute;
+
     left: 0;
     right: 0;
     bottom: 0;
+
     height: 34%;
+
     z-index: 1;
-    background: linear-gradient(
-      to top,
-      rgba(0, 0, 0, .28),
-      rgba(0, 0, 0, 0)
-    );
+
+    background:
+      linear-gradient(
+        to top,
+        rgba(0, 0, 0, .28),
+        rgba(0, 0, 0, 0)
+      );
+
     opacity: 0;
+
     transition: opacity .25s ease;
+
     pointer-events: none;
   }
 
   @media (hover: hover) and (pointer: fine) {
+
     .about-image:hover .about-image-caption {
       opacity: 1;
       transform: translateY(0);
@@ -103,6 +134,7 @@ permalink: /a-propos/
     .about-image:hover .about-caption-background {
       opacity: 1;
     }
+
   }
 
   .about-image.is-revealed .about-image-caption {
@@ -117,16 +149,21 @@ permalink: /a-propos/
   .about-text {
     max-width: 760px;
     margin: 0;
+
     font-family: "EB Garamond", serif;
     font-size: 22px;
     font-weight: 400;
     line-height: 1.65;
+
     color: var(--ink);
+
     text-align: justify;
     text-justify: inter-word;
+
     hyphens: none;
     -webkit-hyphens: none;
     -ms-hyphens: none;
+
     word-break: normal;
     overflow-wrap: normal;
   }
@@ -140,6 +177,7 @@ permalink: /a-propos/
   }
 
   @media (max-width: 760px) {
+
     .about-page {
       padding: 64px 24px 90px;
     }
@@ -157,47 +195,68 @@ permalink: /a-propos/
     }
 
     .about-image img {
-      width: 134%;
-      height: 146%;
-      transform: translate(-50%, -58%);
+      width: 138%;
+      height: 170%;
+
+      transform: translate(-50%, -63%);
     }
 
     .about-image-caption {
       left: 20px;
       bottom: 18px;
+
       font-size: 17px;
     }
 
     .about-text {
       max-width: none;
+
       font-size: 21px;
       line-height: 1.62;
     }
+
   }
+
 </style>
 
 <section class="about-page">
+
   <header class="about-header">
-    <p class="eyebrow">À propos</p>
-    <h1>Pour ceux que ça intéressera.</h1>
+
+    <p class="eyebrow">
+      À propos
+    </p>
+
+    <h1>
+      Pour ceux que ça intéressera.
+    </h1>
+
   </header>
 
+
   <figure class="about-visual">
-    <div class="about-image" id="about-image">
+
+    <div
+      class="about-image"
+      id="about-image">
+
       <img
         src="{{ '/assets/images/a-propos.jpg' | relative_url }}"
-        alt="Photographie de Jean Baudrillard, Saint-Clément, 1987"
-      >
+        alt="Photographie de Jean Baudrillard, Saint-Clément, 1987">
 
       <div class="about-caption-background"></div>
 
       <figcaption class="about-image-caption">
         jean baudrillard, saint clément . 1987
       </figcaption>
+
     </div>
+
   </figure>
 
+
   <div class="about-text">
+
     <p>
       Philosophaillon pas tout à fait repenti, lecteur, gamer, consommateur de biens culturels variés. J’ai la prétention de penser qu’un avis critique construit — surtout s’il est intuitif, non institutionnel et gratuit — est le meilleur hommage possible à rendre aux œuvres.
     </p>
@@ -209,64 +268,159 @@ permalink: /a-propos/
     <p>
       Bonne visite.
     </p>
+
   </div>
+
 </section>
 
 <script>
-(function () {
-  const aboutImage = document.querySelector('#about-image');
 
-  if (!aboutImage) return;
+(function () {
+
+  const aboutImage =
+    document.querySelector(
+      '#about-image'
+    );
+
+  if (!aboutImage) {
+    return;
+  }
+
 
   function isMobile() {
-    return window.matchMedia('(max-width: 760px)').matches;
+
+    return window.matchMedia(
+      '(max-width: 760px)'
+    ).matches;
+
   }
+
+
+  let touchMoved = false;
 
   let startX = 0;
   let startY = 0;
-  let touchMoved = false;
+
   const movementThreshold = 10;
 
-  aboutImage.addEventListener('touchstart', function (event) {
-    if (!isMobile()) return;
 
-    const touch = event.touches[0];
-    if (!touch) return;
+  aboutImage.addEventListener(
+    'touchstart',
+    function (event) {
 
-    startX = touch.clientX;
-    startY = touch.clientY;
-    touchMoved = false;
+      if (!isMobile()) {
+        return;
+      }
 
-    aboutImage.classList.add('is-revealed');
-  }, { passive: true });
+      const touch =
+        event.touches[0];
 
-  aboutImage.addEventListener('touchmove', function (event) {
-    if (!isMobile()) return;
+      if (!touch) {
+        return;
+      }
 
-    const touch = event.touches[0];
-    if (!touch) return;
+      startX =
+        touch.clientX;
 
-    const distanceX = Math.abs(touch.clientX - startX);
-    const distanceY = Math.abs(touch.clientY - startY);
+      startY =
+        touch.clientY;
 
-    if (distanceX > movementThreshold || distanceY > movementThreshold) {
-      touchMoved = true;
-    }
-  }, { passive: true });
-
-  document.addEventListener('touchstart', function (event) {
-    if (!isMobile()) return;
-
-    if (!aboutImage.contains(event.target)) {
-      aboutImage.classList.remove('is-revealed');
       touchMoved = false;
-    }
-  }, { passive: true });
 
-  aboutImage.addEventListener('contextmenu', function (event) {
-    if (isMobile()) {
-      event.preventDefault();
+      aboutImage.classList.add(
+        'is-revealed'
+      );
+
+    },
+    {
+      passive: true
     }
-  });
+  );
+
+
+  aboutImage.addEventListener(
+    'touchmove',
+    function (event) {
+
+      if (!isMobile()) {
+        return;
+      }
+
+      const touch =
+        event.touches[0];
+
+      if (!touch) {
+        return;
+      }
+
+      const distanceX =
+        Math.abs(
+          touch.clientX -
+          startX
+        );
+
+      const distanceY =
+        Math.abs(
+          touch.clientY -
+          startY
+        );
+
+      if (
+        distanceX > movementThreshold ||
+        distanceY > movementThreshold
+      ) {
+
+        touchMoved = true;
+
+      }
+
+    },
+    {
+      passive: true
+    }
+  );
+
+
+  document.addEventListener(
+    'touchstart',
+    function (event) {
+
+      if (!isMobile()) {
+        return;
+      }
+
+      if (
+        !aboutImage.contains(
+          event.target
+        )
+      ) {
+
+        aboutImage.classList.remove(
+          'is-revealed'
+        );
+
+        touchMoved = false;
+
+      }
+
+    },
+    {
+      passive: true
+    }
+  );
+
+
+  aboutImage.addEventListener(
+    'contextmenu',
+    function (event) {
+
+      if (isMobile()) {
+        event.preventDefault();
+      }
+
+    }
+  );
+
 })();
+
 </script>
