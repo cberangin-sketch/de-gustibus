@@ -3,7 +3,9 @@ layout: default
 title: À propos
 permalink: /a-propos/
 image: /assets/images/a-propos.jpg
-chapeau: "À propos de de gustibus."
+chapeau: "Philosophaillon pas tout à fait repenti, lecteur, gamer, consommateur de biens culturels variés."
+social_image: /assets/images/a-propos.jpg
+social_description: "Philosophaillon pas tout à fait repenti, lecteur, gamer, consommateur de biens culturels variés."
 ---
 
 <style>
@@ -894,8 +896,7 @@ chapeau: "À propos de de gustibus."
    * PARTAGE NATIF SMARTPHONE
    *
    * URL uniquement :
-   * pas de titre ou de description
-   * ajoutés avant l'aperçu.
+   * aucun texte ajouté en double.
    */
 
   const nativeShare =
