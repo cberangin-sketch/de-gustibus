@@ -5,6 +5,9 @@ category: films-et-series
 chapeau: "Chez Wes Anderson, la symétrie n’est jamais seulement décorative :
   elle sert à contenir des personnages qui, eux, débordent de partout."
 image: /assets/images/111famille.avif
+tags:
+  - Anderson
+  - Cinema
 ---
 La Famille Tenenbaum est peut-être le film dans lequel Wes Anderson a trouvé pour la première fois la forme parfaite de son cinéma.
 
@@ -32,3 +35,4 @@ Et parfois même de devenir quelqu’un d’un peu moins brillant, mais d’un p
 
 
 
+&nbsp;
