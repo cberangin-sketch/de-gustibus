@@ -3,9 +3,9 @@ layout: default
 title: À propos
 permalink: /a-propos/
 image: /assets/images/a-propos.jpg
-chapeau: "Philosophaillon pas tout à fait repenti, lecteur, gamer, consommateur de biens culturels variés."
 social_image: /assets/images/a-propos.jpg
-social_description: "Philosophaillon pas tout à fait repenti, lecteur, gamer, consommateur de biens culturels variés."
+chapeau: "Ici je parle un peu d'art"
+social_description: "Ici je parle un peu d'art"
 ---
 
 <style>
@@ -896,7 +896,7 @@ social_description: "Philosophaillon pas tout à fait repenti, lecteur, gamer, c
    * PARTAGE NATIF SMARTPHONE
    *
    * URL uniquement :
-   * aucun texte ajouté en double.
+   * aucun texte ajouté avant l'aperçu.
    */
 
   const nativeShare =
