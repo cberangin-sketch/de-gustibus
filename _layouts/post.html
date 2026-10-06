@@ -19,6 +19,12 @@ layout: default
   {% assign article_section_url = "/divers/" %}
 {% endif %}
 
+{% assign share_url = page.url | absolute_url %}
+
+{% capture share_message %}
+{{ page.title }} — {{ share_url }}
+{% endcapture %}
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -45,6 +51,7 @@ layout: default
 </script>
 
 <style>
+
   .post-section-link {
     color: inherit;
     text-decoration: none;
@@ -54,7 +61,127 @@ layout: default
     text-decoration: underline;
     text-underline-offset: 4px;
   }
+
+
+  /*
+   * PARTAGE
+   */
+
+  .article-share {
+    max-width: 690px;
+    margin: 30px auto 0;
+    padding-top: 22px;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+  }
+
+  .article-share__label {
+    flex: 0 0 auto;
+    font-family: var(--sans);
+    font-size: 9px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .article-share__actions {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+  }
+
+  .article-share__link,
+  .article-share__copy {
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--ink);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: .72;
+    transition:
+      opacity .18s ease,
+      transform .18s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .article-share__link:hover,
+  .article-share__copy:hover {
+    opacity: 1;
+  }
+
+  .article-share__link:active,
+  .article-share__copy:active {
+    transform: scale(.94);
+  }
+
+  .article-share svg {
+    display: block;
+    width: 17px;
+    height: 17px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.55;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .article-share__brand {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1;
+    font-weight: 400;
+  }
+
+  .article-share__facebook {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    transform: translateY(1px);
+  }
+
+  .article-share__x {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+  }
+
+  .article-share__status {
+    min-width: 38px;
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: .04em;
+    color: var(--muted);
+  }
+
+  @media (max-width: 760px) {
+
+    .article-share {
+      margin-top: 27px;
+      gap: 18px;
+    }
+
+    .article-share__actions {
+      gap: 15px;
+    }
+
+    .article-share__link,
+    .article-share__copy {
+      width: 22px;
+      height: 22px;
+    }
+
+  }
+
 </style>
+
 
 <article class="post">
 
@@ -77,6 +204,7 @@ layout: default
 
   </header>
 
+
   {% if page.image %}
     <figure class="post-cover">
       <img
@@ -85,9 +213,11 @@ layout: default
     </figure>
   {% endif %}
 
+
   <div class="post-body">
     {{ content }}
   </div>
+
 
   {% if page.tags %}
     <div class="tags">
@@ -97,26 +227,289 @@ layout: default
     </div>
   {% endif %}
 
+
+  <div
+    class="article-share"
+    aria-label="Partager cet article">
+
+    <span class="article-share__label">
+      Partager
+    </span>
+
+    <div class="article-share__actions">
+
+      <!-- Facebook -->
+      <a
+        class="article-share__link"
+        href="https://www.facebook.com/sharer/sharer.php?u={{ share_url | url_encode }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Partager sur Facebook"
+        title="Facebook">
+
+        <span
+          class="article-share__brand article-share__facebook"
+          aria-hidden="true">f</span>
+
+      </a>
+
+
+      <!-- X -->
+      <a
+        class="article-share__link"
+        href="https://twitter.com/intent/tweet?text={{ page.title | url_encode }}&url={{ share_url | url_encode }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Partager sur X"
+        title="X">
+
+        <span
+          class="article-share__brand article-share__x"
+          aria-hidden="true">X</span>
+
+      </a>
+
+
+      <!-- WhatsApp -->
+      <a
+        class="article-share__link"
+        href="https://wa.me/?text={{ share_message | strip | url_encode }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Partager sur WhatsApp"
+        title="WhatsApp">
+
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true">
+
+          <path
+            d="M20 11.7a8 8 0 0 1-11.8 7L4 20l1.3-4A8 8 0 1 1 20 11.7Z">
+          </path>
+
+          <path
+            d="M9 8.2c.3 2.9 2 4.7 4.9 5.6">
+          </path>
+
+          <path
+            d="M9 8.2 8.2 9.5">
+          </path>
+
+          <path
+            d="m13.9 13.8 1.4-.8">
+          </path>
+
+        </svg>
+
+      </a>
+
+
+      <!-- Telegram -->
+      <a
+        class="article-share__link"
+        href="https://t.me/share/url?url={{ share_url | url_encode }}&text={{ page.title | url_encode }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Partager sur Telegram"
+        title="Telegram">
+
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true">
+
+          <path
+            d="M3 11.4 20.5 4 16 20l-5-4-3 2 .5-4.5Z">
+          </path>
+
+          <path
+            d="m8.5 13.5 8-6">
+          </path>
+
+        </svg>
+
+      </a>
+
+
+      <!-- E-mail -->
+      <a
+        class="article-share__link"
+        href="mailto:?subject={{ page.title | url_encode }}&body={{ share_message | strip | url_encode }}"
+        aria-label="Partager par e-mail"
+        title="E-mail">
+
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true">
+
+          <rect
+            x="3"
+            y="5"
+            width="18"
+            height="14"
+            rx="1">
+          </rect>
+
+          <path
+            d="m4 7 8 6 8-6">
+          </path>
+
+        </svg>
+
+      </a>
+
+
+      <!-- Copier le lien -->
+      <button
+        class="article-share__copy"
+        type="button"
+        data-share-url="{{ share_url }}"
+        aria-label="Copier le lien"
+        title="Copier le lien">
+
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true">
+
+          <path
+            d="m9.5 14.5 5-5">
+          </path>
+
+          <path
+            d="M7.5 16.5 6 18a3 3 0 0 1-4-4l3-3a3 3 0 0 1 4.2 0">
+          </path>
+
+          <path
+            d="m16.5 7.5 1.5-1.5a3 3 0 0 1 4 4l-3 3a3 3 0 0 1-4.2 0">
+          </path>
+
+        </svg>
+
+      </button>
+
+    </div>
+
+    <span
+      class="article-share__status"
+      aria-live="polite">
+    </span>
+
+  </div>
+
+
   <nav class="post-navigation">
 
     <div class="post-navigation-prev">
+
       {% if page.previous %}
+
         <span>← Article précédent</span>
+
         <a href="{{ page.previous.url | relative_url }}">
           {{ page.previous.title }}
         </a>
+
       {% endif %}
+
     </div>
 
+
     <div class="post-navigation-next">
+
       {% if page.next %}
+
         <span>Article suivant →</span>
+
         <a href="{{ page.next.url | relative_url }}">
           {{ page.next.title }}
         </a>
+
       {% endif %}
+
     </div>
 
   </nav>
 
 </article>
+
+
+<script>
+
+  (function () {
+
+    const copyButton =
+      document.querySelector(
+        '.article-share__copy'
+      );
+
+    const status =
+      document.querySelector(
+        '.article-share__status'
+      );
+
+    if (!copyButton) return;
+
+
+    copyButton.addEventListener(
+      'click',
+      async function () {
+
+        const url =
+          copyButton.getAttribute(
+            'data-share-url'
+          );
+
+        try {
+
+          await navigator.clipboard.writeText(
+            url
+          );
+
+          if (status) {
+            status.textContent = 'Copié';
+          }
+
+        } catch (error) {
+
+          const temporaryInput =
+            document.createElement(
+              'input'
+            );
+
+          temporaryInput.value = url;
+
+          document.body.appendChild(
+            temporaryInput
+          );
+
+          temporaryInput.select();
+
+          document.execCommand(
+            'copy'
+          );
+
+          temporaryInput.remove();
+
+          if (status) {
+            status.textContent = 'Copié';
+          }
+
+        }
+
+
+        window.setTimeout(
+          function () {
+
+            if (status) {
+              status.textContent = '';
+            }
+
+          },
+          1600
+        );
+
+      }
+    );
+
+  })();
+
+</script>
