@@ -3,15 +3,20 @@ layout: default
 ---
 
 {% assign article_section = page.category %}
+{% assign article_section_url = "/" | append: page.category | append: "/" %}
 
 {% if page.category == "films-et-series" %}
   {% assign article_section = "Films et Séries" %}
+  {% assign article_section_url = "/films-et-series/" %}
 {% elsif page.category == "jeu-video" %}
   {% assign article_section = "Jeu vidéo" %}
+  {% assign article_section_url = "/jeu-video/" %}
 {% elsif page.category == "litterature" %}
   {% assign article_section = "Littérature" %}
+  {% assign article_section_url = "/litterature/" %}
 {% elsif page.category == "divers" %}
   {% assign article_section = "Divers" %}
+  {% assign article_section_url = "/divers/" %}
 {% endif %}
 
 <script type="application/ld+json">
@@ -39,17 +44,28 @@ layout: default
 }
 </script>
 
+<style>
+  .post-section-link {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .post-section-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+</style>
+
 <article class="post">
 
   <header class="post-header">
+
     <p class="eyebrow">
-      {% case page.category %}
-        {% when "films-et-series" %}Films et Séries
-        {% when "jeu-video" %}Jeu vidéo
-        {% when "litterature" %}Littérature
-        {% when "divers" %}Divers
-        {% else %}{{ page.category }}
-      {% endcase %}
+      <a
+        class="post-section-link"
+        href="{{ article_section_url | relative_url }}">
+        {{ article_section }}
+      </a>
       · {{ page.date | date: "%d.%m.%Y" }}
     </p>
 
@@ -58,11 +74,14 @@ layout: default
     {% if page.chapeau %}
       <p class="post-deck">{{ page.chapeau }}</p>
     {% endif %}
+
   </header>
 
   {% if page.image %}
     <figure class="post-cover">
-      <img src="{{ page.image }}" alt="{{ page.title }}">
+      <img
+        src="{{ page.image }}"
+        alt="{{ page.title }}">
     </figure>
   {% endif %}
 
