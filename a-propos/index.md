@@ -13,11 +13,11 @@ permalink: /a-propos/
   }
 
 
-  /* TITRE */
+  /* EN-TÊTE */
 
   .about-header {
-    margin-bottom: 58px;
-    text-align: center;
+    margin-bottom: 52px;
+    text-align: left;
   }
 
   .about-header .eyebrow {
@@ -26,29 +26,22 @@ permalink: /a-propos/
 
   .about-header h1 {
     margin: 0;
+    text-align: left;
   }
 
 
-  /* ENSEMBLE IMAGE */
+  /* IMAGE */
 
   .about-visual {
     width: 100%;
-    margin: 0 auto 54px;
+    margin: 0 0 52px;
   }
-
-
-  /*
-   * IMAGE
-   *
-   * Le fichier original contient un cadre blanc.
-   * On zoome légèrement pour le faire disparaître.
-   */
 
   .about-image {
     position: relative;
 
     width: 100%;
-    aspect-ratio: 1.53 / 1;
+    aspect-ratio: 1.50 / 1;
 
     overflow: hidden;
 
@@ -58,69 +51,25 @@ permalink: /a-propos/
 
     user-select: none;
     -webkit-user-select: none;
-
-
-    /*
-     * Léger fondu sur les côtés.
-     */
-
-    -webkit-mask-image:
-      linear-gradient(
-        to right,
-        transparent 0,
-        black 3%,
-        black 97%,
-        transparent 100%
-      );
-
-    mask-image:
-      linear-gradient(
-        to right,
-        transparent 0,
-        black 3%,
-        black 97%,
-        transparent 100%
-      );
   }
 
 
   /*
-   * Léger fondu vertical.
+   * Recadrage volontairement plus fort
+   * pour supprimer complètement
+   * les bordures blanches du fichier.
    */
-
-  .about-image::after {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    z-index: 2;
-
-    pointer-events: none;
-
-    background:
-      linear-gradient(
-        to bottom,
-        var(--paper) 0,
-        transparent 4%,
-        transparent 96%,
-        var(--paper) 100%
-      );
-
-    opacity: .32;
-  }
-
 
   .about-image img {
     display: block;
 
-    width: 114%;
-    height: 114%;
+    width: 126%;
+    height: 126%;
 
     max-width: none;
 
-    margin-left: -7%;
-    margin-top: -7%;
+    margin-left: -13%;
+    margin-top: -13%;
 
     object-fit: cover;
     object-position: center;
@@ -129,42 +78,15 @@ permalink: /a-propos/
   }
 
 
-  /*
-   * VOILE DISCRET POUR LA LÉGENDE
-   */
-
-  .about-image-overlay {
-    position: absolute;
-    inset: 0;
-
-    z-index: 1;
-
-    background:
-      linear-gradient(
-        to top,
-        rgba(0, 0, 0, .24),
-        rgba(0, 0, 0, 0) 42%
-      );
-
-    opacity: 0;
-
-    transition: opacity .25s ease;
-
-    pointer-events: none;
-  }
-
-
-  /*
-   * LÉGENDE
-   */
+  /* LÉGENDE */
 
   .about-image-caption {
     position: absolute;
 
-    left: 30px;
-    bottom: 26px;
+    left: 28px;
+    bottom: 24px;
 
-    z-index: 3;
+    z-index: 2;
 
     margin: 0;
 
@@ -189,13 +111,43 @@ permalink: /a-propos/
     pointer-events: none;
 
     text-shadow:
-      0 1px 8px rgba(0, 0, 0, .28);
+      0 1px 8px rgba(0, 0, 0, .38);
   }
 
 
   /*
-   * SURVOL SOURIS
+   * Léger assombrissement uniquement
+   * derrière la légende.
+   * Ce n'est PAS un fondu des bords.
    */
+
+  .about-caption-background {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 34%;
+
+    z-index: 1;
+
+    background:
+      linear-gradient(
+        to top,
+        rgba(0, 0, 0, .28),
+        rgba(0, 0, 0, 0)
+      );
+
+    opacity: 0;
+
+    transition: opacity .25s ease;
+
+    pointer-events: none;
+  }
+
+
+  /* SURVOL SOURIS */
 
   @media (hover: hover) and (pointer: fine) {
 
@@ -206,16 +158,14 @@ permalink: /a-propos/
     }
 
     .about-image:hover
-    .about-image-overlay {
+    .about-caption-background {
       opacity: 1;
     }
 
   }
 
 
-  /*
-   * MOBILE : ÉTAT RÉVÉLÉ
-   */
+  /* MOBILE */
 
   .about-image.is-revealed
   .about-image-caption {
@@ -224,24 +174,17 @@ permalink: /a-propos/
   }
 
   .about-image.is-revealed
-  .about-image-overlay {
+  .about-caption-background {
     opacity: 1;
   }
 
 
-  /*
-   * TEXTE DE PRÉSENTATION
-   *
-   * Le bloc lui-même est centré
-   * sous l'image.
-   *
-   * Le texte à l'intérieur est justifié.
-   */
+  /* TEXTE DE PRÉSENTATION */
 
   .about-text {
     max-width: 760px;
 
-    margin: 0 auto;
+    margin: 0;
 
     font-family: "EB Garamond", serif;
     font-size: 22px;
@@ -257,26 +200,12 @@ permalink: /a-propos/
     -webkit-hyphens: auto;
   }
 
-
   .about-text p {
     margin: 0 0 30px;
   }
 
-
   .about-text p:last-child {
     margin-bottom: 0;
-  }
-
-
-  /*
-   * "Bonne visite." reste indépendante
-   * et centrée pour fermer la page
-   * de façon plus élégante.
-   */
-
-  .about-text .about-goodbye {
-    text-align: center;
-    margin-top: 38px;
   }
 
 
@@ -288,30 +217,30 @@ permalink: /a-propos/
       padding: 64px 24px 90px;
     }
 
-
     .about-header {
+      margin-bottom: 40px;
+    }
+
+    .about-visual {
       margin-bottom: 42px;
     }
 
-
-    .about-visual {
-      margin-bottom: 46px;
-    }
-
-
     .about-image {
-      aspect-ratio: 1.36 / 1;
+      aspect-ratio: 1.34 / 1;
     }
 
+    /*
+     * Recadrage encore légèrement
+     * plus fort sur petit écran.
+     */
 
     .about-image img {
-      width: 118%;
-      height: 118%;
+      width: 132%;
+      height: 132%;
 
-      margin-left: -9%;
-      margin-top: -9%;
+      margin-left: -16%;
+      margin-top: -16%;
     }
-
 
     .about-image-caption {
       left: 20px;
@@ -320,9 +249,8 @@ permalink: /a-propos/
       font-size: 17px;
     }
 
-
     .about-text {
-      max-width: 620px;
+      max-width: none;
 
       font-size: 21px;
       line-height: 1.62;
@@ -358,7 +286,7 @@ permalink: /a-propos/
         src="{{ '/assets/images/a-propos.jpg' | relative_url }}"
         alt="Photographie de Jean Baudrillard, Saint-Clément, 1987">
 
-      <div class="about-image-overlay"></div>
+      <div class="about-caption-background"></div>
 
       <figcaption class="about-image-caption">
         jean baudrillard, saint clément . 1987
@@ -387,7 +315,7 @@ permalink: /a-propos/
       volontiers arbitraire.
     </p>
 
-    <p class="about-goodbye">
+    <p>
       Bonne visite.
     </p>
 
@@ -404,7 +332,6 @@ permalink: /a-propos/
     document.querySelector(
       '#about-image'
     );
-
 
   if (!aboutImage) {
     return;
@@ -429,9 +356,8 @@ permalink: /a-propos/
 
 
   /*
-   * TOUCHER L'IMAGE
-   *
-   * La légende apparaît immédiatement.
+   * TOUCHER L'IMAGE :
+   * la légende apparaît.
    */
 
   aboutImage.addEventListener(
@@ -442,15 +368,12 @@ permalink: /a-propos/
         return;
       }
 
-
       const touch =
         event.touches[0];
-
 
       if (!touch) {
         return;
       }
-
 
       startX =
         touch.clientX;
@@ -458,9 +381,7 @@ permalink: /a-propos/
       startY =
         touch.clientY;
 
-
       touchMoved = false;
-
 
       aboutImage.classList.add(
         'is-revealed'
@@ -474,8 +395,8 @@ permalink: /a-propos/
 
 
   /*
-   * LE SCROLL NE MASQUE PAS
-   * LA LÉGENDE
+   * Un déplacement du doigt
+   * ne masque pas la légende.
    */
 
   aboutImage.addEventListener(
@@ -486,15 +407,12 @@ permalink: /a-propos/
         return;
       }
 
-
       const touch =
         event.touches[0];
-
 
       if (!touch) {
         return;
       }
-
 
       const distanceX =
         Math.abs(
@@ -502,13 +420,11 @@ permalink: /a-propos/
           startX
         );
 
-
       const distanceY =
         Math.abs(
           touch.clientY -
           startY
         );
-
 
       if (
         distanceX > movementThreshold ||
@@ -527,28 +443,8 @@ permalink: /a-propos/
 
 
   /*
-   * ON CONSERVE LA LÉGENDE
-   * APRÈS LE RELÂCHEMENT
-   */
-
-  aboutImage.addEventListener(
-    'touchend',
-    function () {
-
-      if (!isMobile()) {
-        return;
-      }
-
-    },
-    {
-      passive: true
-    }
-  );
-
-
-  /*
-   * TOUCHER AILLEURS :
-   * LA LÉGENDE DISPARAÎT
+   * Toucher ailleurs :
+   * la légende disparaît.
    */
 
   document.addEventListener(
@@ -558,7 +454,6 @@ permalink: /a-propos/
       if (!isMobile()) {
         return;
       }
-
 
       if (
         !aboutImage.contains(
@@ -582,8 +477,8 @@ permalink: /a-propos/
 
 
   /*
-   * PAS DE MENU CONTEXTUEL
-   * SUR APPUI LONG
+   * Pas de menu contextuel
+   * lors d'un appui long.
    */
 
   aboutImage.addEventListener(
@@ -591,9 +486,7 @@ permalink: /a-propos/
     function (event) {
 
       if (isMobile()) {
-
         event.preventDefault();
-
       }
 
     }
