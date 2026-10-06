@@ -565,6 +565,37 @@ main{
     opacity:.78
   }
 
+
+  /*
+   * PROTECTION TACTILE DE L'INTERFACE
+   *
+   * Les éléments de navigation et d'interface
+   * ne peuvent plus être sélectionnés
+   * accidentellement comme du texte.
+   *
+   * Le contenu éditorial reste sélectionnable :
+   * corps des articles, À propos, etc.
+   */
+
+  .logo,
+  .main-nav,
+  .menu-toggle,
+  .mobile-search-toggle,
+  .search-toggle,
+  .search-form label,
+  .search-row button,
+  .section-heading,
+  .post-card,
+  .post-navigation,
+  .tags,
+  .site-footer,
+  .featured-latest__overlay{
+    user-select:none;
+    -webkit-user-select:none;
+    -ms-user-select:none;
+    -webkit-tap-highlight-color:transparent
+  }
+
 }
 
 
