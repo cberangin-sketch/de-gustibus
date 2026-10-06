@@ -4,19 +4,86 @@ title: Archives
 permalink: /archives/
 ---
 
-<section class="archive">
+<style>
+
+  .archive-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 38px;
+    font-family: var(--sans);
+    font-size: 11px;
+  }
+
+  .archive-pagination a,
+  .archive-pagination span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 28px;
+    height: 32px;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .archive-pagination a:hover {
+    text-decoration: underline;
+    text-underline-offset: 5px;
+  }
+
+  .archive-pagination .is-current {
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .archive-pagination .pagination-ellipsis {
+    color: var(--muted);
+    min-width: 16px;
+  }
+
+  .archive-pagination[hidden] {
+    display: none;
+  }
+
+</style>
+
+<section
+  class="archive"
+  id="all-articles">
+
   <div class="section-heading">
     <p class="eyebrow">Archives</p>
     <h1>Tous les articles</h1>
   </div>
 
   {% if site.posts.size > 0 %}
-    <div class="post-list">
+
+    <div
+      class="post-list"
+      id="archive-post-list">
+
       {% for post in site.posts %}
-        {% include post-card.html %}
+
+        <div class="archive-page-item">
+          {% include post-card.html %}
+        </div>
+
       {% endfor %}
+
     </div>
+
+    <nav
+      class="archive-pagination"
+      id="archive-pagination"
+      aria-label="Pagination des articles"
+      hidden>
+    </nav>
+
   {% else %}
+
     <p>Aucun article pour le moment.</p>
+
   {% endif %}
+
 </section>
