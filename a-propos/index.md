@@ -230,7 +230,7 @@ permalink: /a-propos/
     </p>
 
     <h1>
-      Pour ceux que ça intéressera.
+      À propos, donc.
     </h1>
 
   </header>
@@ -264,7 +264,8 @@ permalink: /a-propos/
     </p>
 
     <p>
-      Urgence, toujours, de se poser à la fois contre la culture légitime et contre son négatif : le relativisme culturel. Ce site est la contribution de son auteur à une forme de troisième voie. C’est surtout un carnet de notes, volontiers arbitraire.
+      Urgence, toujours, de se poser à la fois contre la culture légitime et contre son négatif : le relativisme culturel. Ce site est la contribution de son auteur à une forme de troisième voie.<br>
+      C’est surtout un carnet de notes, volontiers arbitraire.
     </p>
 
     <p>
