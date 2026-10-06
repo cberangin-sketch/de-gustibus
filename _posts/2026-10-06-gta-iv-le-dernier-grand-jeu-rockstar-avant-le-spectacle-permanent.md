@@ -10,24 +10,6 @@ tags:
   - Rockstar
   - Bellic
 ---
-Bien sûr. Je garde le même ton mais je structure l’article avec des sous-titres, ce qui sera aussi plus intéressant visuellement sur ton site.
-
-### GTA IV
-
-**Titre**  
-GTA IV : le dernier grand jeu Rockstar avant le spectacle permanent
-
-**Chapeau**  
-Plus lourd, plus gris, plus lent que ses successeurs, GTA IV reste peut-être le jeu Rockstar où la ville, la violence et le désenchantement forment le tout le plus cohérent.
-
-**Catégorie**  
-Jeu vidéo
-
-**Tags**  
-GTA IV, Rockstar, Liberty City, Niko Bellic
-
-**Texte**
-
 GTA IV est un jeu étrange à rejouer aujourd’hui.
 
 À première vue, il semble presque plus vieux qu’il ne l’est réellement. Les déplacements sont lourds, les voitures glissent, les fusillades manquent parfois de souplesse, les menus sentent encore franchement la génération Xbox 360 et PS3.
