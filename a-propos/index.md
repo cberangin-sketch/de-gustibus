@@ -5,11 +5,15 @@ permalink: /a-propos/
 ---
 
 <style>
+
   .about-page {
     max-width: 1120px;
     margin: 0 auto;
     padding: 90px 34px 120px;
   }
+
+
+  /* EN-TÊTE */
 
   .about-header {
     margin-bottom: 52px;
@@ -25,6 +29,9 @@ permalink: /a-propos/
     text-align: left;
   }
 
+
+  /* IMAGE */
+
   .about-visual {
     width: 100%;
     margin: 0 0 52px;
@@ -33,37 +40,24 @@ permalink: /a-propos/
   .about-image {
     position: relative;
     width: 100%;
-    aspect-ratio: 1.5 / 1;
     overflow: hidden;
-    background: var(--paper);
+
     -webkit-tap-highlight-color: transparent;
+
     user-select: none;
     -webkit-user-select: none;
   }
 
-  /*
-   * Recadrage renforcé pour supprimer
-   * complètement les bordures blanches
-   * présentes dans l'image source.
-   */
   .about-image img {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-
-    width: 132%;
-    height: 165%;
-
-    max-width: none;
-
-    object-fit: cover;
-    object-position: center;
-
-    transform: translate(-50%, -62%);
-
-    pointer-events: none;
     display: block;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    pointer-events: none;
   }
+
+
+  /* LÉGENDE */
 
   .about-image-caption {
     position: absolute;
@@ -99,6 +93,12 @@ permalink: /a-propos/
       0 1px 8px rgba(0, 0, 0, .38);
   }
 
+
+  /*
+   * Assombrissement très léger
+   * uniquement quand la légende apparaît.
+   */
+
   .about-caption-background {
     position: absolute;
 
@@ -124,6 +124,9 @@ permalink: /a-propos/
     pointer-events: none;
   }
 
+
+  /* SURVOL SOURIS */
+
   @media (hover: hover) and (pointer: fine) {
 
     .about-image:hover .about-image-caption {
@@ -137,6 +140,9 @@ permalink: /a-propos/
 
   }
 
+
+  /* MOBILE */
+
   .about-image.is-revealed .about-image-caption {
     opacity: 1;
     transform: translateY(0);
@@ -145,6 +151,9 @@ permalink: /a-propos/
   .about-image.is-revealed .about-caption-background {
     opacity: 1;
   }
+
+
+  /* TEXTE */
 
   .about-text {
     max-width: 760px;
@@ -176,6 +185,9 @@ permalink: /a-propos/
     margin-bottom: 0;
   }
 
+
+  /* MOBILE */
+
   @media (max-width: 760px) {
 
     .about-page {
@@ -188,17 +200,6 @@ permalink: /a-propos/
 
     .about-visual {
       margin-bottom: 42px;
-    }
-
-    .about-image {
-      aspect-ratio: 1.34 / 1;
-    }
-
-    .about-image img {
-      width: 138%;
-      height: 170%;
-
-      transform: translate(-50%, -63%);
     }
 
     .about-image-caption {
@@ -218,6 +219,7 @@ permalink: /a-propos/
   }
 
 </style>
+
 
 <section class="about-page">
 
@@ -273,6 +275,7 @@ permalink: /a-propos/
 
 </section>
 
+
 <script>
 
 (function () {
@@ -303,6 +306,11 @@ permalink: /a-propos/
 
   const movementThreshold = 10;
 
+
+  /*
+   * TOUCHER L'IMAGE :
+   * la légende apparaît.
+   */
 
   aboutImage.addEventListener(
     'touchstart',
@@ -337,6 +345,10 @@ permalink: /a-propos/
     }
   );
 
+
+  /*
+   * Le scroll ne masque pas la légende.
+   */
 
   aboutImage.addEventListener(
     'touchmove',
@@ -381,6 +393,11 @@ permalink: /a-propos/
   );
 
 
+  /*
+   * Toucher ailleurs :
+   * la légende disparaît.
+   */
+
   document.addEventListener(
     'touchstart',
     function (event) {
@@ -409,6 +426,11 @@ permalink: /a-propos/
     }
   );
 
+
+  /*
+   * Pas de menu contextuel
+   * lors d'un appui long.
+   */
 
   aboutImage.addEventListener(
     'contextmenu',
