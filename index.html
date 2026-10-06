@@ -4,6 +4,7 @@ title:
 ---
 
 <section class="hero">
+
   <div>
     <p class="eyebrow">Carnet culturel</p>
     <h1>Ici je parle un peu d’art</h1>
@@ -13,6 +14,7 @@ title:
     {{ site.data.site.quote }}
     <span class="quote-author">La Bruyère</span>
   </blockquote>
+
 </section>
 
 {% if site.posts.size > 0 %}
@@ -63,17 +65,27 @@ title:
   <section class="archive">
 
     <div class="section-heading">
-      <h2>Récemment</h2>
+      <h2>
+        <a
+          href="{{ '/archives/' | relative_url }}"
+          aria-label="Voir tous les articles">
+          Récemment
+        </a>
+      </h2>
     </div>
 
     <div class="post-list">
+
       {% for post in site.posts offset:1 limit:5 %}
         {% include post-card.html %}
       {% endfor %}
+
     </div>
 
-    <div style="text-align: right; margin-top: 20px;">
-      <a href="{{ '/archives/' | relative_url }}">Tous les articles →</a>
+    <div style="text-align:right; margin-top:20px;">
+      <a href="{{ '/archives/' | relative_url }}">
+        Tous les articles →
+      </a>
     </div>
 
   </section>
