@@ -1,41 +1,119 @@
 (function () {
 
-  const menuToggle = document.querySelector('.menu-toggle');
-  const mainNav = document.querySelector('.main-nav');
+  const menuToggle =
+    document.querySelector('.menu-toggle');
 
-  const desktopSearchToggle = document.querySelector('.search-toggle');
-  const mobileSearchToggle = document.querySelector('.mobile-search-toggle');
+  const mainNav =
+    document.querySelector('.main-nav');
 
-  const searchPanel = document.querySelector('#search-panel');
-  const searchInput = document.querySelector('#search-input');
+  const desktopSearchToggle =
+    document.querySelector('.search-toggle');
+
+  const mobileSearchToggle =
+    document.querySelector('.mobile-search-toggle');
+
+  const searchPanel =
+    document.querySelector('#search-panel');
+
+  const searchInput =
+    document.querySelector('#search-input');
 
 
-  /* Menu mobile */
+  /*
+   * MENU MOBILE
+   */
+
+  function isMobile() {
+    return window.matchMedia(
+      '(max-width: 760px)'
+    ).matches;
+  }
+
+
+  function closeMobileMenu() {
+
+    if (!menuToggle || !mainNav) return;
+
+    mainNav.classList.remove('is-open');
+
+    menuToggle.textContent = '☰';
+
+    menuToggle.setAttribute(
+      'aria-expanded',
+      'false'
+    );
+
+    menuToggle.setAttribute(
+      'aria-label',
+      'Ouvrir le menu'
+    );
+  }
+
 
   if (menuToggle && mainNav) {
 
-    menuToggle.addEventListener('click', function () {
+    menuToggle.addEventListener(
+      'click',
+      function () {
 
-      const isOpen = mainNav.classList.toggle('is-open');
+        const isOpen =
+          mainNav.classList.toggle('is-open');
 
-      menuToggle.setAttribute(
-        'aria-expanded',
-        String(isOpen)
-      );
+        menuToggle.setAttribute(
+          'aria-expanded',
+          String(isOpen)
+        );
 
-      menuToggle.setAttribute(
-        'aria-label',
-        isOpen ? 'Fermer le menu' : 'Ouvrir le menu'
-      );
+        menuToggle.setAttribute(
+          'aria-label',
+          isOpen
+            ? 'Fermer le menu'
+            : 'Ouvrir le menu'
+        );
 
-      menuToggle.textContent = isOpen ? '×' : '☰';
+        menuToggle.textContent =
+          isOpen ? '×' : '☰';
 
-    });
+      }
+    );
+
+
+    /*
+     * Sur téléphone :
+     * toucher n'importe où hors du menu
+     * ferme immédiatement le menu.
+     */
+
+    document.addEventListener(
+      'pointerdown',
+      function (event) {
+
+        if (!isMobile()) return;
+
+        if (
+          !mainNav.classList.contains('is-open')
+        ) {
+          return;
+        }
+
+        if (
+          mainNav.contains(event.target) ||
+          menuToggle.contains(event.target)
+        ) {
+          return;
+        }
+
+        closeMobileMenu();
+
+      }
+    );
 
   }
 
 
-  /* Ouverture de la recherche */
+  /*
+   * PANNEAU DE RECHERCHE
+   */
 
   function openSearch() {
 
@@ -44,28 +122,27 @@
     searchPanel.hidden = false;
 
     if (desktopSearchToggle) {
-
       desktopSearchToggle.setAttribute(
         'aria-expanded',
         'true'
       );
-
     }
 
     if (mobileSearchToggle) {
-
       mobileSearchToggle.setAttribute(
         'aria-expanded',
         'true'
       );
-
     }
 
     if (searchInput) {
 
-      setTimeout(function () {
-        searchInput.focus();
-      }, 50);
+      setTimeout(
+        function () {
+          searchInput.focus();
+        },
+        50
+      );
 
     }
 
@@ -85,12 +162,10 @@
       searchPanel.hidden = true;
 
       if (desktopSearchToggle) {
-
         desktopSearchToggle.setAttribute(
           'aria-expanded',
           'false'
         );
-
       }
 
     }
@@ -108,34 +183,13 @@
   }
 
 
-  /* Recherche depuis le menu mobile */
-
   if (mobileSearchToggle) {
 
     mobileSearchToggle.addEventListener(
       'click',
       function () {
 
-        if (mainNav) {
-          mainNav.classList.remove('is-open');
-        }
-
-        if (menuToggle) {
-
-          menuToggle.textContent = '☰';
-
-          menuToggle.setAttribute(
-            'aria-expanded',
-            'false'
-          );
-
-          menuToggle.setAttribute(
-            'aria-label',
-            'Ouvrir le menu'
-          );
-
-        }
-
+        closeMobileMenu();
         openSearch();
 
       }
@@ -145,54 +199,44 @@
 
 
   /*
-   * Dernier article sur téléphone
+   * DERNIER ARTICLE SUR TÉLÉPHONE
    *
    * Premier toucher :
-   * le titre apparaît et reste affiché.
+   * le texte apparaît et reste affiché.
    *
-   * Même si on relâche le doigt ou qu'on scrolle :
-   * il reste affiché.
+   * Scroll :
+   * le texte reste affiché.
    *
    * Deuxième toucher sur l'image :
    * ouverture de l'article.
    *
    * Toucher ailleurs :
-   * disparition du titre.
+   * disparition du texte.
    */
 
   const featuredLatest =
-    document.querySelector('.featured-latest__link');
+    document.querySelector(
+      '.featured-latest__link'
+    );
+
 
   if (featuredLatest) {
 
     let wasAlreadyRevealed = false;
     let suppressNextClick = false;
-
     let touchMoved = false;
+
     let startX = 0;
     let startY = 0;
 
     const movementThreshold = 10;
 
 
-    function isMobileTouch() {
-
-      return window.matchMedia(
-        '(max-width: 760px)'
-      ).matches;
-
-    }
-
-
-    /*
-     * Début du toucher sur l'image.
-     */
-
     featuredLatest.addEventListener(
       'touchstart',
       function (event) {
 
-        if (!isMobileTouch()) return;
+        if (!isMobile()) return;
 
         const touch = event.touches[0];
 
@@ -203,20 +247,10 @@
 
         touchMoved = false;
 
-        /*
-         * On vérifie si le faux hover était déjà actif.
-         */
-
         wasAlreadyRevealed =
           featuredLatest.classList.contains(
             'is-revealed'
           );
-
-
-        /*
-         * Premier toucher :
-         * on affiche le titre.
-         */
 
         if (!wasAlreadyRevealed) {
 
@@ -231,37 +265,31 @@
     );
 
 
-    /*
-     * On détecte seulement si le doigt se déplace.
-     *
-     * Important :
-     * le titre NE disparaît PAS pendant le scroll.
-     */
-
     featuredLatest.addEventListener(
       'touchmove',
       function (event) {
 
-        if (!isMobileTouch()) return;
+        if (!isMobile()) return;
 
         const touch = event.touches[0];
 
         if (!touch) return;
 
         const distanceX =
-          Math.abs(touch.clientX - startX);
+          Math.abs(
+            touch.clientX - startX
+          );
 
         const distanceY =
-          Math.abs(touch.clientY - startY);
-
+          Math.abs(
+            touch.clientY - startY
+          );
 
         if (
           distanceX > movementThreshold ||
           distanceY > movementThreshold
         ) {
-
           touchMoved = true;
-
         }
 
       },
@@ -269,56 +297,25 @@
     );
 
 
-    /*
-     * Fin du toucher.
-     */
-
     featuredLatest.addEventListener(
       'touchend',
       function () {
 
-        if (!isMobileTouch()) return;
-
-
-        /*
-         * Si l'utilisateur a scrollé depuis l'image :
-         * le titre reste affiché.
-         *
-         * On bloque simplement une éventuelle
-         * ouverture accidentelle.
-         */
+        if (!isMobile()) return;
 
         if (touchMoved) {
 
           suppressNextClick = true;
-
           return;
 
         }
-
-
-        /*
-         * Premier toucher :
-         * le titre vient d'apparaître.
-         *
-         * On bloque l'ouverture de l'article.
-         */
 
         if (!wasAlreadyRevealed) {
 
           suppressNextClick = true;
-
           return;
 
         }
-
-
-        /*
-         * Deuxième toucher sur l'image,
-         * alors que le titre était déjà visible :
-         *
-         * on laisse le lien s'ouvrir.
-         */
 
         suppressNextClick = false;
 
@@ -327,16 +324,11 @@
     );
 
 
-    /*
-     * Si le système annule le geste,
-     * on conserve quand même le titre.
-     */
-
     featuredLatest.addEventListener(
       'touchcancel',
       function () {
 
-        if (!isMobileTouch()) return;
+        if (!isMobile()) return;
 
         suppressNextClick = true;
 
@@ -345,54 +337,33 @@
     );
 
 
-    /*
-     * Gestion du clic généré après le toucher.
-     */
-
     featuredLatest.addEventListener(
       'click',
       function (event) {
 
-        if (!isMobileTouch()) return;
-
-
-        /*
-         * Premier toucher ou geste de scroll :
-         * on empêche l'ouverture.
-         */
+        if (!isMobile()) return;
 
         if (suppressNextClick) {
 
           event.preventDefault();
-
           suppressNextClick = false;
 
         }
-
-        /*
-         * Sinon :
-         * deuxième tap sur l'image,
-         * le lien s'ouvre normalement.
-         */
 
       }
     );
 
 
-    /*
-     * Toucher ailleurs sur la page :
-     * disparition du faux hover.
-     */
-
     document.addEventListener(
       'touchstart',
       function (event) {
 
-        if (!isMobileTouch()) return;
-
+        if (!isMobile()) return;
 
         if (
-          !featuredLatest.contains(event.target)
+          !featuredLatest.contains(
+            event.target
+          )
         ) {
 
           featuredLatest.classList.remove(
@@ -400,7 +371,6 @@
           );
 
           suppressNextClick = false;
-
           wasAlreadyRevealed = false;
 
         }
@@ -410,16 +380,11 @@
     );
 
 
-    /*
-     * Évite le menu contextuel lors
-     * d'un appui prolongé.
-     */
-
     featuredLatest.addEventListener(
       'contextmenu',
       function (event) {
 
-        if (isMobileTouch()) {
+        if (isMobile()) {
           event.preventDefault();
         }
 
@@ -429,42 +394,523 @@
   }
 
 
-  /* Page complète de résultats */
+  /*
+   * PAGINATION DE LA PAGE
+   * "TOUS LES ARTICLES"
+   */
+
+  const archiveItems =
+    Array.from(
+      document.querySelectorAll(
+        '.archive-page-item'
+      )
+    );
+
+  const archivePagination =
+    document.querySelector(
+      '#archive-pagination'
+    );
+
+  const archiveSection =
+    document.querySelector(
+      '#all-articles'
+    );
+
+  const postsPerPage = 10;
+
+
+  if (
+    archiveItems.length &&
+    archivePagination
+  ) {
+
+    const pageCount =
+      Math.ceil(
+        archiveItems.length /
+        postsPerPage
+      );
+
+
+    function getRequestedPage() {
+
+      const params =
+        new URLSearchParams(
+          window.location.search
+        );
+
+      const value =
+        parseInt(
+          params.get('page'),
+          10
+        );
+
+      if (
+        Number.isNaN(value) ||
+        value < 1
+      ) {
+        return 1;
+      }
+
+      if (value > pageCount) {
+        return pageCount;
+      }
+
+      return value;
+
+    }
+
+
+    function pageHref(pageNumber) {
+
+      const url =
+        new URL(
+          window.location.href
+        );
+
+      if (pageNumber === 1) {
+
+        url.searchParams.delete(
+          'page'
+        );
+
+      } else {
+
+        url.searchParams.set(
+          'page',
+          pageNumber
+        );
+
+      }
+
+      return (
+        url.pathname +
+        url.search
+      );
+
+    }
+
+
+    function addPageLink(
+      container,
+      pageNumber,
+      currentPage
+    ) {
+
+      const link =
+        document.createElement('a');
+
+      link.href =
+        pageHref(pageNumber);
+
+      link.textContent =
+        String(pageNumber);
+
+      link.setAttribute(
+        'aria-label',
+        'Page ' + pageNumber
+      );
+
+      if (
+        pageNumber === currentPage
+      ) {
+
+        link.classList.add(
+          'is-current'
+        );
+
+        link.setAttribute(
+          'aria-current',
+          'page'
+        );
+
+      }
+
+      link.addEventListener(
+        'click',
+        function (event) {
+
+          event.preventDefault();
+
+          showArchivePage(
+            pageNumber,
+            true
+          );
+
+        }
+      );
+
+      container.appendChild(link);
+
+    }
+
+
+    function addEllipsis(container) {
+
+      const ellipsis =
+        document.createElement('span');
+
+      ellipsis.className =
+        'pagination-ellipsis';
+
+      ellipsis.textContent = '…';
+
+      container.appendChild(
+        ellipsis
+      );
+
+    }
+
+
+    function renderPagination(
+      currentPage
+    ) {
+
+      archivePagination.innerHTML = '';
+
+      if (pageCount <= 1) {
+
+        archivePagination.hidden = true;
+        return;
+
+      }
+
+      archivePagination.hidden = false;
+
+
+      /*
+       * Flèche précédente
+       */
+
+      if (currentPage > 1) {
+
+        const previous =
+          document.createElement('a');
+
+        previous.href =
+          pageHref(
+            currentPage - 1
+          );
+
+        previous.textContent = '←';
+
+        previous.setAttribute(
+          'aria-label',
+          'Page précédente'
+        );
+
+        previous.addEventListener(
+          'click',
+          function (event) {
+
+            event.preventDefault();
+
+            showArchivePage(
+              currentPage - 1,
+              true
+            );
+
+          }
+        );
+
+        archivePagination.appendChild(
+          previous
+        );
+
+      }
+
+
+      /*
+       * Numéros
+       */
+
+      if (pageCount <= 7) {
+
+        for (
+          let page = 1;
+          page <= pageCount;
+          page++
+        ) {
+
+          addPageLink(
+            archivePagination,
+            page,
+            currentPage
+          );
+
+        }
+
+      } else {
+
+        addPageLink(
+          archivePagination,
+          1,
+          currentPage
+        );
+
+
+        if (currentPage <= 3) {
+
+          addPageLink(
+            archivePagination,
+            2,
+            currentPage
+          );
+
+          addPageLink(
+            archivePagination,
+            3,
+            currentPage
+          );
+
+          addEllipsis(
+            archivePagination
+          );
+
+        } else if (
+          currentPage >=
+          pageCount - 2
+        ) {
+
+          addEllipsis(
+            archivePagination
+          );
+
+          addPageLink(
+            archivePagination,
+            pageCount - 2,
+            currentPage
+          );
+
+          addPageLink(
+            archivePagination,
+            pageCount - 1,
+            currentPage
+          );
+
+        } else {
+
+          addEllipsis(
+            archivePagination
+          );
+
+          addPageLink(
+            archivePagination,
+            currentPage - 1,
+            currentPage
+          );
+
+          addPageLink(
+            archivePagination,
+            currentPage,
+            currentPage
+          );
+
+          addPageLink(
+            archivePagination,
+            currentPage + 1,
+            currentPage
+          );
+
+          addEllipsis(
+            archivePagination
+          );
+
+        }
+
+
+        addPageLink(
+          archivePagination,
+          pageCount,
+          currentPage
+        );
+
+      }
+
+
+      /*
+       * Flèche suivante
+       */
+
+      if (currentPage < pageCount) {
+
+        const next =
+          document.createElement('a');
+
+        next.href =
+          pageHref(
+            currentPage + 1
+          );
+
+        next.textContent = '→';
+
+        next.setAttribute(
+          'aria-label',
+          'Page suivante'
+        );
+
+        next.addEventListener(
+          'click',
+          function (event) {
+
+            event.preventDefault();
+
+            showArchivePage(
+              currentPage + 1,
+              true
+            );
+
+          }
+        );
+
+        archivePagination.appendChild(
+          next
+        );
+
+      }
+
+    }
+
+
+    function showArchivePage(
+      pageNumber,
+      updateHistory
+    ) {
+
+      const safePage =
+        Math.min(
+          Math.max(
+            pageNumber,
+            1
+          ),
+          pageCount
+        );
+
+      const start =
+        (safePage - 1) *
+        postsPerPage;
+
+      const end =
+        start + postsPerPage;
+
+
+      archiveItems.forEach(
+        function (
+          item,
+          index
+        ) {
+
+          item.hidden =
+            !(
+              index >= start &&
+              index < end
+            );
+
+        }
+      );
+
+
+      renderPagination(
+        safePage
+      );
+
+
+      if (updateHistory) {
+
+        history.pushState(
+          {
+            archivePage:
+              safePage
+          },
+          '',
+          pageHref(
+            safePage
+          )
+        );
+
+        if (archiveSection) {
+
+          archiveSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+
+        }
+
+      }
+
+    }
+
+
+    showArchivePage(
+      getRequestedPage(),
+      false
+    );
+
+
+    window.addEventListener(
+      'popstate',
+      function () {
+
+        showArchivePage(
+          getRequestedPage(),
+          false
+        );
+
+      }
+    );
+
+  }
+
+
+  /*
+   * PAGE COMPLÈTE DE RECHERCHE
+   */
 
   const f =
-    document.querySelector('#full-search-form');
+    document.querySelector(
+      '#full-search-form'
+    );
 
   const i =
-    document.querySelector('#full-search-input');
+    document.querySelector(
+      '#full-search-input'
+    );
 
   const r =
-    document.querySelector('#search-results-list');
+    document.querySelector(
+      '#search-results-list'
+    );
 
   const s =
-    document.querySelector('#search-summary');
+    document.querySelector(
+      '#search-summary'
+    );
 
   const e =
-    document.querySelector('#search-empty');
+    document.querySelector(
+      '#search-empty'
+    );
 
   const posts =
     window.DE_GUSTIBUS_POSTS || [];
 
 
   /*
-   * Le reste ne concerne que
-   * la page de recherche.
+   * Si nous ne sommes pas sur
+   * la page de recherche,
+   * le reste n'est pas nécessaire.
    */
 
   if (!f) return;
 
 
   const q =
-    new URLSearchParams(location.search).get('q') || '';
+    new URLSearchParams(
+      location.search
+    ).get('q') || '';
 
   i.value = q;
 
-
-  /* Protection du texte injecté */
 
   function esc(x) {
 
@@ -482,16 +928,14 @@
   }
 
 
-  /* Affichage propre de la date */
-
   function formatDate(value) {
 
     const dateOnly =
-      String(value || '').split('T')[0];
+      String(value || '')
+        .split('T')[0];
 
     const parts =
       dateOnly.split('-');
-
 
     if (parts.length === 3) {
 
@@ -510,16 +954,15 @@
   }
 
 
-  /* Recherche */
-
   function run() {
 
-    let x =
+    const x =
       i.value
         .trim()
         .toLocaleLowerCase('fr');
 
     r.innerHTML = '';
+
     e.hidden = true;
 
 
@@ -533,95 +976,103 @@
     }
 
 
-    let m = posts.filter(p =>
-
-      [
-        p.title,
-        p.category,
-        p.excerpt,
-        ...(p.tags || [])
-      ]
-
-        .join(' ')
-        .toLocaleLowerCase('fr')
-        .includes(x)
-
-    );
+    const matches =
+      posts.filter(
+        p =>
+          [
+            p.title,
+            p.category,
+            p.excerpt,
+            ...(p.tags || [])
+          ]
+            .join(' ')
+            .toLocaleLowerCase('fr')
+            .includes(x)
+      );
 
 
     s.textContent =
-      m.length +
+      matches.length +
       ' ' +
       (
-        m.length > 1
+        matches.length > 1
           ? 'articles trouvés.'
           : 'article trouvé.'
       );
 
 
-    m.forEach(p => {
+    matches.forEach(
+      p => {
 
-      let a =
-        document.createElement('article');
+        const article =
+          document.createElement(
+            'article'
+          );
 
-      a.className =
-        'post-card search-card';
-
-
-      a.innerHTML =
-
-        '<div class="post-card-content">' +
-
-        '<p class="eyebrow">' +
-        esc(p.category) +
-        ' · ' +
-        formatDate(p.date) +
-        '</p>' +
-
-        '<h2><a href="' +
-        p.url +
-        '">' +
-        esc(p.title) +
-        '</a></h2>' +
-
-        '<div class="post-excerpt">' +
-        esc(p.excerpt || '') +
-        '</div>' +
-
-        '<a class="read-more" href="' +
-        p.url +
-        '">Lire l’article →</a>' +
-
-        '</div>';
+        article.className =
+          'post-card search-card';
 
 
-      r.appendChild(a);
+        article.innerHTML =
+          '<div class="post-card-content">' +
 
-    });
+          '<p class="eyebrow">' +
+          esc(p.category) +
+          ' · ' +
+          formatDate(p.date) +
+          '</p>' +
+
+          '<h2><a href="' +
+          p.url +
+          '">' +
+          esc(p.title) +
+          '</a></h2>' +
+
+          '<div class="post-excerpt">' +
+          esc(p.excerpt || '') +
+          '</div>' +
+
+          '<a class="read-more" href="' +
+          p.url +
+          '">Lire l’article →</a>' +
+
+          '</div>';
 
 
-    if (!m.length) {
+        r.appendChild(
+          article
+        );
+
+      }
+    );
+
+
+    if (!matches.length) {
       e.hidden = false;
     }
 
   }
 
 
-  f.onsubmit = z => {
+  f.onsubmit =
+    function (event) {
 
-    z.preventDefault();
+      event.preventDefault();
 
-    history.replaceState(
-      {},
-      '',
-      i.value
-        ? '?q=' + encodeURIComponent(i.value)
-        : location.pathname
-    );
+      history.replaceState(
+        {},
+        '',
+        i.value
+          ? '?q=' +
+            encodeURIComponent(
+              i.value
+            )
+          : location.pathname
+      );
 
-    run();
+      run();
 
-  };
+    };
 
 
   run();
