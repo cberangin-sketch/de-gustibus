@@ -6,6 +6,9 @@ chapeau: Plus lourd, plus gris, plus lent que ses successeurs, GTA IV reste
   peut-être le jeu Rockstar où la ville, la violence et le désenchantement
   forment le tout le plus cohérent.
 image: /assets/images/111fgfdsdf.jpg
+tags:
+  - Rockstar
+  - Bellic
 ---
 Bien sûr. Je garde le même ton mais je structure l’article avec des sous-titres, ce qui sera aussi plus intéressant visuellement sur ton site.
 
