@@ -5,10 +5,6 @@ category: jeu-video
 chapeau: Spectaculaire, violent et techniquement impressionnant, Wolverine peine
   pourtant à faire exister autre chose que son héros.
 image: /assets/images/11Wolverine-rage.webp
-tags:
-  - Wolverine
-  - Sony
-  - Ps5
 ---
 Il y avait pourtant de quoi être enthousiaste. Wolverine est probablement l’un des personnages Marvel qui se prête le mieux au jeu vidéo : brutal, mobile, immédiatement identifiable, doté d’un pouvoir suffisamment simple pour ne pas exiger vingt minutes d’explications.
 
