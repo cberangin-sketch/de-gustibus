@@ -182,6 +182,10 @@ layout: default
       -webkit-user-select: none;
     }
 
+    .article-share__label {
+      display: none;
+    }
+
     .article-share__desktop {
       display: none;
     }
@@ -743,12 +747,6 @@ layout: default
             });
 
           } catch (error) {
-
-            /*
-             * L'utilisateur peut simplement
-             * fermer le panneau de partage.
-             * Dans ce cas, on ne fait rien.
-             */
 
             if (
               error.name !== 'AbortError'
