@@ -64,6 +64,7 @@
       <meta property="og:image:type" content="image/png">
       <meta property="og:image:width" content="1536">
       <meta property="og:image:height" content="864">
+
       <meta
         property="og:image:alt"
         content="de gustibus. — Ici je parle un peu d’art">
@@ -104,20 +105,13 @@
     type="image/svg+xml">
 
   <!-- Polices -->
-  <link
-    rel="preconnect"
-    href="https://fonts.googleapis.com">
-
-  <link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
     href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap"
     rel="stylesheet">
 
-  <!-- Feuille de style -->
   <link
     rel="stylesheet"
     href="{{ '/assets/css/style.css' | relative_url }}">
@@ -147,12 +141,29 @@
       id="main-nav"
       aria-label="Navigation principale">
 
-      <a href="{{ '/' | relative_url }}">Accueil</a>
-      <a href="{{ '/jeu-video/' | relative_url }}">Jeu vidéo</a>
-      <a href="{{ '/films-et-series/' | relative_url }}">Films et Séries</a>
-      <a href="{{ '/litterature/' | relative_url }}">Littérature</a>
-      <a href="{{ '/divers/' | relative_url }}">Divers</a>
-      <a href="{{ '/a-propos/' | relative_url }}">À propos</a>
+      <a href="{{ '/' | relative_url }}">
+        Accueil
+      </a>
+
+      <a href="{{ '/jeu-video/' | relative_url }}">
+        Jeu vidéo
+      </a>
+
+      <a href="{{ '/films-et-series/' | relative_url }}">
+        Films et Séries
+      </a>
+
+      <a href="{{ '/litterature/' | relative_url }}">
+        Littérature
+      </a>
+
+      <a href="{{ '/divers/' | relative_url }}">
+        Divers
+      </a>
+
+      <a href="{{ '/a-propos/' | relative_url }}">
+        À propos
+      </a>
 
       <button
         class="mobile-search-toggle"
@@ -174,6 +185,7 @@
     </nav>
 
   </header>
+
 
   <aside
     id="search-panel"
@@ -207,14 +219,24 @@
 
   </aside>
 
+
   <main>
     {{ content }}
   </main>
 
+
   <footer class="site-footer">
-    <span>de gustibus.</span>
-    <span>Carnet culturel</span>
+
+    <a href="{{ '/' | relative_url }}">
+      de gustibus.
+    </a>
+
+    <a href="{{ '/a-propos/' | relative_url }}">
+      carnet culturel
+    </a>
+
   </footer>
+
 
   <script src="{{ '/assets/js/search.js' | relative_url }}"></script>
 
