@@ -5,14 +5,19 @@ permalink: /a-propos/
 ---
 
 <style>
+
   .about-page {
     max-width: 1120px;
     margin: 0 auto;
     padding: 90px 34px 120px;
   }
 
+
+  /* TITRE */
+
   .about-header {
     margin-bottom: 58px;
+    text-align: center;
   }
 
   .about-header .eyebrow {
@@ -23,94 +28,308 @@ permalink: /a-propos/
     margin: 0;
   }
 
+
+  /* ENSEMBLE IMAGE */
+
+  .about-visual {
+    width: 100%;
+    margin: 0 auto 54px;
+  }
+
+
+  /*
+   * IMAGE
+   *
+   * Le fichier original contient un cadre blanc.
+   * On zoome légèrement pour le faire disparaître.
+   */
+
   .about-image {
     position: relative;
+
     width: 100%;
-    margin: 0 0 64px;
+    aspect-ratio: 1.53 / 1;
+
     overflow: hidden;
-    cursor: default;
+
+    background: var(--paper);
+
     -webkit-tap-highlight-color: transparent;
+
     user-select: none;
     -webkit-user-select: none;
+
+
+    /*
+     * Léger fondu sur les côtés.
+     */
+
+    -webkit-mask-image:
+      linear-gradient(
+        to right,
+        transparent 0,
+        black 3%,
+        black 97%,
+        transparent 100%
+      );
+
+    mask-image:
+      linear-gradient(
+        to right,
+        transparent 0,
+        black 3%,
+        black 97%,
+        transparent 100%
+      );
   }
 
-  .about-image img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
 
-  .about-image-caption {
+  /*
+   * Léger fondu vertical.
+   */
+
+  .about-image::after {
+    content: "";
+
     position: absolute;
     inset: 0;
 
-    display: flex;
-    align-items: flex-end;
+    z-index: 2;
 
-    padding: 28px;
+    pointer-events: none;
+
+    background:
+      linear-gradient(
+        to bottom,
+        var(--paper) 0,
+        transparent 4%,
+        transparent 96%,
+        var(--paper) 100%
+      );
+
+    opacity: .32;
+  }
+
+
+  .about-image img {
+    display: block;
+
+    width: 114%;
+    height: 114%;
+
+    max-width: none;
+
+    margin-left: -7%;
+    margin-top: -7%;
+
+    object-fit: cover;
+    object-position: center;
+
+    pointer-events: none;
+  }
+
+
+  /*
+   * VOILE DISCRET POUR LA LÉGENDE
+   */
+
+  .about-image-overlay {
+    position: absolute;
+    inset: 0;
+
+    z-index: 1;
 
     background:
       linear-gradient(
         to top,
-        rgba(0, 0, 0, .56),
-        rgba(0, 0, 0, 0) 55%
+        rgba(0, 0, 0, .24),
+        rgba(0, 0, 0, 0) 42%
       );
 
-    color: #fff;
-
-    font-family: "DM Sans", sans-serif;
-    font-size: 11px;
-    font-weight: 400;
-    line-height: 1.4;
-    letter-spacing: .075em;
-    text-transform: uppercase;
-
     opacity: 0;
+
     transition: opacity .25s ease;
 
     pointer-events: none;
   }
 
-  @media (hover: hover) and (pointer: fine) {
-    .about-image:hover .about-image-caption {
-      opacity: 1;
-    }
+
+  /*
+   * LÉGENDE
+   */
+
+  .about-image-caption {
+    position: absolute;
+
+    left: 30px;
+    bottom: 26px;
+
+    z-index: 3;
+
+    margin: 0;
+
+    color: #fff;
+
+    font-family: "EB Garamond", serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.35;
+
+    text-transform: none;
+    letter-spacing: 0;
+
+    opacity: 0;
+
+    transform: translateY(3px);
+
+    transition:
+      opacity .25s ease,
+      transform .25s ease;
+
+    pointer-events: none;
+
+    text-shadow:
+      0 1px 8px rgba(0, 0, 0, .28);
   }
 
-  .about-image.is-revealed .about-image-caption {
+
+  /*
+   * SURVOL SOURIS
+   */
+
+  @media (hover: hover) and (pointer: fine) {
+
+    .about-image:hover
+    .about-image-caption {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .about-image:hover
+    .about-image-overlay {
+      opacity: 1;
+    }
+
+  }
+
+
+  /*
+   * MOBILE : ÉTAT RÉVÉLÉ
+   */
+
+  .about-image.is-revealed
+  .about-image-caption {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .about-image.is-revealed
+  .about-image-overlay {
     opacity: 1;
   }
 
+
+  /*
+   * TEXTE DE PRÉSENTATION
+   *
+   * Le bloc lui-même est centré
+   * sous l'image.
+   *
+   * Le texte à l'intérieur est justifié.
+   */
+
   .about-text {
     max-width: 760px;
+
+    margin: 0 auto;
+
+    font-family: "EB Garamond", serif;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.65;
+
+    color: var(--ink);
+
+    text-align: justify;
+    text-justify: inter-word;
+
+    hyphens: auto;
+    -webkit-hyphens: auto;
   }
+
 
   .about-text p {
     margin: 0 0 30px;
   }
 
+
   .about-text p:last-child {
     margin-bottom: 0;
   }
 
+
+  /*
+   * "Bonne visite." reste indépendante
+   * et centrée pour fermer la page
+   * de façon plus élégante.
+   */
+
+  .about-text .about-goodbye {
+    text-align: center;
+    margin-top: 38px;
+  }
+
+
+  /* MOBILE */
+
   @media (max-width: 760px) {
+
     .about-page {
-      padding: 64px 34px 90px;
+      padding: 64px 24px 90px;
     }
+
 
     .about-header {
       margin-bottom: 42px;
     }
 
-    .about-image {
-      margin-bottom: 48px;
+
+    .about-visual {
+      margin-bottom: 46px;
     }
 
-    .about-image-caption {
-      padding: 20px;
-      font-size: 10px;
+
+    .about-image {
+      aspect-ratio: 1.36 / 1;
     }
+
+
+    .about-image img {
+      width: 118%;
+      height: 118%;
+
+      margin-left: -9%;
+      margin-top: -9%;
+    }
+
+
+    .about-image-caption {
+      left: 20px;
+      bottom: 18px;
+
+      font-size: 17px;
+    }
+
+
+    .about-text {
+      max-width: 620px;
+
+      font-size: 21px;
+      line-height: 1.62;
+    }
+
   }
+
 </style>
 
 
@@ -118,24 +337,34 @@ permalink: /a-propos/
 
   <header class="about-header">
 
-    <p class="eyebrow">À propos</p>
+    <p class="eyebrow">
+      À propos
+    </p>
 
-    <h1>Pour ceux que ça intéressera.</h1>
+    <h1>
+      Pour ceux que ça intéressera.
+    </h1>
 
   </header>
 
 
-  <figure
-    class="about-image"
-    id="about-image">
+  <figure class="about-visual">
 
-    <img
-      src="{{ '/assets/images/a-propos.jpg' | relative_url }}"
-      alt="Photographie de Jean Baudrillard, Saint-Clément, 1987">
+    <div
+      class="about-image"
+      id="about-image">
 
-    <figcaption class="about-image-caption">
-      jean baudrillard, saint clément . 1987
-    </figcaption>
+      <img
+        src="{{ '/assets/images/a-propos.jpg' | relative_url }}"
+        alt="Photographie de Jean Baudrillard, Saint-Clément, 1987">
+
+      <div class="about-image-overlay"></div>
+
+      <figcaption class="about-image-caption">
+        jean baudrillard, saint clément . 1987
+      </figcaption>
+
+    </div>
 
   </figure>
 
@@ -158,7 +387,7 @@ permalink: /a-propos/
       volontiers arbitraire.
     </p>
 
-    <p>
+    <p class="about-goodbye">
       Bonne visite.
     </p>
 
@@ -168,22 +397,31 @@ permalink: /a-propos/
 
 
 <script>
+
 (function () {
 
   const aboutImage =
-    document.querySelector('#about-image');
+    document.querySelector(
+      '#about-image'
+    );
 
-  if (!aboutImage) return;
+
+  if (!aboutImage) {
+    return;
+  }
 
 
   function isMobile() {
+
     return window.matchMedia(
       '(max-width: 760px)'
     ).matches;
+
   }
 
 
   let touchMoved = false;
+
   let startX = 0;
   let startY = 0;
 
@@ -191,109 +429,136 @@ permalink: /a-propos/
 
 
   /*
-   * MÊME LOGIQUE TACTILE
-   * QUE "DERNIER ARTICLE"
+   * TOUCHER L'IMAGE
+   *
+   * La légende apparaît immédiatement.
    */
 
   aboutImage.addEventListener(
     'touchstart',
     function (event) {
 
-      if (!isMobile()) return;
+      if (!isMobile()) {
+        return;
+      }
 
-      const touch = event.touches[0];
 
-      if (!touch) return;
+      const touch =
+        event.touches[0];
 
-      startX = touch.clientX;
-      startY = touch.clientY;
+
+      if (!touch) {
+        return;
+      }
+
+
+      startX =
+        touch.clientX;
+
+      startY =
+        touch.clientY;
+
 
       touchMoved = false;
+
 
       aboutImage.classList.add(
         'is-revealed'
       );
 
     },
-    { passive: true }
+    {
+      passive: true
+    }
   );
 
+
+  /*
+   * LE SCROLL NE MASQUE PAS
+   * LA LÉGENDE
+   */
 
   aboutImage.addEventListener(
     'touchmove',
     function (event) {
 
-      if (!isMobile()) return;
+      if (!isMobile()) {
+        return;
+      }
 
-      const touch = event.touches[0];
 
-      if (!touch) return;
+      const touch =
+        event.touches[0];
+
+
+      if (!touch) {
+        return;
+      }
+
 
       const distanceX =
         Math.abs(
-          touch.clientX - startX
+          touch.clientX -
+          startX
         );
+
 
       const distanceY =
         Math.abs(
-          touch.clientY - startY
+          touch.clientY -
+          startY
         );
+
 
       if (
         distanceX > movementThreshold ||
         distanceY > movementThreshold
       ) {
+
         touchMoved = true;
+
       }
 
     },
-    { passive: true }
+    {
+      passive: true
+    }
   );
 
+
+  /*
+   * ON CONSERVE LA LÉGENDE
+   * APRÈS LE RELÂCHEMENT
+   */
 
   aboutImage.addEventListener(
     'touchend',
     function () {
 
-      if (!isMobile()) return;
-
-      /*
-       * On ne retire PAS la légende ici :
-       * elle reste visible après le toucher
-       * ou après un scroll commencé sur l'image.
-       */
+      if (!isMobile()) {
+        return;
+      }
 
     },
-    { passive: true }
-  );
-
-
-  aboutImage.addEventListener(
-    'touchcancel',
-    function () {
-
-      if (!isMobile()) return;
-
-      /*
-       * Même principe :
-       * on conserve l'état révélé.
-       */
-
-    },
-    { passive: true }
+    {
+      passive: true
+    }
   );
 
 
   /*
    * TOUCHER AILLEURS :
-   * masque la légende.
+   * LA LÉGENDE DISPARAÎT
    */
 
   document.addEventListener(
     'touchstart',
     function (event) {
 
-      if (!isMobile()) return;
+      if (!isMobile()) {
+        return;
+      }
+
 
       if (
         !aboutImage.contains(
@@ -310,13 +575,15 @@ permalink: /a-propos/
       }
 
     },
-    { passive: true }
+    {
+      passive: true
+    }
   );
 
 
   /*
-   * EMPÊCHE LE MENU CONTEXTUEL
-   * SUR APPUI LONG MOBILE.
+   * PAS DE MENU CONTEXTUEL
+   * SUR APPUI LONG
    */
 
   aboutImage.addEventListener(
@@ -324,11 +591,14 @@ permalink: /a-propos/
     function (event) {
 
       if (isMobile()) {
+
         event.preventDefault();
+
       }
 
     }
   );
 
 })();
+
 </script>
