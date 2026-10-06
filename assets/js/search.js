@@ -79,13 +79,26 @@
 
 
     /*
-     * Sur téléphone :
-     * toucher n'importe où hors du menu
-     * ferme immédiatement le menu.
+     * FERMETURE PAR TAP HORS DU MENU
+     *
+     * - Tap court : ferme.
+     * - Scroll / glissement : ne ferme pas.
+     * - Appui long : ne ferme pas.
      */
 
+    let outsideTouchActive = false;
+    let outsideTouchMoved = false;
+
+    let outsideStartX = 0;
+    let outsideStartY = 0;
+    let outsideStartTime = 0;
+
+    const outsideMovementThreshold = 10;
+    const outsideTapMaxDuration = 350;
+
+
     document.addEventListener(
-      'pointerdown',
+      'touchstart',
       function (event) {
 
         if (!isMobile()) return;
@@ -93,6 +106,7 @@
         if (
           !mainNav.classList.contains('is-open')
         ) {
+          outsideTouchActive = false;
           return;
         }
 
@@ -100,12 +114,95 @@
           mainNav.contains(event.target) ||
           menuToggle.contains(event.target)
         ) {
+          outsideTouchActive = false;
           return;
         }
 
-        closeMobileMenu();
+        const touch = event.touches[0];
 
-      }
+        if (!touch) {
+          outsideTouchActive = false;
+          return;
+        }
+
+        outsideTouchActive = true;
+        outsideTouchMoved = false;
+
+        outsideStartX = touch.clientX;
+        outsideStartY = touch.clientY;
+        outsideStartTime = Date.now();
+
+      },
+      { passive: true }
+    );
+
+
+    document.addEventListener(
+      'touchmove',
+      function (event) {
+
+        if (!outsideTouchActive) return;
+
+        const touch = event.touches[0];
+
+        if (!touch) return;
+
+        const distanceX =
+          Math.abs(
+            touch.clientX - outsideStartX
+          );
+
+        const distanceY =
+          Math.abs(
+            touch.clientY - outsideStartY
+          );
+
+        if (
+          distanceX > outsideMovementThreshold ||
+          distanceY > outsideMovementThreshold
+        ) {
+          outsideTouchMoved = true;
+        }
+
+      },
+      { passive: true }
+    );
+
+
+    document.addEventListener(
+      'touchend',
+      function () {
+
+        if (!outsideTouchActive) return;
+
+        const duration =
+          Date.now() - outsideStartTime;
+
+        const isShortTap =
+          !outsideTouchMoved &&
+          duration <= outsideTapMaxDuration;
+
+        if (isShortTap) {
+          closeMobileMenu();
+        }
+
+        outsideTouchActive = false;
+        outsideTouchMoved = false;
+
+      },
+      { passive: true }
+    );
+
+
+    document.addEventListener(
+      'touchcancel',
+      function () {
+
+        outsideTouchActive = false;
+        outsideTouchMoved = false;
+
+      },
+      { passive: true }
     );
 
   }
