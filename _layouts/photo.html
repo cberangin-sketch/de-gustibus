@@ -1,0 +1,60 @@
+---
+layout: default
+---
+
+<article class="photo-page">
+
+  <header class="photo-page__header">
+
+    <p class="photo-page__eyebrow">
+      Photographie
+    </p>
+
+    {% if page.title %}
+      <h1>{{ page.title }}</h1>
+    {% endif %}
+
+    <div class="photo-page__meta">
+
+      {% if page.location %}
+        <span>{{ page.location }}</span>
+      {% endif %}
+
+      {% if page.date %}
+        <span>{{ page.date | date: "%d.%m.%Y" }}</span>
+      {% endif %}
+
+      {% if page.series %}
+        <span>{{ page.series }}</span>
+      {% endif %}
+
+    </div>
+
+  </header>
+
+  {% if page.image %}
+    <figure class="photo-page__figure">
+
+      <img
+        class="photo-page__image"
+        src="{{ page.image | relative_url }}"
+        alt="{{ page.title | escape }}">
+
+      {% if page.caption %}
+        <figcaption class="photo-page__caption">
+          {{ page.caption }}
+        </figcaption>
+      {% endif %}
+
+    </figure>
+  {% endif %}
+
+  <footer class="photo-page__footer">
+
+    <a href="{{ '/photographie/' | relative_url }}">
+      ← Photographie
+    </a>
+
+  </footer>
+
+</article>
