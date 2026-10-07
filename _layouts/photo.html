@@ -7,7 +7,11 @@ layout: default
   <header class="photo-page__header">
 
     <p class="photo-page__eyebrow">
-      Photographie
+      <a
+        href="{{ '/photographie/' | relative_url }}"
+        aria-label="Retour au Carnet photographique">
+        Carnet photographique
+      </a>
     </p>
 
     {% if page.title %}
@@ -33,6 +37,7 @@ layout: default
   </header>
 
   {% if page.image %}
+
     <figure class="photo-page__figure">
 
       <img
@@ -47,12 +52,13 @@ layout: default
       {% endif %}
 
     </figure>
+
   {% endif %}
 
   <footer class="photo-page__footer">
 
     <a href="{{ '/photographie/' | relative_url }}">
-      ← Photographie
+      ← Carnet photographique
     </a>
 
   </footer>
