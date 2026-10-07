@@ -766,3 +766,246 @@ button{
   }
 
 }
+/* =========================================================
+   PHOTOGRAPHIE
+   ========================================================= */
+
+
+/* Page principale */
+
+.photographie-page{
+  padding:72px 34px 90px
+}
+
+
+.photographie-page__header{
+  margin-bottom:48px
+}
+
+
+.photographie-page__header .eyebrow{
+  margin:0 0 18px
+}
+
+
+.photographie-page__header h1{
+  margin:0;
+  font:500 clamp(45px,6vw,78px)/.96 var(--sans);
+  letter-spacing:-.055em
+}
+
+
+/* Galerie
+   Les images conservent toujours leur format naturel :
+   portrait, paysage ou carré.
+*/
+
+.photographie-grid{
+  columns:2;
+  column-gap:34px
+}
+
+
+.photographie-card{
+  display:inline-block;
+  width:100%;
+  margin:0 0 42px;
+  break-inside:avoid
+}
+
+
+.photographie-card__link{
+  display:block
+}
+
+
+.photographie-card__image{
+  display:block;
+  width:100%;
+  height:auto;
+  background:rgba(23,20,17,.04);
+  transition:opacity .3s ease
+}
+
+
+.photographie-card__meta{
+  padding-top:13px
+}
+
+
+.photographie-card__title{
+  margin:0;
+  font:400 23px/1.15 var(--serif)
+}
+
+
+.photographie-card__details{
+  margin:7px 0 0;
+  font:500 9px/1.4 var(--sans);
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  color:var(--muted)
+}
+
+
+.photographie-empty{
+  margin:0;
+  padding-top:25px;
+  border-top:1px solid var(--line);
+  font:400 22px/1.5 var(--serif)
+}
+
+
+/* Survol discret */
+
+@media (hover:hover) and (pointer:fine){
+
+  .photographie-card__link:hover .photographie-card__image{
+    opacity:.88
+  }
+
+}
+
+
+/* =========================================================
+   PAGE D'UNE PHOTOGRAPHIE
+   ========================================================= */
+
+.photo-page{
+  padding:72px 34px 90px
+}
+
+
+.photo-page__header{
+  max-width:920px;
+  margin:0 auto 42px
+}
+
+
+.photo-page__eyebrow{
+  margin:0 0 18px;
+  font:500 10px var(--sans);
+  text-transform:uppercase;
+  letter-spacing:.11em;
+  color:var(--muted)
+}
+
+
+.photo-page__header h1{
+  margin:0;
+  font:500 clamp(42px,5.6vw,72px)/.98 var(--sans);
+  letter-spacing:-.05em
+}
+
+
+.photo-page__meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 18px;
+  margin-top:20px;
+  font:500 9px/1.4 var(--sans);
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  color:var(--muted)
+}
+
+
+.photo-page__figure{
+  margin:0 auto;
+  max-width:1112px
+}
+
+
+.photo-page__image{
+  display:block;
+  width:auto;
+  height:auto;
+  max-width:100%;
+  max-height:none;
+  margin:0 auto
+}
+
+
+.photo-page__caption{
+  max-width:760px;
+  margin:15px auto 0;
+  font:400 17px/1.45 var(--serif);
+  color:var(--muted)
+}
+
+
+.photo-page__footer{
+  max-width:920px;
+  margin:52px auto 0;
+  padding-top:22px;
+  border-top:1px solid var(--line);
+  font:500 10px var(--sans);
+  text-transform:uppercase;
+  letter-spacing:.09em;
+  color:var(--muted)
+}
+
+
+.photo-page__footer a:hover{
+  text-decoration:underline;
+  text-underline-offset:4px
+}
+
+
+/* =========================================================
+   PHOTOGRAPHIE — MOBILE
+   ========================================================= */
+
+@media(max-width:760px){
+
+  .photographie-page{
+    padding:50px 20px 70px
+  }
+
+
+  .photographie-page__header{
+    margin-bottom:36px
+  }
+
+
+  .photographie-grid{
+    columns:1
+  }
+
+
+  .photographie-card{
+    margin-bottom:36px
+  }
+
+
+  .photographie-card__title{
+    font-size:22px
+  }
+
+
+  .photo-page{
+    padding:50px 20px 70px
+  }
+
+
+  .photo-page__header{
+    margin-bottom:34px
+  }
+
+
+  .photo-page__meta{
+    gap:7px 14px
+  }
+
+
+  .photo-page__caption{
+    margin-top:13px;
+    font-size:16px
+  }
+
+
+  .photo-page__footer{
+    margin-top:42px
+  }
+
+}
