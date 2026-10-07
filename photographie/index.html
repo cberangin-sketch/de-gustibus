@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Photographie
+title: Carnet photographique
 permalink: /photographie/
 ---
 
@@ -8,9 +8,13 @@ permalink: /photographie/
 
   <header class="photographie-page__header">
 
-    <p class="eyebrow">Photographie</p>
+    <p class="eyebrow">
+      <a href="{{ '/photographie/' | relative_url }}">
+        Carnet photographique
+      </a>
+    </p>
 
-    <h1>Photographie</h1>
+    <h1>Des clichés.</h1>
 
   </header>
 
@@ -88,11 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!cards.length) return;
 
-
   let activeCard = null;
-
-  const movementThreshold = 10;
-  const tapMaxDuration = 350;
 
 
   function isMobileGallery() {
@@ -121,10 +121,8 @@ document.addEventListener("DOMContentLoaded", function () {
     /*
      * TOUCH REVEAL
      *
-     * Dès le PREMIER CONTACT du doigt,
-     * la photographie se révèle immédiatement.
-     *
-     * Aucun besoin de relever le doigt.
+     * Premier contact :
+     * apparition immédiate.
      */
 
     card.addEventListener(
@@ -134,17 +132,11 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!isMobileGallery()) return;
 
 
-        /*
-         * Carte encore fermée :
-         * révélation immédiate.
-         */
-
         if (!card.classList.contains("is-revealed")) {
 
           hideActiveCard(card);
 
           card.classList.add("is-revealed");
-
           activeCard = card;
 
           firstTouchRevealed = true;
@@ -155,56 +147,51 @@ document.addEventListener("DOMContentLoaded", function () {
 
         /*
          * Carte déjà révélée :
-         * ce toucher pourra ouvrir le lien.
+         * ce toucher peut ouvrir la page.
          */
 
         firstTouchRevealed = false;
 
       },
-      { passive: true }
+      {
+        passive: true
+      }
     );
 
 
     /*
-     * Le premier toucher qui a servi à révéler
-     * ne doit jamais ouvrir la page.
+     * Premier toucher :
+     * révélation uniquement.
      *
-     * Le deuxième toucher fonctionne normalement.
+     * Deuxième toucher :
+     * ouverture de la photographie.
      */
 
-    card.addEventListener("click", function (event) {
+    card.addEventListener(
+      "click",
+      function (event) {
 
-      if (!isMobileGallery()) return;
+        if (!isMobileGallery()) return;
 
-      if (firstTouchRevealed) {
 
-        event.preventDefault();
+        if (firstTouchRevealed) {
 
-        firstTouchRevealed = false;
+          event.preventDefault();
+
+          firstTouchRevealed = false;
+
+        }
 
       }
-
-    });
+    );
 
   });
 
 
   /*
-   * TOUCHER AILLEURS
-   *
-   * On masque la photo révélée uniquement
-   * après un vrai toucher court ailleurs.
-   *
-   * Un scroll, un glissement ou un appui long
-   * ne la masque pas.
+   * Contact ailleurs :
+   * disparition immédiate.
    */
-
-  let outsideStartX = 0;
-  let outsideStartY = 0;
-  let outsideStartTime = 0;
-  let outsideMoved = false;
-  let outsideStarted = false;
-
 
   document.addEventListener(
     "touchstart",
@@ -213,100 +200,17 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!isMobileGallery()) return;
 
 
-      /*
-       * Si le contact commence sur une photographie,
-       * ce n'est pas un toucher extérieur.
-       */
+      if (!event.target.closest(".photographie-card__link")) {
 
-      if (event.target.closest(".photographie-card__link")) {
-
-        outsideStarted = false;
-
-        return;
-      }
-
-
-      const touch = event.touches[0];
-
-      outsideStartX = touch.clientX;
-      outsideStartY = touch.clientY;
-
-      outsideStartTime = Date.now();
-
-      outsideMoved = false;
-      outsideStarted = true;
-
-    },
-    { passive: true }
-  );
-
-
-  document.addEventListener(
-    "touchmove",
-    function (event) {
-
-      if (
-        !isMobileGallery() ||
-        !outsideStarted
-      ) {
-        return;
-      }
-
-
-      const touch = event.touches[0];
-
-      const distanceX =
-        Math.abs(touch.clientX - outsideStartX);
-
-      const distanceY =
-        Math.abs(touch.clientY - outsideStartY);
-
-
-      if (
-        distanceX > movementThreshold ||
-        distanceY > movementThreshold
-      ) {
-        outsideMoved = true;
-      }
-
-    },
-    { passive: true }
-  );
-
-
-  document.addEventListener(
-    "touchend",
-    function () {
-
-      if (
-        !isMobileGallery() ||
-        !outsideStarted
-      ) {
-        return;
-      }
-
-
-      const duration =
-        Date.now() - outsideStartTime;
-
-
-      /*
-       * Uniquement un toucher court et net
-       * masque la photographie.
-       */
-
-      if (
-        !outsideMoved &&
-        duration <= tapMaxDuration
-      ) {
         hideActiveCard(null);
+
       }
 
-
-      outsideStarted = false;
-
     },
-    { passive: true }
+    {
+      passive: true,
+      capture: true
+    }
   );
 
 });
