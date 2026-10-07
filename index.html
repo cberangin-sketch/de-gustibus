@@ -172,16 +172,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!photo) return;
 
-  const movementThreshold = 10;
-  const tapMaxDuration = 350;
 
   let firstTouchRevealed = false;
-
-  let outsideStarted = false;
-  let outsideMoved = false;
-  let outsideStartX = 0;
-  let outsideStartY = 0;
-  let outsideStartTime = 0;
 
 
   function isMobilePhoto() {
@@ -201,8 +193,9 @@ document.addEventListener("DOMContentLoaded", function () {
   /*
    * TOUCH REVEAL
    *
-   * Premier CONTACT :
-   * apparition immédiate.
+   * Dès le premier CONTACT du doigt
+   * avec la photographie :
+   * apparition immédiate des informations.
    */
 
   photo.addEventListener(
@@ -212,60 +205,70 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!isMobilePhoto()) return;
 
 
+      /*
+       * Photographie encore fermée :
+       * révélation immédiate.
+       */
+
       if (!photo.classList.contains("is-revealed")) {
 
         photo.classList.add("is-revealed");
 
         firstTouchRevealed = true;
 
-      } else {
-
-        /*
-         * La photo était déjà révélée :
-         * ce toucher pourra ouvrir la page.
-         */
-
-        firstTouchRevealed = false;
-
+        return;
       }
 
+
+      /*
+       * Photographie déjà révélée :
+       * ce nouveau toucher pourra ouvrir sa page.
+       */
+
+      firstTouchRevealed = false;
+
     },
-    { passive: true }
+    {
+      passive: true
+    }
   );
 
 
   /*
    * Le premier toucher sert uniquement
-   * à révéler la photo.
+   * à révéler les informations.
    *
-   * Le second peut suivre le lien.
+   * Le deuxième toucher peut suivre le lien.
    */
 
-  photo.addEventListener("click", function (event) {
+  photo.addEventListener(
+    "click",
+    function (event) {
 
-    if (!isMobilePhoto()) return;
+      if (!isMobilePhoto()) return;
 
 
-    if (firstTouchRevealed) {
+      if (firstTouchRevealed) {
 
-      event.preventDefault();
+        event.preventDefault();
 
-      firstTouchRevealed = false;
+        firstTouchRevealed = false;
+
+      }
 
     }
-
-  });
+  );
 
 
   /*
    * TOUCHER AILLEURS
    *
-   * Même logique que Dernier article :
+   * Dès que le doigt entre en contact
+   * avec n'importe quelle zone extérieure
+   * à la photographie :
+   * disparition immédiate.
    *
-   * - toucher court et net ailleurs = masque
-   * - scroll = ne masque pas
-   * - glissement = ne masque pas
-   * - appui long = ne masque pas
+   * Aucun besoin de relever le doigt.
    */
 
   document.addEventListener(
@@ -275,120 +278,16 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!isMobilePhoto()) return;
 
 
-      if (event.target.closest(".featured-photo__link")) {
+      if (!event.target.closest(".featured-photo__link")) {
 
-        outsideStarted = false;
-
-        return;
-      }
-
-
-      const touch = event.touches[0];
-
-      outsideStartX = touch.clientX;
-      outsideStartY = touch.clientY;
-      outsideStartTime = Date.now();
-
-      outsideMoved = false;
-      outsideStarted = true;
-
-    },
-    {
-      passive: true,
-      capture: true
-    }
-  );
-
-
-  document.addEventListener(
-    "touchmove",
-    function (event) {
-
-      if (
-        !isMobilePhoto() ||
-        !outsideStarted
-      ) {
-        return;
-      }
-
-
-      const touch = event.touches[0];
-
-      const distanceX =
-        Math.abs(touch.clientX - outsideStartX);
-
-      const distanceY =
-        Math.abs(touch.clientY - outsideStartY);
-
-
-      if (
-        distanceX > movementThreshold ||
-        distanceY > movementThreshold
-      ) {
-        outsideMoved = true;
-      }
-
-    },
-    {
-      passive: true,
-      capture: true
-    }
-  );
-
-
-  document.addEventListener(
-    "touchend",
-    function () {
-
-      if (
-        !isMobilePhoto() ||
-        !outsideStarted
-      ) {
-        return;
-      }
-
-
-      const duration =
-        Date.now() - outsideStartTime;
-
-
-      if (
-        !outsideMoved &&
-        duration <= tapMaxDuration
-      ) {
         hidePhoto();
+
       }
-
-
-      outsideStarted = false;
 
     },
     {
       passive: true,
       capture: true
-    }
-  );
-
-
-  /*
-   * Sécurité supplémentaire :
-   * si on clique ailleurs avec un dispositif
-   * tactile hybride, on masque aussi.
-   */
-
-  document.addEventListener(
-    "click",
-    function (event) {
-
-      if (!isMobilePhoto()) return;
-
-      if (
-        photo.classList.contains("is-revealed") &&
-        !event.target.closest(".featured-photo__link")
-      ) {
-        hidePhoto();
-      }
-
     }
   );
 
