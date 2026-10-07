@@ -8,9 +8,9 @@ markdown: kramdown
 permalink: /:title/
 
 collections:
-  photos:
+  photographie:
     output: true
-    permalink: /photos/:name/
+    permalink: /photographie/:name/
 
 defaults:
   - scope:
@@ -23,14 +23,10 @@ defaults:
 
   - scope:
       path: ""
-      type: photos
+      type: photographie
     values:
       layout: photo
       image: ""
-      title: ""
-      date: ""
-      location: ""
-      caption: ""
 
 plugins:
   - jekyll-sitemap
