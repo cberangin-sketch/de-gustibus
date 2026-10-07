@@ -17,6 +17,7 @@ title:
 
 </section>
 
+
 {% if site.posts.size > 0 %}
 
   {% assign latest_post = site.posts.first %}
@@ -62,6 +63,79 @@ title:
 
   </section>
 
+{% endif %}
+
+
+{% if site.photographie.size > 0 %}
+
+  {% assign photographs = site.photographie | sort: "date" | reverse %}
+  {% assign latest_photo = photographs.first %}
+
+  <section class="featured-photo">
+
+    <div class="section-heading">
+
+      <h2>
+        <a href="{{ '/photographie/' | relative_url }}">
+          Regard
+        </a>
+      </h2>
+
+      <a
+        class="featured-photo__all"
+        href="{{ '/photographie/' | relative_url }}">
+        Toutes les photographies →
+      </a>
+
+    </div>
+
+    <a
+      class="featured-photo__link"
+      href="{{ latest_photo.url | relative_url }}"
+      aria-label="Voir {{ latest_photo.title }}">
+
+      {% if latest_photo.image %}
+        <img
+          class="featured-photo__image"
+          src="{{ latest_photo.image | relative_url }}"
+          alt="{{ latest_photo.title | escape }}">
+      {% endif %}
+
+      <div class="featured-photo__overlay">
+
+        {% if latest_photo.title %}
+          <h2 class="featured-photo__title">
+            {{ latest_photo.title }}
+          </h2>
+        {% endif %}
+
+        <p class="featured-photo__details">
+
+          {% if latest_photo.location %}
+            {{ latest_photo.location }}
+          {% endif %}
+
+          {% if latest_photo.location and latest_photo.date %}
+            ·
+          {% endif %}
+
+          {% if latest_photo.date %}
+            {{ latest_photo.date | date: "%d.%m.%Y" }}
+          {% endif %}
+
+        </p>
+
+      </div>
+
+    </a>
+
+  </section>
+
+{% endif %}
+
+
+{% if site.posts.size > 0 %}
+
   <section class="archive">
 
     <div class="section-heading">
@@ -97,3 +171,192 @@ title:
   </section>
 
 {% endif %}
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const photo = document.querySelector(".featured-photo__link");
+
+  if (!photo) return;
+
+
+  let firstTouchRevealed = false;
+
+  const movementThreshold = 10;
+  const tapMaxDuration = 350;
+
+
+  function isMobilePhoto() {
+    return window.matchMedia("(max-width: 760px)").matches;
+  }
+
+
+  /*
+   * TOUCH REVEAL
+   *
+   * Premier contact du doigt :
+   * les informations apparaissent immédiatement.
+   */
+
+  photo.addEventListener(
+    "touchstart",
+    function () {
+
+      if (!isMobilePhoto()) return;
+
+
+      if (!photo.classList.contains("is-revealed")) {
+
+        photo.classList.add("is-revealed");
+
+        firstTouchRevealed = true;
+
+        return;
+      }
+
+
+      /*
+       * Si la photographie est déjà révélée,
+       * ce nouveau toucher pourra ouvrir le lien.
+       */
+
+      firstTouchRevealed = false;
+
+    },
+    { passive: true }
+  );
+
+
+  /*
+   * Le premier toucher sert uniquement
+   * à révéler la photographie.
+   *
+   * Le deuxième toucher ouvre la page.
+   */
+
+  photo.addEventListener("click", function (event) {
+
+    if (!isMobilePhoto()) return;
+
+
+    if (firstTouchRevealed) {
+
+      event.preventDefault();
+
+      firstTouchRevealed = false;
+
+    }
+
+  });
+
+
+  /*
+   * Toucher ailleurs :
+   * masque la photographie.
+   *
+   * Un scroll ou un appui long ne la masque pas.
+   */
+
+  let outsideStartX = 0;
+  let outsideStartY = 0;
+  let outsideStartTime = 0;
+  let outsideMoved = false;
+  let outsideStarted = false;
+
+
+  document.addEventListener(
+    "touchstart",
+    function (event) {
+
+      if (!isMobilePhoto()) return;
+
+
+      if (event.target.closest(".featured-photo__link")) {
+
+        outsideStarted = false;
+
+        return;
+      }
+
+
+      const touch = event.touches[0];
+
+      outsideStartX = touch.clientX;
+      outsideStartY = touch.clientY;
+      outsideStartTime = Date.now();
+
+      outsideMoved = false;
+      outsideStarted = true;
+
+    },
+    { passive: true }
+  );
+
+
+  document.addEventListener(
+    "touchmove",
+    function (event) {
+
+      if (
+        !isMobilePhoto() ||
+        !outsideStarted
+      ) {
+        return;
+      }
+
+
+      const touch = event.touches[0];
+
+      const distanceX =
+        Math.abs(touch.clientX - outsideStartX);
+
+      const distanceY =
+        Math.abs(touch.clientY - outsideStartY);
+
+
+      if (
+        distanceX > movementThreshold ||
+        distanceY > movementThreshold
+      ) {
+        outsideMoved = true;
+      }
+
+    },
+    { passive: true }
+  );
+
+
+  document.addEventListener(
+    "touchend",
+    function () {
+
+      if (
+        !isMobilePhoto() ||
+        !outsideStarted
+      ) {
+        return;
+      }
+
+
+      const duration =
+        Date.now() - outsideStartTime;
+
+
+      if (
+        !outsideMoved &&
+        duration <= tapMaxDuration
+      ) {
+        photo.classList.remove("is-revealed");
+        firstTouchRevealed = false;
+      }
+
+
+      outsideStarted = false;
+
+    },
+    { passive: true }
+  );
+
+});
+</script>
