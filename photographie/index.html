@@ -36,7 +36,7 @@ permalink: /photographie/
                 alt="{{ photo.title | escape }}">
             {% endif %}
 
-            <div class="photographie-card__meta">
+            <div class="photographie-card__overlay">
 
               {% if photo.title %}
                 <h2 class="photographie-card__title">
@@ -79,3 +79,263 @@ permalink: /photographie/
   {% endif %}
 
 </section>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const cards = document.querySelectorAll(".photographie-card__link");
+
+  if (!cards.length) return;
+
+  let activeCard = null;
+
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchStartTime = 0;
+  let touchMoved = false;
+
+  const movementThreshold = 10;
+  const tapMaxDuration = 350;
+
+
+  function isMobileGallery() {
+    return window.matchMedia("(max-width: 760px)").matches;
+  }
+
+
+  function hideActiveCard(exceptCard) {
+
+    if (
+      activeCard &&
+      activeCard !== exceptCard
+    ) {
+      activeCard.classList.remove("is-revealed");
+      activeCard = null;
+    }
+
+  }
+
+
+  cards.forEach(function (card) {
+
+    let preventNextClick = false;
+
+
+    card.addEventListener(
+      "touchstart",
+      function (event) {
+
+        if (!isMobileGallery()) return;
+
+        const touch = event.touches[0];
+
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+        touchStartTime = Date.now();
+        touchMoved = false;
+
+      },
+      { passive: true }
+    );
+
+
+    card.addEventListener(
+      "touchmove",
+      function (event) {
+
+        if (!isMobileGallery()) return;
+
+        const touch = event.touches[0];
+
+        const distanceX = Math.abs(
+          touch.clientX - touchStartX
+        );
+
+        const distanceY = Math.abs(
+          touch.clientY - touchStartY
+        );
+
+        if (
+          distanceX > movementThreshold ||
+          distanceY > movementThreshold
+        ) {
+          touchMoved = true;
+        }
+
+      },
+      { passive: true }
+    );
+
+
+    card.addEventListener(
+      "touchend",
+      function () {
+
+        if (!isMobileGallery()) return;
+
+        const duration =
+          Date.now() - touchStartTime;
+
+        /*
+         * Scroll, déplacement du doigt ou appui long :
+         * on ne change rien.
+         *
+         * Si la carte était révélée,
+         * elle reste révélée.
+         */
+
+        if (
+          touchMoved ||
+          duration > tapMaxDuration
+        ) {
+          return;
+        }
+
+
+        /*
+         * Premier toucher court :
+         * révélation sans navigation.
+         */
+
+        if (!card.classList.contains("is-revealed")) {
+
+          hideActiveCard(card);
+
+          card.classList.add("is-revealed");
+          activeCard = card;
+
+          preventNextClick = true;
+
+          return;
+        }
+
+
+        /*
+         * Deuxième toucher court :
+         * la carte est déjà révélée.
+         * On laisse le lien fonctionner normalement.
+         */
+
+        preventNextClick = false;
+
+      },
+      { passive: true }
+    );
+
+
+    card.addEventListener("click", function (event) {
+
+      if (!isMobileGallery()) return;
+
+      if (preventNextClick) {
+        event.preventDefault();
+        preventNextClick = false;
+      }
+
+    });
+
+  });
+
+
+  /*
+   * Toucher ailleurs :
+   * masque la photographie révélée.
+   *
+   * Un scroll ou un appui long hors de la carte
+   * ne la masque pas.
+   */
+
+  let outsideStartX = 0;
+  let outsideStartY = 0;
+  let outsideStartTime = 0;
+  let outsideMoved = false;
+  let outsideStarted = false;
+
+
+  document.addEventListener(
+    "touchstart",
+    function (event) {
+
+      if (!isMobileGallery()) return;
+
+      if (event.target.closest(".photographie-card__link")) {
+        outsideStarted = false;
+        return;
+      }
+
+      const touch = event.touches[0];
+
+      outsideStartX = touch.clientX;
+      outsideStartY = touch.clientY;
+      outsideStartTime = Date.now();
+      outsideMoved = false;
+      outsideStarted = true;
+
+    },
+    { passive: true }
+  );
+
+
+  document.addEventListener(
+    "touchmove",
+    function (event) {
+
+      if (
+        !isMobileGallery() ||
+        !outsideStarted
+      ) {
+        return;
+      }
+
+      const touch = event.touches[0];
+
+      const distanceX = Math.abs(
+        touch.clientX - outsideStartX
+      );
+
+      const distanceY = Math.abs(
+        touch.clientY - outsideStartY
+      );
+
+      if (
+        distanceX > movementThreshold ||
+        distanceY > movementThreshold
+      ) {
+        outsideMoved = true;
+      }
+
+    },
+    { passive: true }
+  );
+
+
+  document.addEventListener(
+    "touchend",
+    function () {
+
+      if (
+        !isMobileGallery() ||
+        !outsideStarted
+      ) {
+        return;
+      }
+
+      const duration =
+        Date.now() - outsideStartTime;
+
+      if (
+        !outsideMoved &&
+        duration <= tapMaxDuration
+      ) {
+        hideActiveCard(null);
+      }
+
+      outsideStarted = false;
+
+    },
+    { passive: true }
+  );
+
+});
+</script>
