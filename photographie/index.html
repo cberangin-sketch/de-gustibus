@@ -1,0 +1,81 @@
+---
+layout: default
+title: Photographie
+permalink: /photographie/
+---
+
+<section class="photographie-page">
+
+  <header class="photographie-page__header">
+
+    <p class="eyebrow">Photographie</p>
+
+    <h1>Photographie</h1>
+
+  </header>
+
+  {% if site.photographie.size > 0 %}
+
+    <div class="photographie-grid">
+
+      {% assign photographs = site.photographie | sort: "date" | reverse %}
+
+      {% for photo in photographs %}
+
+        <article class="photographie-card">
+
+          <a
+            class="photographie-card__link"
+            href="{{ photo.url | relative_url }}"
+            aria-label="Voir {{ photo.title }}">
+
+            {% if photo.image %}
+              <img
+                class="photographie-card__image"
+                src="{{ photo.image | relative_url }}"
+                alt="{{ photo.title | escape }}">
+            {% endif %}
+
+            <div class="photographie-card__meta">
+
+              {% if photo.title %}
+                <h2 class="photographie-card__title">
+                  {{ photo.title }}
+                </h2>
+              {% endif %}
+
+              <p class="photographie-card__details">
+
+                {% if photo.location %}
+                  {{ photo.location }}
+                {% endif %}
+
+                {% if photo.location and photo.date %}
+                  ·
+                {% endif %}
+
+                {% if photo.date %}
+                  {{ photo.date | date: "%d.%m.%Y" }}
+                {% endif %}
+
+              </p>
+
+            </div>
+
+          </a>
+
+        </article>
+
+      {% endfor %}
+
+    </div>
+
+  {% else %}
+
+    <p class="photographie-empty">
+      Les premières photographies arriveront bientôt.
+    </p>
+
+  {% endif %}
+
+</section>
