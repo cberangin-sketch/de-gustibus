@@ -74,19 +74,11 @@ title:
   <section class="featured-photo">
 
     <div class="section-heading">
-
       <h2>
         <a href="{{ '/photographie/' | relative_url }}">
           Regard
         </a>
       </h2>
-
-      <a
-        class="featured-photo__all"
-        href="{{ '/photographie/' | relative_url }}">
-        Toutes les photographies →
-      </a>
-
     </div>
 
     <a
@@ -180,11 +172,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!photo) return;
 
+  const movementThreshold = 10;
+  const tapMaxDuration = 350;
 
   let firstTouchRevealed = false;
 
-  const movementThreshold = 10;
-  const tapMaxDuration = 350;
+  let outsideStarted = false;
+  let outsideMoved = false;
+  let outsideStartX = 0;
+  let outsideStartY = 0;
+  let outsideStartTime = 0;
 
 
   function isMobilePhoto() {
@@ -192,11 +189,20 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
+  function hidePhoto() {
+
+    photo.classList.remove("is-revealed");
+
+    firstTouchRevealed = false;
+
+  }
+
+
   /*
    * TOUCH REVEAL
    *
-   * Premier contact du doigt :
-   * les informations apparaissent immédiatement.
+   * Premier CONTACT :
+   * apparition immédiate.
    */
 
   photo.addEventListener(
@@ -212,16 +218,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
         firstTouchRevealed = true;
 
-        return;
+      } else {
+
+        /*
+         * La photo était déjà révélée :
+         * ce toucher pourra ouvrir la page.
+         */
+
+        firstTouchRevealed = false;
+
       }
-
-
-      /*
-       * Si la photographie est déjà révélée,
-       * ce nouveau toucher pourra ouvrir le lien.
-       */
-
-      firstTouchRevealed = false;
 
     },
     { passive: true }
@@ -230,9 +236,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   /*
    * Le premier toucher sert uniquement
-   * à révéler la photographie.
+   * à révéler la photo.
    *
-   * Le deuxième toucher ouvre la page.
+   * Le second peut suivre le lien.
    */
 
   photo.addEventListener("click", function (event) {
@@ -252,18 +258,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   /*
-   * Toucher ailleurs :
-   * masque la photographie.
+   * TOUCHER AILLEURS
    *
-   * Un scroll ou un appui long ne la masque pas.
+   * Même logique que Dernier article :
+   *
+   * - toucher court et net ailleurs = masque
+   * - scroll = ne masque pas
+   * - glissement = ne masque pas
+   * - appui long = ne masque pas
    */
-
-  let outsideStartX = 0;
-  let outsideStartY = 0;
-  let outsideStartTime = 0;
-  let outsideMoved = false;
-  let outsideStarted = false;
-
 
   document.addEventListener(
     "touchstart",
@@ -290,7 +293,10 @@ document.addEventListener("DOMContentLoaded", function () {
       outsideStarted = true;
 
     },
-    { passive: true }
+    {
+      passive: true,
+      capture: true
+    }
   );
 
 
@@ -323,7 +329,10 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
     },
-    { passive: true }
+    {
+      passive: true,
+      capture: true
+    }
   );
 
 
@@ -347,15 +356,40 @@ document.addEventListener("DOMContentLoaded", function () {
         !outsideMoved &&
         duration <= tapMaxDuration
       ) {
-        photo.classList.remove("is-revealed");
-        firstTouchRevealed = false;
+        hidePhoto();
       }
 
 
       outsideStarted = false;
 
     },
-    { passive: true }
+    {
+      passive: true,
+      capture: true
+    }
+  );
+
+
+  /*
+   * Sécurité supplémentaire :
+   * si on clique ailleurs avec un dispositif
+   * tactile hybride, on masque aussi.
+   */
+
+  document.addEventListener(
+    "click",
+    function (event) {
+
+      if (!isMobilePhoto()) return;
+
+      if (
+        photo.classList.contains("is-revealed") &&
+        !event.target.closest(".featured-photo__link")
+      ) {
+        hidePhoto();
+      }
+
+    }
   );
 
 });
