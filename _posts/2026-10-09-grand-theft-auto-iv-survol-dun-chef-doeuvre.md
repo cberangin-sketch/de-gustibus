@@ -6,6 +6,10 @@ chapeau: Dix-huit ans après sa sortie, le jeu de Rockstar semble échapper au
   vieillissement et demeure une expérience grandiose. Quelques-unes des raisons
   qui permettent au titre de dépasser le cadre du divertissement.
 image: /assets/images/GTA4.webp
+tags:
+  - GTA IV
+  - Rockstar
+  - Grand Theft Auto
 ---
 ## Le paradoxe GTA IV et l’American Nightmare
 
