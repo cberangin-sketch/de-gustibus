@@ -27,7 +27,7 @@ Ainsi, cet acte de sous-détermination a un avantage ici : permettre de discrimi
 ## Mais un *médium* seulement : la sous-détermination du jeu vidéo
 
 Une difficulté apparaît logiquement, comme conséquence de cette clarification par abstraction. Si nous pouvons comparer le jeu vidéo à l’écriture (*médium*), cette dernière s’enrichit pour catégoriser la matière strictement artistique qu’elle permet, la littérature (*discipline*). La discipline se subdivise en *formes* (roman, théâtre, poésie, pour aller vite), les formes en *genres*. Rien de tel du côté du jeu vidéo qui souffre d’un immense manque de détermination, d’une béance sémantique qui laisse sa nature indéfinie, entre le *médium* et le *genre*. Le jeu vidéo est un *médium* qui accepte des genres (du RPG au walking simulator en passant par les TPS, FPS, les jeux de combat, les simulations sportives, etc.) mais ignore la question de la discipline et de la forme, et le langage courant substitue le genre à ces deux dernières qualités. Voici le nœud du débat et l’explication de l’incompréhension générationnelle : le jeu vidéo est atrocement sous-déterminé.  
-  
+
 *Un schéma explicatif du problème (le texte en italique présente des propositions)*  
 ![Comparaison entre écriture, captation du réel par images séquentielles et jeu vidéo](/assets/images/tableau-medium-discipline-forme-genre.png)
 
@@ -47,7 +47,7 @@ Il s’agit donc, en admettant la pertinence de l’approche mécaniste, de trou
 
 ## L’approche finaliste
 
-Cette approche ne saurait nous convaincre pour la raison suivante. Des œuvres telles que *Cyberpunk 2077* ou *Red Dead Redemption II*, dont le caractère artistique semble indéniable pour quiconque a arpenté Night City ou les États-Unis d’Arthur Morgan, et compris leur contexte (techno-féodalisme et irréversibilité du capitalisme industriel), brillent malgré des mécaniques de gameplay très classiques et, somme toute, peu originales.  
+L'approche mécaniste ne saurait pleinement nous convaincre pour la raison suivante. Des œuvres telles que *Cyberpunk 2077* ou *Red Dead Redemption II*, dont le caractère artistique semble indéniable pour quiconque a arpenté Night City ou les États-Unis d’Arthur Morgan, et compris leur contexte (techno-féodalisme et irréversibilité du capitalisme industriel), brillent malgré des mécaniques de gameplay très classiques et, somme toute, peu originales.  
 C’est pourquoi nous préférerons nettement l’approche finaliste. Il ne s’agit plus de questionner l’aspect opérationnel de l’œuvre, sa structure, son mode de déploiement, mais d’interroger sa finalité, son résultat, à savoir une émotion de l’ordre de la contemplation artistique. Jouez, ou plutôt vivez l’introduction de *Red Dead Redemption II* ; mieux encore, sa conclusion et l’apparition du cerf (…) et prétendez ensuite que vous n’avez pas vécu une expérience artistique. Apprenez la tragédie familiale d’Edith Finch, incarnez ses souvenirs et ses deuils successifs, et affirmez toujours que le jeu vidéo, c’est du « *boum boum pan pan* » pour éternels adolescents.
 
 Par cette approche finaliste, on retrouve en réalité un propre du jeu vidéo : l’incarnation et l’immersion au service de la beauté. C’est là peut-être l’essence artistique du jeu vidéo : incarner un univers débordant de beauté.
