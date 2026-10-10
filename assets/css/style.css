@@ -1250,50 +1250,25 @@ button{
 
 }
 /* =========================================================
-   FIGURES / TABLEAUX DANS LES ARTICLES
+   TABLEAUX / FIGURES DANS LES ARTICLES
    ========================================================= */
 
 .article-figure{
-  width:min(920px, calc(100vw - 68px));
-  max-width:none;
-  margin:48px 50% 48px;
-  transform:translateX(-50%)
+  margin:40px auto;
+  text-align:center
 }
 
 .article-figure img{
   display:block;
-  width:100%;
-  height:auto
+  max-width:100%;
+  height:auto;
+  margin:0 auto
 }
 
 .article-figure figcaption{
-  margin-top:12px;
+  margin-top:10px;
+  text-align:center;
   font:400 16px/1.4 var(--serif);
   font-style:italic;
-  color:var(--muted);
-  text-align:left
-}
-
-
-/* Mobile */
-
-@media(max-width:760px){
-
-  .article-figure{
-    width:100%;
-    max-width:100%;
-    margin:34px auto;
-    transform:none
-  }
-
-  .article-figure img{
-    width:100%;
-    height:auto
-  }
-
-  .article-figure figcaption{
-    margin-top:9px;
-    font-size:15px
-  }
-
+  color:var(--muted)
 }
