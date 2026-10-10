@@ -55,6 +55,6 @@ Et celle-ci, malgré les tentatives — vaines — de son dépassement, reste l�
 
 En conclusion, le jeu vidéo souffre d’une lacune classificationnelle. La nomenclature qui lui est associée est sous-déterminée et il serait bon de clarifier cette ambiguïté et de proposer un terme intermédiaire. La dénomination même du *médium* est source de confusion, car si l’amusement est une composante effective du jeu vidéo, celui-ci excède cette seule dimension.
 
-Le plaisir (qui n’est pas le seul résultat du divertissement) ressenti au contact des grandes œuvres de son histoire n’a rien à envier à celui ressenti devant un chef-d’œuvre cinématographique ; il conduit bien souvent à plus encore, à de véritables expériences esthétiques.
+Le plaisir (qui n’est pas le seul résultat du divertissement) ressenti au contact des grandes œuvres de son histoire n’a rien à envier à celui ressenti devant un chef-d’œuvre cinématographique ; il conduit bien souvent à plus encore qu'à du plaisir : à de véritables expériences esthétiques.
 
 Il appartient sans doute aux historiens de l’art de dénouer cette confusion, d’enrichir la notion ainsi, pour finir, de faire comprendre à mamie que la production vidéoludique ne se limite pas à *Fortnite* et, au neveu, que le jeu vidéo peut dialoguer avec les plus belles productions littéraires par exemple (donc pas avec Annie Ernaux, un point pour lui).
