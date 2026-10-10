@@ -73,12 +73,20 @@ title:
 
   <section class="featured-photo">
 
-    <div class="section-heading">
+    <div class="section-heading featured-photo__heading">
+
       <h2>
         <a href="{{ '/photographie/' | relative_url }}">
           Regard
         </a>
       </h2>
+
+      <a
+        class="featured-photo__all"
+        href="{{ '/photographie/' | relative_url }}">
+        Toutes les photographies
+      </a>
+
     </div>
 
     <a
@@ -172,31 +180,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!photo) return;
 
-
   let firstTouchRevealed = false;
-
 
   function isMobilePhoto() {
     return window.matchMedia("(max-width: 760px)").matches;
   }
 
-
   function hidePhoto() {
-
     photo.classList.remove("is-revealed");
-
     firstTouchRevealed = false;
-
   }
-
-
-  /*
-   * TOUCH REVEAL
-   *
-   * Dès le premier CONTACT du doigt
-   * avec la photographie :
-   * apparition immédiate des informations.
-   */
 
   photo.addEventListener(
     "touchstart",
@@ -204,42 +197,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (!isMobilePhoto()) return;
 
-
-      /*
-       * Photographie encore fermée :
-       * révélation immédiate.
-       */
-
       if (!photo.classList.contains("is-revealed")) {
 
         photo.classList.add("is-revealed");
-
         firstTouchRevealed = true;
-
         return;
       }
-
-
-      /*
-       * Photographie déjà révélée :
-       * ce nouveau toucher pourra ouvrir sa page.
-       */
 
       firstTouchRevealed = false;
 
     },
-    {
-      passive: true
-    }
+    { passive: true }
   );
-
-
-  /*
-   * Le premier toucher sert uniquement
-   * à révéler les informations.
-   *
-   * Le deuxième toucher peut suivre le lien.
-   */
 
   photo.addEventListener(
     "click",
@@ -247,29 +216,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (!isMobilePhoto()) return;
 
-
       if (firstTouchRevealed) {
-
         event.preventDefault();
-
         firstTouchRevealed = false;
-
       }
 
     }
   );
-
-
-  /*
-   * TOUCHER AILLEURS
-   *
-   * Dès que le doigt entre en contact
-   * avec n'importe quelle zone extérieure
-   * à la photographie :
-   * disparition immédiate.
-   *
-   * Aucun besoin de relever le doigt.
-   */
 
   document.addEventListener(
     "touchstart",
@@ -277,11 +230,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (!isMobilePhoto()) return;
 
-
       if (!event.target.closest(".featured-photo__link")) {
-
         hidePhoto();
-
       }
 
     },
