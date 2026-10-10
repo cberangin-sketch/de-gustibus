@@ -1272,3 +1272,33 @@ button{
   font-style:italic;
   color:var(--muted)
 }
+/* =========================================================
+   TABLEAU DANS LES ARTICLES
+   ========================================================= */
+
+.article-figure{
+  width:100% !important;
+  max-width:760px !important;
+  margin:36px auto !important;
+  padding:0 !important;
+  transform:none !important;
+  text-align:center !important
+}
+
+.article-figure img{
+  display:block !important;
+  width:100% !important;
+  max-width:760px !important;
+  height:auto !important;
+  margin:0 auto !important;
+  transform:none !important
+}
+
+.article-figure figcaption{
+  margin:10px auto 0 !important;
+  padding:0 !important;
+  text-align:left !important;
+  font:400 16px/1.4 var(--serif) !important;
+  font-style:italic !important;
+  color:var(--muted) !important
+}
