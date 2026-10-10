@@ -5,7 +5,7 @@ category: jeu-video
 chapeau: "Souvent qualifié de dixième art, institutionnalisé comme tel par le
   ministère français de la Culture depuis 2006, le jeu vidéo continue pourtant
   de faire débat. Une prise de position personnelle. "
-image: /assets/images/JV estil un art.png
+image: /assets/images/JV estil un art-1.png
 tags:
   - Jeu vidéo
   - Art
