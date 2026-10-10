@@ -28,6 +28,11 @@ a{
   text-decoration:none
 }
 
+
+/* =========================================================
+   EN-TÊTE
+   ========================================================= */
+
 .site-header{
   max-width:var(--max);
   margin:0 auto;
@@ -71,6 +76,11 @@ a{
   padding:0 0 0 4px
 }
 
+
+/* =========================================================
+   RECHERCHE
+   ========================================================= */
+
 .search-panel{
   max-width:var(--max);
   margin:auto;
@@ -110,17 +120,14 @@ a{
   letter-spacing:.1em
 }
 
+
+/* =========================================================
+   STRUCTURE GÉNÉRALE
+   ========================================================= */
+
 main{
   max-width:var(--max);
   margin:auto
-}
-
-.hero{
-  padding:72px 34px 68px;
-  display:grid;
-  grid-template-columns:.95fr 1.15fr;
-  gap:88px;
-  border-bottom:1px solid var(--line)
 }
 
 .eyebrow,
@@ -129,6 +136,19 @@ main{
   text-transform:uppercase;
   letter-spacing:.11em;
   color:var(--muted)
+}
+
+
+/* =========================================================
+   ACCUEIL — HERO
+   ========================================================= */
+
+.hero{
+  padding:72px 34px 68px;
+  display:grid;
+  grid-template-columns:.95fr 1.15fr;
+  gap:88px;
+  border-bottom:1px solid var(--line)
 }
 
 .hero h1{
@@ -153,6 +173,11 @@ main{
   letter-spacing:.12em;
   color:var(--muted)
 }
+
+
+/* =========================================================
+   ARCHIVES / LISTE D'ARTICLES
+   ========================================================= */
 
 .archive{
   padding:62px 34px 90px
@@ -209,6 +234,11 @@ main{
   letter-spacing:-.055em
 }
 
+
+/* =========================================================
+   ARTICLES
+   ========================================================= */
+
 .post{
   max-width:920px;
   margin:auto;
@@ -254,6 +284,79 @@ main{
   margin:55px 0 20px
 }
 
+.post .post-body p{
+  text-align:justify !important;
+  text-justify:inter-word
+}
+
+
+/* =========================================================
+   FIGURES / IMAGES DANS LE CORPS DES ARTICLES
+   ========================================================= */
+
+/*
+ * Règle volontairement simple :
+ * une figure insérée dans un article ne dépasse jamais 690 px.
+ * Elle reste centrée et dans le rythme normal du texte.
+ */
+
+.post figure,
+.post-body figure,
+.article-figure{
+  display:block;
+  width:100%;
+  max-width:690px;
+  margin:36px auto;
+  padding:0;
+  position:static;
+  transform:none;
+  text-align:center
+}
+
+.post figure img,
+.post-body figure img,
+.article-figure img{
+  display:block;
+  width:100%;
+  max-width:100%;
+  height:auto;
+  margin:0 auto;
+  padding:0;
+  position:static;
+  transform:none;
+  object-fit:contain
+}
+
+.post figure figcaption,
+.post-body figure figcaption,
+.article-figure figcaption{
+  display:block;
+  width:100%;
+  margin:10px 0 0;
+  padding:0;
+  color:var(--muted);
+  font:400 16px/1.4 var(--serif);
+  font-style:italic;
+  text-align:left
+}
+
+
+/* Images Markdown simples dans les articles */
+
+.post-body > img,
+.post-body p > img{
+  display:block;
+  width:auto;
+  max-width:100%;
+  height:auto;
+  margin:36px auto
+}
+
+
+/* =========================================================
+   MOTS-CLÉS
+   ========================================================= */
+
 .tags{
   max-width:690px;
   margin:55px auto 0;
@@ -266,6 +369,11 @@ main{
   color:var(--muted)
 }
 
+
+/* =========================================================
+   PAGES SIMPLES
+   ========================================================= */
+
 .simple-page,
 .search-results{
   padding:62px 34px 90px
@@ -276,27 +384,10 @@ main{
   font:400 22px/1.6 var(--serif)
 }
 
-.site-footer{
-  max-width:var(--max);
-  margin:auto;
-  padding:31px 34px 47px;
-  border-top:1px solid var(--line);
-  display:flex;
-  justify-content:space-between;
-  font:10px var(--sans);
-  color:var(--muted)
-}
 
-
-/* Texte des articles */
-
-.post .post-body p{
-  text-align:justify !important;
-  text-justify:inter-word
-}
-
-
-/* Navigation entre les articles */
+/* =========================================================
+   NAVIGATION PRÉCÉDENT / SUIVANT
+   ========================================================= */
 
 .post-navigation{
   max-width:900px;
@@ -342,7 +433,9 @@ main{
 }
 
 
-/* Dernier article mis en avant */
+/* =========================================================
+   DERNIER ARTICLE MIS EN AVANT
+   ========================================================= */
 
 .featured-latest{
   padding:62px 34px 0
@@ -403,9 +496,6 @@ main{
   letter-spacing:-.025em
 }
 
-
-/* Le survol ne s'applique qu'aux appareils équipés d'une souris */
-
 @media (hover:hover) and (pointer:fine){
 
   .featured-latest__link:hover .featured-latest__image{
@@ -421,7 +511,282 @@ main{
 }
 
 
-/* Tablettes */
+/* =========================================================
+   REGARD — ACCUEIL
+   ========================================================= */
+
+.featured-photo{
+  padding:48px 34px 0
+}
+
+.featured-photo .section-heading{
+  margin-bottom:18px
+}
+
+.featured-photo__all{
+  font:400 12px var(--sans);
+  color:var(--muted)
+}
+
+.featured-photo__all:hover{
+  text-decoration:underline;
+  text-underline-offset:4px
+}
+
+.featured-photo__link{
+  position:relative;
+  display:block;
+  width:max-content;
+  max-width:72%;
+  overflow:hidden;
+  background:var(--ink);
+  -webkit-tap-highlight-color:transparent
+}
+
+.featured-photo__image{
+  display:block;
+  width:auto;
+  height:auto;
+  max-width:100%;
+  max-height:560px;
+  object-fit:contain;
+  opacity:1;
+  transform:none;
+  transition:
+    opacity .35s ease,
+    transform .5s ease
+}
+
+.featured-photo__overlay{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:30px;
+  color:#f3eadc;
+  background:rgba(23,20,17,0);
+  opacity:0;
+  transition:
+    opacity .35s ease,
+    background .35s ease
+}
+
+.featured-photo__title{
+  margin:0;
+  max-width:720px;
+  font:400 clamp(27px,3.4vw,42px)/1.06 var(--serif);
+  letter-spacing:-.02em
+}
+
+.featured-photo__details{
+  margin:9px 0 0;
+  font:500 9px/1.4 var(--sans);
+  text-transform:uppercase;
+  letter-spacing:.11em
+}
+
+@media (hover:hover) and (pointer:fine){
+
+  .featured-photo__link:hover .featured-photo__image{
+    opacity:.72;
+    transform:scale(1.01)
+  }
+
+  .featured-photo__link:hover .featured-photo__overlay{
+    opacity:1;
+    background:rgba(23,20,17,.24)
+  }
+
+}
+
+
+/* =========================================================
+   CARNET PHOTOGRAPHIQUE — GALERIE
+   ========================================================= */
+
+.photographie-page{
+  padding:72px 34px 90px
+}
+
+.photographie-page__header{
+  margin-bottom:48px
+}
+
+.photographie-page__header .eyebrow{
+  margin:0 0 18px
+}
+
+.photographie-page__header h1{
+  margin:0;
+  font:500 clamp(45px,6vw,78px)/.96 var(--sans);
+  letter-spacing:-.055em
+}
+
+.photographie-grid{
+  columns:2;
+  column-gap:34px
+}
+
+.photographie-card{
+  display:inline-block;
+  width:100%;
+  margin:0 0 34px;
+  break-inside:avoid
+}
+
+.photographie-card__link{
+  position:relative;
+  display:block;
+  width:100%;
+  overflow:hidden;
+  background:var(--ink);
+  -webkit-tap-highlight-color:transparent
+}
+
+.photographie-card__image{
+  display:block;
+  width:100%;
+  height:auto;
+  opacity:1;
+  transform:none;
+  transition:
+    opacity .35s ease,
+    transform .5s ease
+}
+
+.photographie-card__overlay{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:24px;
+  color:#f3eadc;
+  background:rgba(23,20,17,0);
+  opacity:0;
+  transition:
+    opacity .35s ease,
+    background .35s ease
+}
+
+.photographie-card__title{
+  margin:0;
+  font:400 clamp(22px,2.4vw,31px)/1.08 var(--serif)
+}
+
+.photographie-card__details{
+  margin:8px 0 0;
+  font:500 9px/1.4 var(--sans);
+  text-transform:uppercase;
+  letter-spacing:.1em
+}
+
+@media (hover:hover) and (pointer:fine){
+
+  .photographie-card__link:hover .photographie-card__image{
+    opacity:.72;
+    transform:scale(1.01)
+  }
+
+  .photographie-card__link:hover .photographie-card__overlay{
+    opacity:1;
+    background:rgba(23,20,17,.24)
+  }
+
+}
+
+
+/* =========================================================
+   PAGE D'UNE PHOTOGRAPHIE
+   ========================================================= */
+
+.photo-page{
+  padding:72px 34px 90px
+}
+
+.photo-page__header{
+  max-width:920px;
+  margin:0 auto 42px
+}
+
+.photo-page__eyebrow{
+  margin:0 0 18px;
+  font:500 10px var(--sans);
+  text-transform:uppercase;
+  letter-spacing:.11em;
+  color:var(--muted)
+}
+
+.photo-page__header h1{
+  margin:0;
+  font:500 clamp(42px,5.6vw,72px)/.98 var(--sans);
+  letter-spacing:-.05em
+}
+
+.photo-page__meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 18px;
+  margin-top:20px;
+  font:500 9px/1.4 var(--sans);
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  color:var(--muted)
+}
+
+.photo-page__figure{
+  margin:0 auto;
+  max-width:1112px
+}
+
+.photo-page__image{
+  display:block;
+  width:auto;
+  height:auto;
+  max-width:100%;
+  max-height:none;
+  margin:0 auto
+}
+
+.photo-page__caption{
+  max-width:760px;
+  margin:15px auto 0;
+  font:400 17px/1.45 var(--serif);
+  color:var(--muted)
+}
+
+.photo-page__footer{
+  max-width:920px;
+  margin:52px auto 0;
+  padding-top:22px;
+  border-top:1px solid var(--line);
+  font:500 10px var(--sans);
+  text-transform:uppercase;
+  letter-spacing:.09em;
+  color:var(--muted)
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.site-footer{
+  max-width:var(--max);
+  margin:auto;
+  padding:31px 34px 47px;
+  border-top:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  font:10px var(--sans);
+  color:var(--muted)
+}
+
+
+/* =========================================================
+   TABLETTE
+   ========================================================= */
 
 @media(max-width:900px){
 
@@ -442,202 +807,19 @@ main{
 }
 
 
-/* Adaptation téléphone générale */
-
-@media(max-width:760px){
-
-  .site-header{
-    padding:22px 20px 17px
-  }
-
-  .logo{
-    font-size:31px
-  }
-
-  .main-nav{
-    font-size:9px;
-    gap:12px
-  }
-
-  .hero{
-    padding:50px 20px;
-    display:block
-  }
-
-  .hero h1{
-    margin-bottom:42px
-  }
-
-  .hero blockquote{
-    font-size:20px
-  }
-
-  .archive,
-  .simple-page,
-  .search-results{
-    padding:44px 20px 70px
-  }
-
-  .post-card{
-    grid-template-columns:1fr 28px;
-    gap:7px
-  }
-
-  .post-card__meta{
-    grid-column:1
-  }
-
-  .post-card__title{
-    grid-column:1;
-    font-size:23px
-  }
-
-  .post-card__link{
-    grid-column:2;
-    grid-row:1/3
-  }
-
-  .post{
-    padding:50px 20px 65px
-  }
-
-  .post-body{
-    font-size:20px
-  }
-
-  .site-footer{
-    padding:28px 20px 40px;
-    gap:20px
-  }
-
-
-  /* Dernier article sur téléphone */
-
-  .featured-latest{
-    padding:44px 20px 0
-  }
-
-  .featured-latest__link{
-    aspect-ratio:4 / 3
-  }
-
-  .featured-latest__overlay{
-    padding:24px;
-    opacity:0;
-    background:transparent
-  }
-
-  .featured-latest__image{
-    opacity:1;
-    transform:none
-  }
-
-  .featured-latest__title{
-    font-size:32px
-  }
-
-  /*
-   * Avant le premier toucher :
-   * photographie entièrement visible, aucun texte.
-   */
-
-  .featured-latest__link:not(.is-revealed) .featured-latest__overlay{
-    opacity:0 !important;
-    background:transparent !important
-  }
-
-  .featured-latest__link:not(.is-revealed) .featured-latest__image{
-    opacity:1 !important;
-    transform:none !important
-  }
-
-  /*
-   * Après le premier toucher :
-   * voile + catégorie + titre.
-   */
-
-  .featured-latest__link.is-revealed .featured-latest__overlay{
-    opacity:1;
-    background:rgba(23,20,17,.28)
-  }
-
-  .featured-latest__link.is-revealed .featured-latest__image{
-    opacity:.78
-  }
-
-
-  /*
-   * PROTECTION TACTILE DE L'INTERFACE
-   *
-   * Les éléments de navigation et d'interface
-   * ne peuvent plus être sélectionnés
-   * accidentellement comme du texte.
-   *
-   * Le contenu éditorial reste sélectionnable :
-   * corps des articles, À propos, etc.
-   */
-
-  .logo,
-  .main-nav,
-  .menu-toggle,
-  .mobile-search-toggle,
-  .search-toggle,
-  .search-form label,
-  .search-row button,
-  .section-heading,
-  .post-card,
-  .post-navigation,
-  .tags,
-  .site-footer,
-  .featured-latest__overlay{
-    user-select:none;
-    -webkit-user-select:none;
-    -ms-user-select:none;
-    -webkit-tap-highlight-color:transparent
-  }
-
-}
-
-
-/* Navigation précédent / suivant sur téléphone */
-
-@media(max-width:650px){
-
-  .post-navigation{
-    gap:20px
-  }
-
-  .post-navigation-prev,
-  .post-navigation-next{
-    width:48%
-  }
-
-  .post-navigation span{
-    font-size:12px
-  }
-
-  .post-navigation a{
-    font-size:16px
-  }
-
-}
-
-
-/* Menu mobile */
+/* =========================================================
+   MOBILE
+   ========================================================= */
 
 .menu-toggle,
 .mobile-search-toggle{
   display:none
 }
 
-
-/* Évite le flash bleu tactile sur les éléments interactifs */
-
 a,
 button{
   -webkit-tap-highlight-color:transparent
 }
-
 
 @media(max-width:760px){
 
@@ -735,15 +917,9 @@ button{
     background:transparent
   }
 
-
-  /* La loupe desktop disparaît sur téléphone */
-
   .site-header .search-toggle{
     display:none
   }
-
-
-  /* Panneau de recherche mobile */
 
   .search-panel{
     width:100%;
@@ -765,422 +941,131 @@ button{
     -webkit-tap-highlight-color:transparent
   }
 
-}
 
+  /* Accueil */
 
-/* =========================================================
-   PHOTOGRAPHIE
-   ========================================================= */
-
-
-/* Page principale */
-
-.photographie-page{
-  padding:72px 34px 90px
-}
-
-
-.photographie-page__header{
-  margin-bottom:48px
-}
-
-
-.photographie-page__header .eyebrow{
-  margin:0 0 18px
-}
-
-
-.photographie-page__header h1{
-  margin:0;
-  font:500 clamp(45px,6vw,78px)/.96 var(--sans);
-  letter-spacing:-.055em
-}
-
-
-/* Galerie */
-
-.photographie-grid{
-  columns:2;
-  column-gap:34px
-}
-
-
-.photographie-card{
-  display:inline-block;
-  width:100%;
-  margin:0 0 34px;
-  break-inside:avoid
-}
-
-
-.photographie-card__link{
-  position:relative;
-  display:block;
-  width:100%;
-  overflow:hidden;
-  background:var(--ink);
-  -webkit-tap-highlight-color:transparent
-}
-
-
-.photographie-card__image{
-  display:block;
-  width:100%;
-  height:auto;
-  opacity:1;
-  transform:none;
-  transition:
-    opacity .35s ease,
-    transform .5s ease
-}
-
-
-.photographie-card__overlay{
-  position:absolute;
-  inset:0;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
-  padding:24px;
-  color:#f3eadc;
-  background:rgba(23,20,17,0);
-  opacity:0;
-  transition:
-    opacity .35s ease,
-    background .35s ease
-}
-
-
-.photographie-card__title{
-  margin:0;
-  font:400 clamp(22px,2.4vw,31px)/1.08 var(--serif)
-}
-
-
-.photographie-card__details{
-  margin:8px 0 0;
-  font:500 9px/1.4 var(--sans);
-  text-transform:uppercase;
-  letter-spacing:.1em
-}
-
-
-.photographie-empty{
-  margin:0;
-  padding-top:25px;
-  border-top:1px solid var(--line);
-  font:400 22px/1.5 var(--serif)
-}
-
-
-/* Survol souris */
-
-@media (hover:hover) and (pointer:fine){
-
-  .photographie-card__link:hover .photographie-card__image{
-    opacity:.72;
-    transform:scale(1.01)
+  .hero{
+    padding:50px 20px;
+    display:block
   }
 
-  .photographie-card__link:hover .photographie-card__overlay{
-    opacity:1;
-    background:rgba(23,20,17,.24)
+  .hero h1{
+    margin-bottom:42px
   }
 
-}
+  .hero blockquote{
+    font-size:20px
+  }
 
-
-/* =========================================================
-   PAGE D'UNE PHOTOGRAPHIE
-   ========================================================= */
-
-.photo-page{
-  padding:72px 34px 90px
-}
-
-
-.photo-page__header{
-  max-width:920px;
-  margin:0 auto 42px
-}
-
-
-.photo-page__eyebrow{
-  margin:0 0 18px;
-  font:500 10px var(--sans);
-  text-transform:uppercase;
-  letter-spacing:.11em;
-  color:var(--muted)
-}
-
-
-.photo-page__header h1{
-  margin:0;
-  font:500 clamp(42px,5.6vw,72px)/.98 var(--sans);
-  letter-spacing:-.05em
-}
-
-
-.photo-page__meta{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px 18px;
-  margin-top:20px;
-  font:500 9px/1.4 var(--sans);
-  text-transform:uppercase;
-  letter-spacing:.1em;
-  color:var(--muted)
-}
-
-
-.photo-page__figure{
-  margin:0 auto;
-  max-width:1112px
-}
-
-
-.photo-page__image{
-  display:block;
-  width:auto;
-  height:auto;
-  max-width:100%;
-  max-height:none;
-  margin:0 auto
-}
-
-
-.photo-page__caption{
-  max-width:760px;
-  margin:15px auto 0;
-  font:400 17px/1.45 var(--serif);
-  color:var(--muted)
-}
-
-
-.photo-page__footer{
-  max-width:920px;
-  margin:52px auto 0;
-  padding-top:22px;
-  border-top:1px solid var(--line);
-  font:500 10px var(--sans);
-  text-transform:uppercase;
-  letter-spacing:.09em;
-  color:var(--muted)
-}
-
-
-.photo-page__footer a:hover{
-  text-decoration:underline;
-  text-underline-offset:4px
-}
-
-
-/* =========================================================
-   PHOTOGRAPHIE — MOBILE
-   ========================================================= */
-
-@media(max-width:760px){
-
-  .photographie-page{
-    padding:50px 20px 70px
+  .archive,
+  .simple-page,
+  .search-results{
+    padding:44px 20px 70px
   }
 
 
-  .photographie-page__header{
-    margin-bottom:36px
+  /* Cartes articles */
+
+  .post-card{
+    grid-template-columns:1fr 28px;
+    gap:7px
+  }
+
+  .post-card__meta{
+    grid-column:1
+  }
+
+  .post-card__title{
+    grid-column:1;
+    font-size:23px
+  }
+
+  .post-card__link{
+    grid-column:2;
+    grid-row:1/3
   }
 
 
-  .photographie-grid{
-    columns:1
+  /* Articles */
+
+  .post{
+    padding:50px 20px 65px
+  }
+
+  .post-body{
+    font-size:20px
+  }
+
+  .post figure,
+  .post-body figure,
+  .article-figure{
+    width:100%;
+    max-width:100%;
+    margin:32px auto
+  }
+
+  .post figure img,
+  .post-body figure img,
+  .article-figure img{
+    width:100%;
+    max-width:100%;
+    height:auto
+  }
+
+  .post figure figcaption,
+  .post-body figure figcaption,
+  .article-figure figcaption{
+    margin-top:8px;
+    font-size:15px
   }
 
 
-  .photographie-card{
-    margin-bottom:28px
+  /* Dernier article */
+
+  .featured-latest{
+    padding:44px 20px 0
   }
 
+  .featured-latest__link{
+    aspect-ratio:4 / 3
+  }
 
-  .photographie-card__overlay{
-    padding:22px;
+  .featured-latest__overlay{
+    padding:24px;
     opacity:0;
-    background:transparent;
-    user-select:none;
-    -webkit-user-select:none;
-    -ms-user-select:none
+    background:transparent
   }
 
-
-  .photographie-card__title{
-    font-size:29px
+  .featured-latest__image{
+    opacity:1;
+    transform:none
   }
 
+  .featured-latest__title{
+    font-size:32px
+  }
 
-  /*
-   * Touch Reveal :
-   * avant le premier toucher,
-   * photographie totalement nue.
-   */
-
-  .photographie-card__link:not(.is-revealed) .photographie-card__overlay{
+  .featured-latest__link:not(.is-revealed) .featured-latest__overlay{
     opacity:0 !important;
     background:transparent !important
   }
 
-
-  .photographie-card__link:not(.is-revealed) .photographie-card__image{
+  .featured-latest__link:not(.is-revealed) .featured-latest__image{
     opacity:1 !important;
     transform:none !important
   }
 
-
-  /*
-   * Après le premier toucher :
-   * apparition des informations.
-   */
-
-  .photographie-card__link.is-revealed .photographie-card__overlay{
+  .featured-latest__link.is-revealed .featured-latest__overlay{
     opacity:1;
     background:rgba(23,20,17,.28)
   }
 
-
-  .photographie-card__link.is-revealed .photographie-card__image{
-    opacity:.76
+  .featured-latest__link.is-revealed .featured-latest__image{
+    opacity:.78
   }
 
 
-  .photo-page{
-    padding:50px 20px 70px
-  }
-
-
-  .photo-page__header{
-    margin-bottom:34px
-  }
-
-
-  .photo-page__meta{
-    gap:7px 14px
-  }
-
-
-  .photo-page__caption{
-    margin-top:13px;
-    font-size:16px
-  }
-
-
-  .photo-page__footer{
-    margin-top:42px
-  }
-
-}
-/* =========================================================
-   REGARD — ACCUEIL
-   ========================================================= */
-
-.featured-photo{
-  padding:48px 34px 0
-}
-
-.featured-photo .section-heading{
-  margin-bottom:18px
-}
-
-.featured-photo__all{
-  font:400 12px var(--sans);
-  color:var(--muted)
-}
-
-.featured-photo__all:hover{
-  text-decoration:underline;
-  text-underline-offset:4px
-}
-
-/*
- * Regard reste visuellement secondaire
- * par rapport au Dernier article.
- *
- * La photographie conserve son ratio naturel.
- */
-
-.featured-photo__link{
-  position:relative;
-  display:block;
-  width:max-content;
-  max-width:72%;
-  overflow:hidden;
-  background:var(--ink);
-  -webkit-tap-highlight-color:transparent
-}
-
-.featured-photo__image{
-  display:block;
-  width:auto;
-  height:auto;
-  max-width:100%;
-  max-height:560px;
-  object-fit:contain;
-  opacity:1;
-  transform:none;
-  transition:
-    opacity .35s ease,
-    transform .5s ease
-}
-
-.featured-photo__overlay{
-  position:absolute;
-  inset:0;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
-  padding:30px;
-  color:#f3eadc;
-  background:rgba(23,20,17,0);
-  opacity:0;
-  transition:
-    opacity .35s ease,
-    background .35s ease
-}
-
-.featured-photo__title{
-  margin:0;
-  max-width:720px;
-  font:400 clamp(27px,3.4vw,42px)/1.06 var(--serif);
-  letter-spacing:-.02em
-}
-
-.featured-photo__details{
-  margin:9px 0 0;
-  font:500 9px/1.4 var(--sans);
-  text-transform:uppercase;
-  letter-spacing:.11em
-}
-
-
-/* Survol souris */
-
-@media (hover:hover) and (pointer:fine){
-
-  .featured-photo__link:hover .featured-photo__image{
-    opacity:.72;
-    transform:scale(1.01)
-  }
-
-  .featured-photo__link:hover .featured-photo__overlay{
-    opacity:1;
-    background:rgba(23,20,17,.24)
-  }
-
-}
-
-
-/* =========================================================
-   REGARD — MOBILE
-   ========================================================= */
-
-@media(max-width:760px){
+  /* Regard */
 
   .featured-photo{
     padding:40px 20px 0
@@ -1192,13 +1077,6 @@ button{
 
   .featured-photo .section-heading h2{
     font-size:29px
-  }
-
-  .featured-photo__all{
-    max-width:145px;
-    font-size:10px;
-    line-height:1.3;
-    text-align:right
   }
 
   .featured-photo__link{
@@ -1248,57 +1126,129 @@ button{
     opacity:.76
   }
 
-}
-/* =========================================================
-   TABLEAUX / FIGURES DANS LES ARTICLES
-   ========================================================= */
 
-.article-figure{
-  margin:40px auto;
-  text-align:center
-}
+  /* Galerie photographique */
 
-.article-figure img{
-  display:block;
-  max-width:100%;
-  height:auto;
-  margin:0 auto
-}
+  .photographie-page{
+    padding:50px 20px 70px
+  }
 
-.article-figure figcaption{
-  margin-top:10px;
-  text-align:center;
-  font:400 16px/1.4 var(--serif);
-  font-style:italic;
-  color:var(--muted)
-}
-/* =========================================================
-   TABLEAU DANS LES ARTICLES
-   ========================================================= */
+  .photographie-page__header{
+    margin-bottom:36px
+  }
 
-.article-figure{
-  width:100% !important;
-  max-width:760px !important;
-  margin:36px auto !important;
-  padding:0 !important;
-  transform:none !important;
-  text-align:center !important
-}
+  .photographie-grid{
+    columns:1
+  }
 
-.article-figure img{
-  display:block !important;
-  width:100% !important;
-  max-width:760px !important;
-  height:auto !important;
-  margin:0 auto !important;
-  transform:none !important
-}
+  .photographie-card{
+    margin-bottom:28px
+  }
 
-.article-figure figcaption{
-  margin:10px auto 0 !important;
-  padding:0 !important;
-  text-align:left !important;
-  font:400 16px/1.4 var(--serif) !important;
-  font-style:italic !important;
-  color:var(--muted) !important
+  .photographie-card__overlay{
+    padding:22px;
+    opacity:0;
+    background:transparent;
+    user-select:none;
+    -webkit-user-select:none;
+    -ms-user-select:none
+  }
+
+  .photographie-card__title{
+    font-size:29px
+  }
+
+  .photographie-card__link:not(.is-revealed) .photographie-card__overlay{
+    opacity:0 !important;
+    background:transparent !important
+  }
+
+  .photographie-card__link:not(.is-revealed) .photographie-card__image{
+    opacity:1 !important;
+    transform:none !important
+  }
+
+  .photographie-card__link.is-revealed .photographie-card__overlay{
+    opacity:1;
+    background:rgba(23,20,17,.28)
+  }
+
+  .photographie-card__link.is-revealed .photographie-card__image{
+    opacity:.76
+  }
+
+
+  /* Page photo */
+
+  .photo-page{
+    padding:50px 20px 70px
+  }
+
+  .photo-page__header{
+    margin-bottom:34px
+  }
+
+  .photo-page__meta{
+    gap:7px 14px
+  }
+
+  .photo-page__caption{
+    margin-top:13px;
+    font-size:16px
+  }
+
+  .photo-page__footer{
+    margin-top:42px
+  }
+
+
+  /* Navigation précédent / suivant */
+
+  .post-navigation{
+    gap:20px
+  }
+
+  .post-navigation-prev,
+  .post-navigation-next{
+    width:48%
+  }
+
+  .post-navigation span{
+    font-size:12px
+  }
+
+  .post-navigation a{
+    font-size:16px
+  }
+
+
+  /* Footer */
+
+  .site-footer{
+    padding:28px 20px 40px;
+    gap:20px
+  }
+
+
+  /* Protection tactile */
+
+  .logo,
+  .main-nav,
+  .menu-toggle,
+  .mobile-search-toggle,
+  .search-toggle,
+  .search-form label,
+  .search-row button,
+  .section-heading,
+  .post-card,
+  .post-navigation,
+  .tags,
+  .site-footer,
+  .featured-latest__overlay{
+    user-select:none;
+    -webkit-user-select:none;
+    -ms-user-select:none;
+    -webkit-tap-highlight-color:transparent
+  }
+
 }
