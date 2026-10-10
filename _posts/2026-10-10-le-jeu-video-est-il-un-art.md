@@ -26,60 +26,7 @@ Ainsi, cet acte de sous-détermination a un avantage ici : permettre de discrimi
 
 ## Mais un *médium* seulement : la sous-détermination du jeu vidéo
 
-Une difficulté apparaît logiquement, comme conséquence de cette clarification par abstraction. Si nous pouvons comparer le jeu vidéo à l’écriture (*médium*), cette dernière s’enrichit pour catégoriser la matière strictement artistique qu’elle permet, la littérature (*discipline*). La discipline se subdivise en *formes* (roman, théâtre, poésie, pour aller vite), les formes en *genres*. Rien de tel du côté du jeu vidéo qui souffre d’un immense manque de détermination, d’une béance sémantique qui laisse sa nature indéfinie, entre le *médium* et le *genre*. Le jeu vidéo est un *médium* qui accepte des genres (du RPG au walking simulator en passant par les TPS, FPS, les jeux de combat, les simulations sportives, etc.) mais ignore la question de la discipline et de la forme, et le langage courant substitue le genre à ces deux dernières qualités. Voici le nœud du débat et l’explication de l’incompréhension générationnelle : le jeu vidéo est atrocement sous-déterminé.  
-  
-*Voici une version schématique du problème* :   
-  
-**ÉCRITURE**
-
-**Médium :** Écriture
-
-↓
-
-**Discipline :** Littérature / journalisme / publicité / documentation etc.
-
-↓
-
-**Forme (pour la discipline littéraire) :** Roman / Théâtre (également discipline) / poésie
-
-↓
-
-**Genre :** policier / romance / autofiction etc.
-
-**JEU VIDÉO**
-
-**Médium :** Jeu vidéo
-
-↓
-
-**Discipline :** ?
-
-↓
-
-**Forme :** ?
-
-↓
-
-**Genre :** RPG / FPS / TPS etc.  
-  
-*Et une proposition personnelle pour le régler* :   
-  
-**JEU VIDÉO**
-
-**Médium :** Jeu vidéo
-
-↓
-
-**Discipline :** Narration vidéoludique / simulation sportive vidéoludique / compétition etc.
-
-↓
-
-**Forme :** Monde ouvert / couloir / génération procédurale etc.
-
-↓
-
-**Genre :** RPG / FPS / TPS etc.  
-
+Une difficulté apparaît logiquement, comme conséquence de cette clarification par abstraction. Si nous pouvons comparer le jeu vidéo à l’écriture (*médium*), cette dernière s’enrichit pour catégoriser la matière strictement artistique qu’elle permet, la littérature (*discipline*). La discipline se subdivise en *formes* (roman, théâtre, poésie, pour aller vite), les formes en *genres*. Rien de tel du côté du jeu vidéo qui souffre d’un immense manque de détermination, d’une béance sémantique qui laisse sa nature indéfinie, entre le *médium* et le *genre*. Le jeu vidéo est un *médium* qui accepte des genres (du RPG au walking simulator en passant par les TPS, FPS, les jeux de combat, les simulations sportives, etc.) mais ignore la question de la discipline et de la forme, et le langage courant substitue le genre à ces deux dernières qualités. Voici le nœud du débat et l’explication de l’incompréhension générationnelle : le jeu vidéo est atrocement sous-déterminé.
 
 ## Le jeu vidéo et sa représentation comme seul objet de divertissement
 
