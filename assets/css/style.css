@@ -256,17 +256,27 @@ main{
   max-width:720px
 }
 
+
+/* Image de couverture — grande largeur */
+
 .post-cover{
+  width:100%;
+  max-width:none;
   aspect-ratio:16/8.6;
   margin:44px 0 48px;
   overflow:hidden
 }
 
 .post-cover img{
+  display:block;
   width:100%;
   height:100%;
+  max-width:none;
   object-fit:cover
 }
+
+
+/* Corps de l'article */
 
 .post-body{
   max-width:690px;
@@ -291,38 +301,32 @@ main{
 
 
 /* =========================================================
-   FIGURES DANS LES ARTICLES
+   FIGURE SPÉCIALE DANS LE CORPS D'UN ARTICLE
    ========================================================= */
 
-.post figure,
-.post-body figure,
+/*
+ * UNIQUEMENT les éléments ayant la classe article-figure.
+ * Cela ne touche jamais aux images de couverture.
+ */
+
 .article-figure{
   display:block;
   width:100%;
   max-width:690px;
   margin:36px auto;
   padding:0;
-  position:static;
-  transform:none;
   text-align:center
 }
 
-.post figure img,
-.post-body figure img,
 .article-figure img{
   display:block;
   width:100%;
   max-width:100%;
   height:auto;
   margin:0 auto;
-  padding:0;
-  position:static;
-  transform:none;
   object-fit:contain
 }
 
-.post figure figcaption,
-.post-body figure figcaption,
 .article-figure figcaption{
   display:block;
   width:100%;
@@ -333,6 +337,9 @@ main{
   font-style:italic;
   text-align:left
 }
+
+
+/* Images Markdown simples dans le corps */
 
 .post-body > img,
 .post-body p > img{
@@ -1000,24 +1007,34 @@ button{
     font-size:20px
   }
 
-  .post figure,
-  .post-body figure,
+
+  /* Couverture d'article sur mobile */
+
+  .post-cover{
+    width:100%;
+    max-width:none
+  }
+
+  .post-cover img{
+    width:100%;
+    max-width:none
+  }
+
+
+  /* Figure spéciale dans le corps */
+
   .article-figure{
     width:100%;
     max-width:100%;
     margin:32px auto
   }
 
-  .post figure img,
-  .post-body figure img,
   .article-figure img{
     width:100%;
     max-width:100%;
     height:auto
   }
 
-  .post figure figcaption,
-  .post-body figure figcaption,
   .article-figure figcaption{
     margin-top:8px;
     font-size:15px
